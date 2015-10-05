@@ -273,9 +273,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
                 try {
                     // Simulate network access.
-                    getWindow().setSoftInputMode(
-                            WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
-                    ); //move keyboard
+                    //getWindow().setSoftInputMode(
+                    //       WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+                    //); //move keyboard
                     ParseUser user = new ParseUser();
                     user.setUsername(email);
                     user.setEmail(email);

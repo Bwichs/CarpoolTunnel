@@ -1,5 +1,6 @@
 package carpooltunnel.slugging;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,8 +18,8 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -29,6 +30,17 @@ public class WelcomeActivity extends AppCompatActivity {
                 ParseUser.logOut();
 
                 Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        FloatingActionButton acc = (FloatingActionButton) findViewById(R.id.acc);
+        acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(WelcomeActivity.this, AccountActivity.class);
                 startActivity(intent);
                 finish();
             }

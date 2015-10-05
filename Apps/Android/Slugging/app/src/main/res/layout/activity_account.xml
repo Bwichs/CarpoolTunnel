@@ -12,14 +12,74 @@
         <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
             android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay" />
-
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_account" />
+    <LinearLayout android:id="@+id/sched_enter_form" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical"
+        android:layout_gravity="center">
 
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Account Name/Email"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/anTitle"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Content"
+                android:editable="true"
+                android:textSize="20dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:id="@+id/anContent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Phone Number"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/pnTitle"
+            />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Number"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/pnContent"
+                />
+        </LinearLayout>
+    </LinearLayout>
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
-
+        android:src="@android:drawable/ic_menu_revert" />
 </android.support.design.widget.CoordinatorLayout>

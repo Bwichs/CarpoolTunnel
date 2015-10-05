@@ -31,7 +31,7 @@
             android:paddingRight="8dp"
             android:layout_weight="1"
             android:layout_gravity="center|left"
-            android:id="@+id/button3"
+            android:id="@+id/pbutton"
             />
         <Button
             android:layout_width="0dp"
@@ -41,7 +41,7 @@
             android:paddingRight="8dp"
             android:layout_weight="1"
             android:layout_gravity="center|left"
-            android:id="@+id/button4" />
+            android:id="@+id/dbutton" />
     </LinearLayout>
     <include layout="@layout/content_welcome" />
 

@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Parse.enableLocalDatastore(this);
+//        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "VPZjlR7XLjBjn7KPCiCgaAexMUSX13fNe2wZ4mps", "lMHGifcMpdu9yKDL5YFT1Rw79fo466o7BngcneUF");
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -273,65 +273,68 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 //            Toast.makeText(getApplicationContext(),
 //                    "Successfully Logged in",
 //                    Toast.LENGTH_LONG).show();
-            try {
-                // Simulate network access.
+                try {
+                    // Simulate network access.
 
-                ParseUser user = new ParseUser();
-                user.setUsername(email);
-                user.setPassword(password);
-                Log.e(TAG, "U+P:"+ email + " " + password);
-                user.signUpInBackground(new SignUpCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Successfully signed up!",
-                                    Toast.LENGTH_LONG).show();
+                    ParseUser user = new ParseUser();
+                    user.setUsername(email);
+                    user.setEmail(email);
+                    user.setPassword(password);
+                    Log.e(TAG, "U+P:" + email + " " + password);
+                    user.signUpInBackground(new SignUpCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Successfully signed up!",
+                                        Toast.LENGTH_LONG).show();
 //                            Log.d("U+P", String.valueOf(mEmail) + " " + String.valueOf(mPassword));
-                            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            ParseUser.logInInBackground(email, password, new LogInCallback() {
-                                public void done(ParseUser user, ParseException e) {
-                                    if (user != null) {
-                                        // Hooray! The user is logged in.
-                                        Toast.makeText(getApplicationContext(),
-                                                "Welcome back!",
-                                                Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Log.e(TAG, "PE:" + e);
-                                        Toast.makeText(getApplicationContext(),
-                                                String.valueOf(e),
-                                                Toast.LENGTH_LONG).show();
-                                        // Signup failed. Look at the ParseException to see what happened.
+                                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                ParseUser.logInInBackground(email, password, new LogInCallback() {
+                                    public void done(ParseUser user, ParseException e) {
+                                        if (user != null) {
+                                            // Hooray! The user is logged in.
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Welcome back!",
+                                                    Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Log.e(TAG, "PE:" + e);
+//                                            Toast.makeText(getApplicationContext(),
+//                                                    String.valueOf(e),
+//                                                    Toast.LENGTH_LONG).show();
+                                            // Signup failed. Look at the ParseException to see what happened.
+                                        }
                                     }
-                                }
-                            });
+                                });
 
-                            // Sign up didn't succeed. Look at the ParseException
-                            // to figure out what went wrong
+                                // Sign up didn't succeed. Look at the ParseException
+                                // to figure out what went wrong
+                            }
                         }
-                    }
-                });
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+                    });
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Log.e(TAG, "Exception");
+                    return false;
                 }
-            }
+
+
+//            for (String credential : DUMMY_CREDENTIALS) {
+//                String[] pieces = credential.split(":");
+//                if (pieces[0].equals(mEmail)) {
+//                    // Account exists, return true if the password matches.
+//                    return pieces[1].equals(mPassword);
+//                }
+//            }
 
             // TODO: register the new account here.
-            return true;
+            Log.e(TAG, "Exception2");
+            return false;
         }
 
         @Override

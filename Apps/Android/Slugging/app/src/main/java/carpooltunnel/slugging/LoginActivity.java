@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -289,12 +290,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
                             startActivity(intent);
                             finish();
-                        } else if(e == )
+                        }
                         else {
-                            Log.e(TAG,"PE:" +e);
-                            Toast.makeText(getApplicationContext(),
-                                    String.valueOf(e),
-                                    Toast.LENGTH_LONG).show();
+                            ParseUser.logInInBackground(email, password, new LogInCallback() {
+                                public void done(ParseUser user, ParseException e) {
+                                    if (user != null) {
+                                        // Hooray! The user is logged in.
+                                        Toast.makeText(getApplicationContext(),
+                                                "Welcome back!",
+                                                Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Log.e(TAG, "PE:" + e);
+                                        Toast.makeText(getApplicationContext(),
+                                                String.valueOf(e),
+                                                Toast.LENGTH_LONG).show();
+                                        // Signup failed. Look at the ParseException to see what happened.
+                                    }
+                                }
+                            });
+
                             // Sign up didn't succeed. Look at the ParseException
                             // to figure out what went wrong
                         }

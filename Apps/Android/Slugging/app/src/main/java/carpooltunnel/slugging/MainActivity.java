@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.parse.Parse;
+import com.parse.ParseUser;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -15,8 +15,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Parse.initialize(this, "VPZjlR7XLjBjn7KPCiCgaAexMUSX13fNe2wZ4mps", "lMHGifcMpdu9yKDL5YFT1Rw79fo466o7BngcneUF");
-        //Parse.enableLocalDatastore(this);
 
 //        ParseUser user = new ParseUser();
 //        user.setUsername("my name");
@@ -41,9 +39,16 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this,LoginActivity.class); //go to login
-        startActivity(intent);
-        finish();
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            Intent intent = new Intent(this, LoginActivity.class); //go to login
+            startActivity(intent);
+            finish();
+        } else {
+            Intent intent = new Intent(this, WelcomeActivity.class); //go to welcome
+            startActivity(intent);
+            finish();
+        }
 
     }
 

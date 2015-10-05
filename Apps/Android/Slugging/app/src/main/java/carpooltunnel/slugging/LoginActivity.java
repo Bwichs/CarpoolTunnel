@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@ucsc.edu"); //locks in to ucsc only
+        return email.endsWith("@ucsc.edu"); //locks in to ucsc only
     }
 
     private boolean isPasswordValid(String password) {

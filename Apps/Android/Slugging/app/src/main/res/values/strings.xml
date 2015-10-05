@@ -8,14 +8,26 @@
     <!-- Strings related to login -->
     <string name="prompt_email">UCSC Email</string>
     <string name="prompt_password">Password</string>
+
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid (@ucsc.edu only)</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+
+    <string name="prompt_start">Start</string>
+    <string name="prompt_finish">Destination</string>
+    <string name="prompt_numpass"># of Passengers</string>
+    <string name="prompt_time">Departure Time</string>
+    <string name="prompt_day">Day</string>
+    <string name="sched_sub">Submit!</string>
+
+    <string name="title_activity_welcome">Welcome Activity</string>
+    <string name="title_activity_driver">Driver Activity</string>
+    <string name="title_activity_account">Account Activity</string>
+    <string name="title_activity_passenger">Passenger Activity</string>
+
+    <color name="white">#FFFFFF</color>
 </resources>

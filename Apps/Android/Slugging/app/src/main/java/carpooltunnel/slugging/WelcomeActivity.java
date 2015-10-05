@@ -38,18 +38,18 @@ public class WelcomeActivity extends AppCompatActivity {
         pbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, PassengerActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
         dbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WelcomeActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(WelcomeActivity.this, DriverActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }

@@ -40,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
+        if (currentUser == null || !currentUser.getBoolean("emailVerified")) {
             Intent intent = new Intent(this, LoginActivity.class); //go to login
             startActivity(intent);
             finish();

@@ -285,23 +285,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         public void done(ParseException e) {
                             if (e == null) {
                                 Toast.makeText(getApplicationContext(),
-                                        "Successfully signed up!",
+                                        "Successfully signed up! Please verify your email!",
                                         Toast.LENGTH_LONG).show();
 //                            Log.d("U+P", String.valueOf(mEmail) + " " + String.valueOf(mPassword));
-                                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                                startActivity(intent);
-                                finish();
                             } else {
                                 ParseUser.logInInBackground(email, password, new LogInCallback() {
                                     public void done(ParseUser user, ParseException e) {
                                         if (user != null) {
-                                            // Hooray! The user is logged in.
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Welcome back!",
-                                                    Toast.LENGTH_LONG).show();
-                                            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
-                                            startActivity(intent);
-                                            finish();
+                                            if(user.getBoolean("emailVerified")) {
+                                                // Hooray! The user is logged in.
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Welcome back!",
+                                                        Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                            else {
+                                                //Boo! User is not verified.
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Please verify your email!",
+                                                        Toast.LENGTH_LONG).show();
+                                            }
                                         } else {
                                             Log.e(TAG, "PE:" + e);
 //                                            Toast.makeText(getApplicationContext(),
@@ -345,7 +350,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(getString(R.string.error_poolcar));
                 mPasswordView.requestFocus();
             }
         }

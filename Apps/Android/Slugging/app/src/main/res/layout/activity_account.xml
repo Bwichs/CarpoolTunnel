@@ -51,35 +51,7 @@
                 android:layout_gravity="right"
                 android:id="@+id/anContent" />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:weightSum="2">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Password"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:layout_weight="1"
-                android:layout_gravity="left"
-                android:id="@+id/pwTitle"
-                />
-            <android.support.design.widget.TextInputLayout android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-                <EditText android:id="@+id/pwContent" android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:hint="Change Password"
-                    android:inputType="number" android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
         <LinearLayout
             android:id="@+id/phone"
             android:layout_width="match_parent"
@@ -104,7 +76,7 @@
                 android:layout_height="wrap_content">
                 <EditText android:id="@+id/pnContent" android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:hint="Press to add"
-                    android:inputType="number" android:maxLines="1"
+                    android:inputType="text" android:maxLines="1"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -132,7 +104,7 @@
                 android:layout_height="wrap_content">
                 <EditText android:id="@+id/ctContent" android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:hint="Press to add"
-                    android:inputType="number" android:maxLines="1"
+                    android:inputType="text" android:maxLines="1"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -152,7 +124,34 @@
                 android:paddingRight="8dp"
                 android:layout_weight="1"
                 android:layout_gravity="left"
-                android:id="@+id/dbutton" />
+                android:id="@+id/fbButton" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/pwbutton" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:weightSum="2">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:id="@+id/sbutton" />
         </LinearLayout>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"

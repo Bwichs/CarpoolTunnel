@@ -42,6 +42,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(WelcomeActivity.this, AccountActivity.class);
                 startActivity(intent);
+                try {
+                    Thread.sleep(2000);                 //1000 milliseconds is one second.
+                } catch(InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
                 finish();
             }
         });

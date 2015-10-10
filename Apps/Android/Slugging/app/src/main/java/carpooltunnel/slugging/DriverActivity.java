@@ -1,5 +1,6 @@
 package carpooltunnel.slugging;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -67,6 +69,28 @@ public class DriverActivity extends AppCompatActivity {
 
             }
         });
+
+
+        mDay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Calendar myCalendar = Calendar.getInstance();
+                int cDate = myCalendar.get(Calendar.DAY_OF_MONTH);
+                int cMonth = myCalendar.get(Calendar.MONTH);
+                int cYear = myCalendar.get(Calendar.YEAR);
+                DatePickerDialog mDatePicker;
+                mDatePicker = new DatePickerDialog(DriverActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int selectedDate, int selectedMonth, int selectedYear) {
+                        mDay.setText("" + selectedYear + "/" + selectedMonth + "/" + selectedDate);
+                    }
+                }, cYear, cMonth, cDate);
+                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
+
+                }
+    });
 
         Button mSubmitButton = (Button) findViewById(R.id.sched_sub_button);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {

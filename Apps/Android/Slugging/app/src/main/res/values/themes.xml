@@ -18,7 +18,7 @@
 
     <style name="Theme.App.Base" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlActivated">#FF5722</item>
         <item name="colorControlHighlight">@color/white</item>
 
         <!-- colorPrimary is used for the default action bar background -->
@@ -37,7 +37,7 @@
 
     <style name="Theme.AppCompat.NoActionBar." parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlActivated">#FF5722</item>
         <item name="colorControlHighlight">@color/white</item>
 
         <!-- colorPrimary is used for the default action bar background -->

@@ -94,13 +94,15 @@
 
                 <EditText android:id="@+id/time" android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:hint="@string/prompt_time"
-                    android:inputType="time" android:maxLines="1"
+                    android:maxLines="1"
                     android:singleLine="true"
+                    android:focusable="false"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textColorHighlight="@color/white"
                     android:layout_gravity="center|left"
-                    android:editable="false"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
                     android:layout_margin="10dp"
                     android:enabled="true" />
 
@@ -113,14 +115,15 @@
                 <EditText android:id="@+id/date" android:layout_width="fill_parent"
                     android:layout_height="wrap_content" android:hint="@string/prompt_day"
                     android:maxLines="1"
+                    android:focusable="false"
                     android:singleLine="true"
+                    android:inputType="none"
+                    android:textIsSelectable="true"
                     android:textColor="@color/white"
                     android:textColorHint="@color/white"
                     android:textColorHighlight="@color/white"
                     android:layout_margin="10dp"
-
-                android:layout_gravity="center|right"
-                    android:inputType="text"
+                    android:layout_gravity="center|right"
                     android:enabled="true" />
 
         </android.support.design.widget.TextInputLayout>

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,8 +21,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -110,6 +112,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if (mAuthTask != null) {
             return;
         }
+        View view = this.getCurrentFocus();//closes keyboard on log in
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -160,7 +167,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 8;
+        return password.length() > 7; //require atleast 7 letters
     }
 
     /**
@@ -276,17 +283,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     //getWindow().setSoftInputMode(
                     //       WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
                     //); //move keyboard
-                    ParseUser user = new ParseUser();
+                    final ParseUser user = new ParseUser();
                     user.setUsername(email);
                     user.setEmail(email);
                     user.setPassword(password);
-                    Log.e(TAG, "U+P:" + email + " " + password);
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
                                 Toast.makeText(getApplicationContext(),
                                         "Successfully signed up! Please verify your email!",
                                         Toast.LENGTH_LONG).show();
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    public void run() {
+                                        if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21) {
+                                             user.deleteInBackground();
+                                            Log.e(TAG,">21: ");
+                                        }else{
+                                            user.deleteEventually();
+                                            Log.e(TAG, "<21: ");
+                                        }
+                                    }
+                                }, 20000);//deletes user in 20 seconds
 //                            Log.d("U+P", String.valueOf(mEmail) + " " + String.valueOf(mPassword));
                             } else {
                                 ParseUser.logInInBackground(email, password, new LogInCallback() {
@@ -303,9 +321,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                             }
                                             else {
                                                 //Boo! User is not verified.
+//                                                Snackbar.make(view, "Please verify your email!", Snackbar.LENGTH_LONG)
+//                                                        .setAction("Action", null).show();
                                                 Toast.makeText(getApplicationContext(),
                                                         "Please verify your email!",
                                                         Toast.LENGTH_LONG).show();
+
+//                                                if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21) {
+//                                                    user.deleteInBackground();
+//                                                    Log.e(TAG,">21: ");
+//                                                }else{
+//                                                    user.deleteEventually();
+//                                                    Log.e(TAG, "<21: ");
+//                                                }
                                             }
                                         } else {
                                             Log.e(TAG, "PE:" + e);
@@ -351,6 +379,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_poolcar));
+                //goes here if pass is wrong.
                 mPasswordView.requestFocus();
             }
         }

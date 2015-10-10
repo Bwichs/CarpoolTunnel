@@ -28,4 +28,6 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.android.support:design:22.2.1'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+    compile 'com.android.support:support-v4:22.2.1'
 }
+

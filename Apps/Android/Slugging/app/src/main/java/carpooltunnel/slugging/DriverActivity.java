@@ -6,17 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -33,13 +30,14 @@ public class DriverActivity extends AppCompatActivity {
 
     String from;
     String to;
-    int numPass;
+    String numPass;
     String depTime;
     String depDay;
     ParseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,31 +87,41 @@ public class DriverActivity extends AppCompatActivity {
         });
     }
 
-
+    public final String TAG = "DriverActivity";
 
     private void submitRoute(){
-        ParseRoute route = new ParseRoute();
+
         from = mFrom.getText().toString();
-        to = mTo.getText().toString();;
-        numPass = Integer.parseInt(mNumPass.getText().toString());
+        to = mTo.getText().toString();
+        numPass = mNumPass.getText().toString();
         depTime = mTime.getText().toString();
         depDay = mDay.getText().toString();
-        user = ParseUser.getCurrentUser();
-        route.setFrom(from);
-        route.setTo(to);
-        route.setNumPass(numPass);
-        route.setDepTime(depTime);
-        route.setDepDay(depDay);
-        route.setUser(user);
-        route.saveInBackground(new SaveCallback(){
-            @Override
-            public void done(ParseException e) {
-                Toast.makeText(getApplicationContext(),
-                        "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
-                        Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
+             Log.e(TAG, "true: Route added from " + from + " to " + to + " at " + depTime + " on " + depDay);
+             ParseRoute route = new ParseRoute();
+             user = ParseUser.getCurrentUser();
+             route.setFrom(from);
+             route.setTo(to);
+             route.setNumPass(numPass);
+             route.setDepTime(depTime);
+             route.setDepDay(depDay);
+             route.setUser(user);
+             route.saveInBackground(new SaveCallback() {
+                 @Override
+                 public void done(ParseException e) {
+                     Toast.makeText(getApplicationContext(),
+                             "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
+                             Toast.LENGTH_LONG).show();
+                     finish();
+                 }
+             });
+         }
+        else{
+            Log.e(TAG,"false: Route added from " + from + " to " + to + " at " + depTime + " on " + depDay);
+            Toast.makeText(getApplicationContext(),
+                    "Please fill in the entire form",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 }

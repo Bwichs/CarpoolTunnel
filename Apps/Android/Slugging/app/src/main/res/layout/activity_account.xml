@@ -117,17 +117,19 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Login With Facebook"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
+                android:background="#3b5998"
+                android:textColor="@color/white"
                 android:layout_gravity="left"
                 android:id="@+id/fbButton" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Change Password"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:layout_margin="4dp"
+                android:background="#00796B"
+                android:textColor="@color/white"
                 android:layout_weight="1"
                 android:layout_gravity="left"
                 android:id="@+id/pwbutton" />
@@ -136,16 +138,18 @@
             android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:padding="10dp"
             android:weightSum="2">
             <Button
                 android:layout_width="0dp"
+                android:background="#00796B"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:text="Submit"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
+                android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:layout_gravity="left"
                 android:id="@+id/sbutton" />

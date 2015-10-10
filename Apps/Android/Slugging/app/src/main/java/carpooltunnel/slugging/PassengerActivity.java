@@ -40,7 +40,7 @@ public class PassengerActivity extends AppCompatActivity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(PassengerActivity.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Parse.com Custom ListView Tutorial");
+            mProgressDialog.setTitle("Current Routes");
             // Set progressdialog message
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);

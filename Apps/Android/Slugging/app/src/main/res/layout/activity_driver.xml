@@ -28,20 +28,28 @@
             <AutoCompleteTextView android:id="@+id/start" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="@string/prompt_start"
                 android:inputType="text" android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorHighlight="@color/white"/>
 
         </android.support.design.widget.TextInputLayout>
         <LinearLayout
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:weightSum="2">
+
         <android.support.design.widget.TextInputLayout android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.75">
+            android:layout_weight="1.75"
+            >
 
             <EditText android:id="@+id/finish" android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:hint="@string/prompt_finish"
                 android:inputType="text" android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorHighlight="@color/white"/>
 
 
         </android.support.design.widget.TextInputLayout>
@@ -67,6 +75,10 @@
                 android:inputType="number" android:maxLines="1"
                 android:singleLine="true"
                 android:enabled="true"
+                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textColorHighlight="@color/white"
                 android:editable="true" />
 
         </android.support.design.widget.TextInputLayout>
@@ -84,10 +96,12 @@
                     android:layout_height="wrap_content" android:hint="@string/prompt_time"
                     android:inputType="time" android:maxLines="1"
                     android:singleLine="true"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textColorHighlight="@color/white"
                     android:layout_gravity="center|left"
                     android:editable="false"
+                    android:layout_margin="10dp"
                     android:enabled="true" />
 
             </android.support.design.widget.TextInputLayout>
@@ -100,8 +114,10 @@
                     android:layout_height="wrap_content" android:hint="@string/prompt_day"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:layout_margin="10dp"
 
                 android:layout_gravity="center|right"
                     android:inputType="text"
@@ -114,7 +130,11 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="@string/sched_sub"
             android:textStyle="bold"
-        android:background="@android:color/transparent"/>
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textColorHighlight="@color/white"
+            android:layout_margin="8dp"
+        android:background="#00796B"/>
 
     </LinearLayout>
     <include layout="@layout/content_driver" />

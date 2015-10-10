@@ -7,14 +7,16 @@
     tools:context="carpooltunnel.slugging.WelcomeActivity">
 
     <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay"/>
 
-        <android.support.design.widget.FloatingActionButton android:id="@+id/acc"
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/acc"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@android:drawable/ic_menu_preferences" />
+            android:layout_gravity="top|end"
 
-    </android.support.design.widget.AppBarLayout>
+            android:src="@android:drawable/ic_menu_preferences"  />
+
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"

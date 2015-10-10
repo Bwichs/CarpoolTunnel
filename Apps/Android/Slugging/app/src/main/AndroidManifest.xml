@@ -45,29 +45,28 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity
             android:name=".WelcomeActivity"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.App.Base" >
         </activity>
         <activity
             android:name=".DriverActivity"
             android:label="@string/title_activity_driver"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.App.Base" >
         </activity>
         <activity
             android:name=".PassengerActivity"
             android:label="@string/title_activity_passenger"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.App.Base" >
         </activity>
         <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity android:name=".CustomAdapter" >
+            android:theme="@style/Theme.App.Base" >
         </activity>
         <activity android:name=".ListViewAdapter" >
         </activity>
@@ -76,7 +75,7 @@
         <activity
             android:name=".SingleItemView"
             android:label="@string/title_activity_single_item_view"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/Theme.App.Base" >
         </activity>
     </application>
 

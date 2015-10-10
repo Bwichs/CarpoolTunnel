@@ -31,7 +31,7 @@
     <string name="title_activity_passenger">Passenger Activity</string>
 
     <color name="white">#FFFFFF</color>
-    <color name="bg_login">#4DB6AC</color>
+    <color name="bg_login">#009688</color>
     <color name="bg_register">#2e3237</color>
     <color name="bg_main">#428bca</color>
     <color name="input_login">#222222</color>
@@ -45,8 +45,6 @@
     <color name="btn_logut_bg">#F3875F</color>
 
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_single_item_view">SingleItemView</string>
 
     <string name="title_activity_main">Parse Custom ListView</string>

@@ -76,6 +76,7 @@ public class DriverActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar myCalendar = Calendar.getInstance();
+                int cDay = myCalendar.get(Calendar.DAY_OF_MONTH);
                 int cDate = myCalendar.get(Calendar.DAY_OF_MONTH);
                 int cMonth = myCalendar.get(Calendar.MONTH);
                 int cYear = myCalendar.get(Calendar.YEAR);
@@ -83,7 +84,7 @@ public class DriverActivity extends AppCompatActivity {
                 mDatePicker = new DatePickerDialog(DriverActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int selectedDate, int selectedMonth, int selectedYear) {
-                        mDay.setText("" + selectedYear + "/" + selectedMonth + "/" + selectedDate);
+                        mDay.setText("" + selectedYear + "/" + (selectedMonth+1) + "/" + selectedDate);
                     }
                 }, cYear, cMonth, cDate);
                 mDatePicker.setTitle("Select Date");

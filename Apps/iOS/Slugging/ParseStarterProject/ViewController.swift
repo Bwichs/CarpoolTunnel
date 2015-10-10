@@ -28,6 +28,7 @@ class ViewController: UIViewController {
                 // Show the errorString somewhere and let the user try again.
             } else {
                 // Hooray! Let them use the app now.
+                self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
             }
         }
     }

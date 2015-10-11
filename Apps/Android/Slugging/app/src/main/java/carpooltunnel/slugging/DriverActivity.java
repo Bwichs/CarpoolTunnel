@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,10 +15,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -68,10 +62,6 @@ public class DriverActivity extends FragmentActivity {
         addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
         addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
 
-        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
-                LOCATION_REFRESH_DISTANCE, mLocationListener);
 
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);
@@ -105,14 +95,6 @@ public class DriverActivity extends FragmentActivity {
 
         }
         });
-
-        private final LocationListener mLocationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(final Location location) {
-                //your code here
-            }
-        };
-
 
         //date picker
         mDay.setOnClickListener(new View.OnClickListener() {

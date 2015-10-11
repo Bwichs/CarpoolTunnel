@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/numPasslabel"
         android:text="@string/tolabel"
-        android:paddingBottom="16dp"/>
+        android:padding="16dp"/>
 
     <TextView
         android:id="@+id/to"
@@ -74,6 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/numPass"
         android:layout_toRightOf="@+id/tolabel"
-        android:paddingBottom="16dp"/>
+        android:paddingTop="16dp"/>
 
 </RelativeLayout>

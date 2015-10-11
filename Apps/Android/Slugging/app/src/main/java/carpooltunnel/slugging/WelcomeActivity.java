@@ -2,11 +2,10 @@ package carpooltunnel.slugging;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,35 +20,6 @@ public class WelcomeActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Logging out!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                ParseUser.logOut();
-
-                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        FloatingActionButton acc = (FloatingActionButton) findViewById(R.id.acc);
-        acc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent intent = new Intent(WelcomeActivity.this, AccountActivity.class);
-                startActivity(intent);
-                try {
-                    Thread.sleep(2000);                 //1000 milliseconds is one second.
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-                finish();
-            }
-        });
         Button pbutton = (Button) findViewById(R.id.pbutton);
         Button dbutton = (Button) findViewById(R.id.dbutton);
         pbutton.setOnClickListener(new View.OnClickListener() {
@@ -71,13 +41,27 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_account:
+                startActivity(new Intent(this, AccountActivity.class));
+                return true;
+            case R.id.action_logout:
+                ParseUser.logOut();
+                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        //respond to menu item selection
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
-
-
-
 }

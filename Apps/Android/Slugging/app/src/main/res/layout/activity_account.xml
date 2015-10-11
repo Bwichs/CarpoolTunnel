@@ -114,6 +114,7 @@
             android:padding="10dp"
             android:weightSum="2">
             <Button
+                android:fontFamily="sans-serif-light"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Login With Facebook"
@@ -124,6 +125,7 @@
                 android:layout_gravity="left"
                 android:id="@+id/fbButton" />
             <Button
+                android:fontFamily="sans-serif-light"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Change Password"
@@ -145,6 +147,7 @@
             android:weightSum="2">
             <Button
                 android:layout_width="0dp"
+                android:fontFamily="sans-serif-light"
                 android:background="#00796B"
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"

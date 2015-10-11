@@ -4,12 +4,15 @@
     android:layout_height="fill_parent" >
 
     <TextView
+        android:paddingTop="16dp"
         android:id="@+id/depDaylabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/depDaylabel" />
+        android:text="@string/depDaylabel"
+        />
 
     <TextView
+        android:paddingTop="16dp"
         android:id="@+id/depDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,13 +65,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/numPasslabel"
-        android:text="@string/tolabel" />
+        android:text="@string/tolabel"
+        android:paddingBottom="16dp"/>
 
     <TextView
         android:id="@+id/to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/numPass"
-        android:layout_toRightOf="@+id/tolabel" />
+        android:layout_toRightOf="@+id/tolabel"
+        android:paddingBottom="16dp"/>
 
 </RelativeLayout>

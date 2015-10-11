@@ -5,17 +5,22 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -50,16 +55,30 @@ public class DriverActivity extends FragmentActivity {
         setContentView(R.layout.activity_driver);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        //this declares the map fragment, and hides them
         fragmentManagerDest = getFragmentManager();
         fragmentManagerStarting = getFragmentManager();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.commit();
+        ft.hide(fragmentManagerDest.findFragmentById(R.id.location_mapDest));
+        ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+
+        //function call for buttons to show/hide map fragments
         addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
         addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+
+        LocationManager mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME,
+                LOCATION_REFRESH_DISTANCE, mLocationListener);
+
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);
         mNumPass = (EditText) findViewById(R.id.numpass);
         mTime = (EditText) findViewById(R.id.time);
         mDay = (EditText) findViewById(R.id.date);
-
+        //time picker
         mTime.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,11 +95,26 @@ public class DriverActivity extends FragmentActivity {
                 }, hour, minute, true);//24 Hour Time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-
             }
         });
 
+        final Button startButton = (Button)findViewById(R.id.startlocation);
+        startButton.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
 
+        }
+        });
+
+        private final LocationListener mLocationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(final Location location) {
+                //your code here
+            }
+        };
+
+
+        //date picker
         mDay.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -99,7 +133,6 @@ public class DriverActivity extends FragmentActivity {
                 }, cYear, cMonth, cDate);
                 mDatePicker.setTitle("Select Date");
                 mDatePicker.show();
-
                 }
     });
 
@@ -120,7 +153,7 @@ public class DriverActivity extends FragmentActivity {
             }
         });
     }
-
+    //button function
     void addShowHideListener(int buttonId, final Fragment fragment) {
         final Button button = (Button)findViewById(buttonId);
         button.setOnClickListener(new View.OnClickListener() {
@@ -130,15 +163,15 @@ public class DriverActivity extends FragmentActivity {
                         android.R.animator.fade_out);
                 if (fragment.isHidden()) {
                     ft.show(fragment);
-//                    button.setText("Hide");
+
                 } else {
                     ft.hide(fragment);
-//                    button.setText("Show");
                 }
                 ft.commit();
             }
         });
     }
+
 
     public final String TAG = "DriverActivity";
 
@@ -150,7 +183,6 @@ public class DriverActivity extends FragmentActivity {
         depTime = mTime.getText().toString();
         depDay = mDay.getText().toString();
         if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
-             Log.e(TAG, "true: Route added from " + from + " to " + to + " at " + depTime + " on " + depDay);
              ParseRoute route = new ParseRoute();
              user = ParseUser.getCurrentUser();
              route.setFrom(from);
@@ -170,7 +202,6 @@ public class DriverActivity extends FragmentActivity {
              });
          }
         else{
-            Log.e(TAG,"false: Route added from " + from + " to " + to + " at " + depTime + " on " + depDay);
             Toast.makeText(getApplicationContext(),
                     "Please fill in the entire form",
                     Toast.LENGTH_LONG).show();

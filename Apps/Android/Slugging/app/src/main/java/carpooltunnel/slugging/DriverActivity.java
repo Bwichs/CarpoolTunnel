@@ -1,11 +1,14 @@
 package carpooltunnel.slugging;
 
 import android.app.DatePickerDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +23,10 @@ import com.parse.SaveCallback;
 
 import java.util.Calendar;
 
-public class DriverActivity extends AppCompatActivity {
+public class DriverActivity extends FragmentActivity {
+
+    public static FragmentManager fragmentManagerDest;
+    public static FragmentManager fragmentManagerStarting;
 
     // UI references.
     private EditText mFrom;
@@ -39,11 +45,15 @@ public class DriverActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        fragmentManagerDest = getFragmentManager();
+        fragmentManagerStarting = getFragmentManager();
+        addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
+        addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);
         mNumPass = (EditText) findViewById(R.id.numpass);
@@ -107,6 +117,25 @@ public class DriverActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+    }
+
+    void addShowHideListener(int buttonId, final Fragment fragment) {
+        final Button button = (Button)findViewById(buttonId);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setCustomAnimations(android.R.animator.fade_in,
+                        android.R.animator.fade_out);
+                if (fragment.isHidden()) {
+                    ft.show(fragment);
+//                    button.setText("Hide");
+                } else {
+                    ft.hide(fragment);
+//                    button.setText("Show");
+                }
+                ft.commit();
             }
         });
     }

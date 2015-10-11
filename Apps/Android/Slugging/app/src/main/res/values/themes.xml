@@ -18,8 +18,8 @@
 
     <style name="Theme.App.Base" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">#FF5722</item>
-        <item name="colorControlHighlight">@color/white</item>
+
+        <item name="colorControlHighlight">#009688</item>
 
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">#009688</item>
@@ -31,14 +31,14 @@
         <!-- colorAccent is used as the default value for colorControlActivated,
              which is used to tint widgets -->
         <item name="colorAccent">#FF5722</item>
+        <item name="colorControlActivated">#00796B</item>
 <!--disable title bar from activity-->
         <item name="android:windowNoTitle">true</item>
     </style>
 
     <style name="Theme.AppCompat.NoActionBar." parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">#c5c5c5</item>
-        <item name="colorControlActivated">#FF5722</item>
-        <item name="colorControlHighlight">@color/white</item>
+        <item name="colorControlHighlight">#009688</item>
 
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">#009688</item>
@@ -51,7 +51,26 @@
              which is used to tint widgets -->
         <item name="colorAccent">#FF5722</item>
         <!--disable title bar from activity-->
+        <item name="colorControlActivated">@color/white</item>
     </style>
     <!-- The rest of your attributes -->
+    <style name ="stupidtest" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">#c5c5c5</item>
+
+        <item name="colorControlHighlight">#009688</item>
+
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">#009688</item>
+        <item name="android:textColorPrimary">#212121</item>
+
+        <!-- colorPrimaryDark is used for the status bar -->
+        <item name="colorPrimaryDark">#00796B</item>
+
+        <!-- colorAccent is used as the default value for colorControlActivated,
+             which is used to tint widgets -->
+        <item name="colorControlActivated">#00796B</item>
+        <!--disable title bar from activity-->
+        <item name="windowActionBar">false</item>
+    </style>
 
 </resources>

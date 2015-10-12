@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O71-Lh-j68">
-                                <rect key="frame" x="260" y="289" width="80" height="20.5"/>
+                                <rect key="frame" x="260" y="289" width="80" height="21"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9e9-hn-teT"/>
@@ -74,8 +74,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfE-eZ-m89">
-                                <rect key="frame" x="140" y="245" width="320" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfE-eZ-m89">
+                                <rect key="frame" x="200" y="245" width="200" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1ED-3T-Q6q"/>
@@ -84,8 +84,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-bk-HJg">
-                                <rect key="frame" x="140" y="317" width="320" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-bk-HJg">
+                                <rect key="frame" x="200" y="317" width="200" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MG2-Fu-Q7y"/>
@@ -94,8 +94,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJS-M8-dJb">
-                                <rect key="frame" x="245" y="386" width="110" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJS-M8-dJb">
+                                <rect key="frame" x="245" y="386" width="110" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="6qc-8P-MTI"/>
@@ -288,10 +288,10 @@
             </objects>
             <point key="canvasLocation" x="-1817" y="-152"/>
         </scene>
-        <!--Item 2-->
+        <!--DRIVER-->
         <scene sceneID="u7g-d1-Et0">
             <objects>
-                <viewController id="cPv-dO-BF6" sceneMemberID="viewController">
+                <viewController id="cPv-dO-BF6" userLabel="DRIVER" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Nbs-KC-hSd"/>
                         <viewControllerLayoutGuide type="bottom" id="p8b-sW-ca0"/>
@@ -299,6 +299,20 @@
                     <view key="view" contentMode="scaleToFill" id="PDE-pe-egd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-Nr-vLa">
+                                <rect key="frame" x="102" y="184" width="148" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="CMH-7E-hpZ">
+                                <rect key="frame" x="155" y="240" width="355" height="70"/>
+                                <date key="date" timeIntervalSinceReferenceDate="466382395.81427801">
+                                    <!--2015-10-12 22:39:55 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -306,12 +320,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s30-Ue-5Mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-273" y="178"/>
+            <point key="canvasLocation" x="-693" y="184"/>
         </scene>
-        <!--Item 1-->
+        <!--PASSENGER-->
         <scene sceneID="hVB-OA-f7E">
             <objects>
-                <viewController id="Iu8-id-lEG" sceneMemberID="viewController">
+                <viewController id="Iu8-id-lEG" userLabel="PASSENGER" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eib-q6-CMJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Tu8-wC-hG4"/>
@@ -326,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUM-5D-O1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-273" y="-483"/>
+            <point key="canvasLocation" x="-273" y="-593"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WRy-Tg-YNy">

@@ -5,15 +5,12 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-@ParseClassName("Routes")
+@ParseClassName("ParseRoute")
 public class ParseRoute extends ParseObject {
-
     public String getFrom() {
         return getString("from");
     }
-    public void setFrom(String value) {
-        put("from", value);
-    }
+    public void setFrom(String value) { put("from", value); }
 
     public String getTo() {
         return getString("to");
@@ -22,10 +19,10 @@ public class ParseRoute extends ParseObject {
         put("to", value);
     }
 
-    public int getNumPass() {
-        return getInt("numPass");
+    public String getNumPass() {
+        return getString("numPass");
     }
-    public void setNumPass(int value) {
+    public void setNumPass(String value) {
         put("numPass", value);
     }
 

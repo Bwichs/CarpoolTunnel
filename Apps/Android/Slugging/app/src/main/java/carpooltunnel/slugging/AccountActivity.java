@@ -1,34 +1,22 @@
 package carpooltunnel.slugging;
 
-import android.accounts.Account;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.widget.Button;
-
-import java.net.URI;
-import java.util.List;
-import java.util.Arrays;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.parse.ParseException;
-import com.parse.RequestPasswordResetCallback;
-import com.parse.ParseUser;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 import com.parse.SaveCallback;
 
-import com.facebook.GraphRequest;
-import com.facebook.AccessToken;
-import com.facebook.HttpMethod;
-import com.facebook.GraphResponse;
+import java.util.Arrays;
+import java.util.List;
 
 
 
@@ -39,8 +27,8 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

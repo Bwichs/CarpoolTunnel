@@ -31,7 +31,7 @@
     <string name="title_activity_passenger">Passenger Activity</string>
 
     <color name="white">#FFFFFF</color>
-    <color name="bg_login">#4DB6AC</color>
+    <color name="bg_login">#009688</color>
     <color name="bg_register">#2e3237</color>
     <color name="bg_main">#428bca</color>
     <color name="input_login">#222222</color>
@@ -43,4 +43,23 @@
     <color name="btn_login_bg">#2e3237</color>
     <color name="lbl_name">#333333</color>
     <color name="btn_logut_bg">#F3875F</color>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_single_item_view">SingleItemView</string>
+
+    <string name="title_activity_main">Parse Custom ListView</string>
+
+    <string name="depDaylabel">"Departure Day : "</string>
+    <string name="depTimelabel">"Departure Time : "</string>
+    <string name="fromlabel">"Starting Location : "</string>
+    <string name="numPasslabel">"Number of Passengers : "</string>
+    <string name="tolabel">"Destination : "</string>
+    <string name="driverUserlabel">"Driver : "</string>
+    <string name="createdAtlabel">"First created : "</string>
+    <string name="updatedAtlabel">"Last updated : "</string>
+
+    <string name="dummy_section_text">Section %1d is just a dummy section.</string>
+    <string name="demo_external_activity">Demo External Activity</string>
+    <string name="demo_collection">Demo Collection</string>
+
 </resources>

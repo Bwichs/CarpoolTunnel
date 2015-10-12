@@ -7,14 +7,8 @@
     tools:context="carpooltunnel.slugging.WelcomeActivity">
 
     <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay"/>
 
-        <android.support.design.widget.FloatingActionButton android:id="@+id/acc"
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@android:drawable/ic_menu_preferences" />
-
-    </android.support.design.widget.AppBarLayout>
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -28,27 +22,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Passenger"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:layout_gravity="center|left"
+            android:background="#00796B"
+            android:textColor="@color/white"
             android:id="@+id/pbutton"
+            android:fontFamily="sans-serif-light"
             />
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Driver"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:layout_margin="4dp"
             android:layout_weight="1"
             android:layout_gravity="center|left"
-            android:id="@+id/dbutton" />
+            android:background="#00796B"
+            android:textColor="@color/white"
+            android:id="@+id/dbutton"
+            android:fontFamily="sans-serif-light"
+            />
     </LinearLayout>
     <include layout="@layout/content_welcome" />
-
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_revert" />
 
 </android.support.design.widget.CoordinatorLayout>

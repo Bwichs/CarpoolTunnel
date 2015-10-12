@@ -1,28 +1,31 @@
 package carpooltunnel.slugging;
 
+import android.app.DatePickerDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.parse.ParseClassName;
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.util.Calendar;
 
-public class DriverActivity extends AppCompatActivity {
+public class DriverActivity extends FragmentActivity {
+
+    public static FragmentManager fragmentManagerDest;
+    public static FragmentManager fragmentManagerStarting;
 
     // UI references.
     private EditText mFrom;
@@ -33,24 +36,39 @@ public class DriverActivity extends AppCompatActivity {
 
     String from;
     String to;
-    int numPass;
+    String numPass;
     String depTime;
     String depDay;
     ParseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+        //this declares the map fragment, and hides them
+        fragmentManagerDest = getFragmentManager();
+        fragmentManagerStarting = getFragmentManager();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.commit();
+        ft.hide(fragmentManagerDest.findFragmentById(R.id.location_mapDest));
+        ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+
+        //function call for buttons to show/hide map fragments
+        addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
+        addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+
 
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);
         mNumPass = (EditText) findViewById(R.id.numpass);
         mTime = (EditText) findViewById(R.id.time);
         mDay = (EditText) findViewById(R.id.date);
-
+        //time picker
         mTime.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -67,9 +85,38 @@ public class DriverActivity extends AppCompatActivity {
                 }, hour, minute, true);//24 Hour Time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-
             }
         });
+
+        final Button startButton = (Button)findViewById(R.id.startlocation);
+        startButton.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View v){
+
+        }
+        });
+
+        //date picker
+        mDay.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Calendar myCalendar = Calendar.getInstance();
+                int cDay = myCalendar.get(Calendar.DAY_OF_MONTH);
+                int cDate = myCalendar.get(Calendar.DAY_OF_MONTH);
+                int cMonth = myCalendar.get(Calendar.MONTH);
+                int cYear = myCalendar.get(Calendar.YEAR);
+                DatePickerDialog mDatePicker;
+                mDatePicker = new DatePickerDialog(DriverActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int selectedDate, int selectedMonth, int selectedYear) {
+                        mDay.setText("" + selectedYear + "/" + (selectedMonth+1) + "/" + selectedDate);
+                    }
+                }, cYear, cMonth, cDate);
+                mDatePicker.setTitle("Select Date");
+                mDatePicker.show();
+                }
+    });
 
         Button mSubmitButton = (Button) findViewById(R.id.sched_sub_button);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -88,32 +135,59 @@ public class DriverActivity extends AppCompatActivity {
             }
         });
     }
+    //button function
+    void addShowHideListener(int buttonId, final Fragment fragment) {
+        final Button button = (Button)findViewById(buttonId);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.setCustomAnimations(android.R.animator.fade_in,
+                        android.R.animator.fade_out);
+                if (fragment.isHidden()) {
+                    ft.show(fragment);
 
-
-
-    private void submitRoute(){
-        ParseRoute route = new ParseRoute();
-        from = mFrom.getText().toString();
-        to = mTo.getText().toString();;
-        numPass = Integer.parseInt(mNumPass.getText().toString());
-        depTime = mTime.getText().toString();
-        depDay = mDay.getText().toString();
-        user = ParseUser.getCurrentUser();
-        route.setFrom(from);
-        route.setTo(to);
-        route.setNumPass(numPass);
-        route.setDepTime(depTime);
-        route.setDepDay(depDay);
-        route.setUser(user);
-        route.saveInBackground(new SaveCallback(){
-            @Override
-            public void done(ParseException e) {
-                Toast.makeText(getApplicationContext(),
-                        "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
-                        Toast.LENGTH_LONG).show();
-                finish();
+                } else {
+                    ft.hide(fragment);
+                }
+                ft.commit();
             }
         });
+    }
+
+
+    public final String TAG = "DriverActivity";
+
+    private void submitRoute(){
+
+        from = mFrom.getText().toString();
+        to = mTo.getText().toString();
+        numPass = mNumPass.getText().toString();
+        depTime = mTime.getText().toString();
+        depDay = mDay.getText().toString();
+        if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
+             ParseRoute route = new ParseRoute();
+             user = ParseUser.getCurrentUser();
+             route.setFrom(from);
+             route.setTo(to);
+             route.setNumPass(numPass);
+             route.setDepTime(depTime);
+             route.setDepDay(depDay);
+             route.setUser(user);
+             route.saveInBackground(new SaveCallback() {
+                 @Override
+                 public void done(ParseException e) {
+                     Toast.makeText(getApplicationContext(),
+                             "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
+                             Toast.LENGTH_LONG).show();
+                     finish();
+                 }
+             });
+         }
+        else{
+            Toast.makeText(getApplicationContext(),
+                    "Please fill in the entire form",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 }

@@ -27,15 +27,25 @@ class ViewController: UIViewController {
             (succeeded: Bool, error: NSError?) -> Void in
             if let error = error {
                 _ = error.userInfo["error"] as? NSString
+                self.signIn_alert(self)
                 // Show the errorString somewhere and let the user try again.
             } else {
                 // Hooray! Let them use the app now.
                 self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
             }
         }
-    }
+    }    
 
-    
+    func signIn_alert(sender: AnyObject) {
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: "Slugging", message:
+                "Email in use, please enter correct password.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -91,7 +91,6 @@
         </LinearLayout>
 
         <fragment
-            android:visibility="gone"
             android:id="@+id/location_mapDest"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,6 +24,7 @@ import com.parse.SaveCallback;
 import java.util.Calendar;
 
 public class DriverActivity extends FragmentActivity {
+    public final String TAG = "DriverActivity";
 
     public static FragmentManager fragmentManagerDest;
     public static FragmentManager fragmentManagerStarting;
@@ -54,14 +56,13 @@ public class DriverActivity extends FragmentActivity {
         fragmentManagerDest = getFragmentManager();
         fragmentManagerStarting = getFragmentManager();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.commit();
         ft.hide(fragmentManagerDest.findFragmentById(R.id.location_mapDest));
         ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
-
+        ft.commit();
         //function call for buttons to show/hide map fragments
-        addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
-        addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
 
+        addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+        addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
 
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);
@@ -88,13 +89,13 @@ public class DriverActivity extends FragmentActivity {
             }
         });
 
-        final Button startButton = (Button)findViewById(R.id.startlocation);
-        startButton.setOnClickListener(new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-
-        }
-        });
+//        final Button startButton = (Button)findViewById(R.id.startlocation);
+//        startButton.setOnClickListener(new View.OnClickListener(){
+//        @Override
+//        public void onClick(View v){
+//
+//        }
+//        });
 
         //date picker
         mDay.setOnClickListener(new View.OnClickListener() {
@@ -137,17 +138,21 @@ public class DriverActivity extends FragmentActivity {
     }
     //button function
     void addShowHideListener(int buttonId, final Fragment fragment) {
+        Log.e(TAG,"hello"+fragment);
         final Button button = (Button)findViewById(buttonId);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.e(TAG,"onClick");
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.setCustomAnimations(android.R.animator.fade_in,
                         android.R.animator.fade_out);
                 if (fragment.isHidden()) {
                     ft.show(fragment);
+                    Log.e(TAG,"SHOW");
 
                 } else {
                     ft.hide(fragment);
+                    Log.e(TAG, "HIDE");
                 }
                 ft.commit();
             }
@@ -155,7 +160,7 @@ public class DriverActivity extends FragmentActivity {
     }
 
 
-    public final String TAG = "DriverActivity";
+
 
     private void submitRoute(){
 

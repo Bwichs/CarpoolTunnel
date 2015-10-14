@@ -23,15 +23,23 @@ class ViewController: UIViewController {
         user.password = password.text
         user.email = emailAddress.text
         
-        user.signUpInBackgroundWithBlock {
-            (succeeded: Bool, error: NSError?) -> Void in
-            if let error = error {
-                _ = error.userInfo["error"] as? NSString
-                self.signIn_alert(self)
-                // Show the errorString somewhere and let the user try again.
+        PFUser.logInWithUsernameInBackground(user.username!, password: (user.password)!) {
+            (return_user: PFUser?, error: NSError?) -> Void in
+            if return_user != nil {
+                // Do stuff after successful login.
             } else {
-                // Hooray! Let them use the app now.
-                self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
+                // The login failed. Check error to see why.
+                user.signUpInBackgroundWithBlock {
+                    (succeeded: Bool, error: NSError?) -> Void in
+                    if let error = error {
+                        _ = error.userInfo["error"] as? NSString
+                        self.signIn_alert(self)
+                        // Show the errorString somewhere and let the user try again.
+                    } else {
+                        // Hooray! Let them use the app now.
+                        self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
+                    }
+                }
             }
         }
     }    
@@ -50,6 +58,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            // Do stuff with the user
+            self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
+            
+        } else {
+            // Show the signup or login screen
+        }
+
     }
 
     override func didReceiveMemoryWarning() {

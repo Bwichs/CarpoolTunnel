@@ -40,9 +40,11 @@ public class ParseRoute extends ParseObject {
         put("depDay", value);
     }
 
-    ParseUser user = ParseUser.getCurrentUser();
-    public ParseUser getUser() {
-        return getParseUser("user");
+    public String getUser() {
+        return getString ("user");
+    }
+    public void setDriverUser(String value) {
+        put("user", value);
     }
 
     public void setUser(ParseUser value) {

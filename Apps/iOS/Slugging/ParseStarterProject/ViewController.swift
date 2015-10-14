@@ -13,7 +13,6 @@ import Parse
 class ViewController: UIViewController {
     
     
-    
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var password: UITextField!
     

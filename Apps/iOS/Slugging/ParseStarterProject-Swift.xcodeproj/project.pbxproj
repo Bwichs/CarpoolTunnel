@@ -40,7 +40,6 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		992D269C1BCDB1620010FAFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = ../../../../Downloads/MapKit.framework; sourceTree = "<group>"; };
 		99375BD41BCD93EC008AE8F1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		9976EDA51BCC71960022FA38 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +54,6 @@
 				992D269D1BCDB1620010FAFE /* MapKit.framework in Frameworks */,
 				81BA81711A49DB6800E65899 /* Parse.framework in Frameworks */,
 				81BA81701A49DB6800E65899 /* Bolts.framework in Frameworks */,
-				C73824B0C2016537B9488F0A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,8 +63,6 @@
 		00FE845456A36294DEAEFED0 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B6A018708537FEAD721E5FE4 /* Pods.debug.xcconfig */,
-				B369104E7751B65D22E9803E /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -286,7 +282,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				814C3AC71B69877600E307BB /* Base */,
-				9976EDA51BCC71960022FA38 /* en */,
 			);
 			name = Main.storyboard;
 			path = ../Resources;
@@ -377,7 +372,6 @@
 		};
 		81BA81651A49DA1800E65899 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B6A018708537FEAD721E5FE4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -397,7 +391,6 @@
 		};
 		81BA81661A49DA1800E65899 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B369104E7751B65D22E9803E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

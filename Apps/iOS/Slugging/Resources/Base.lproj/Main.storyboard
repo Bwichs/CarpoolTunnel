@@ -358,7 +358,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WRy-Tg-YNy">
             <objects>
-                <tabBarController id="kza-BC-whZ" customClass="TabBarController" sceneMemberID="viewController">
+                <tabBarController id="kza-BC-whZ" customClass="TabBarController" customModule="ParseStarterProject_Swift" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ybK-ga-1Q1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

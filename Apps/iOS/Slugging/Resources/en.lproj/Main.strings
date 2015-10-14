@@ -1,0 +1,18 @@
+
+/* Class = "UITabBarItem"; title = "Item 1"; ObjectID = "Bq2-5F-9Ab"; */
+"Bq2-5F-9Ab.title" = "Item 1";
+
+/* Class = "UILabel"; text = "Email Address"; ObjectID = "MYf-uU-tLw"; */
+"MYf-uU-tLw.text" = "Email Address";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "O71-Lh-j68"; */
+"O71-Lh-j68.text" = "Password";
+
+/* Class = "UITabBarItem"; title = "Item 2"; ObjectID = "Zrb-eH-Iu5"; */
+"Zrb-eH-Iu5.title" = "Item 2";
+
+/* Class = "UILabel"; text = "MM/DD/YY HH:MM"; ObjectID = "brJ-Nr-vLa"; */
+"brJ-Nr-vLa.text" = "MM/DD/YY HH:MM";
+
+/* Class = "UIButton"; normalTitle = "Register/Sign In"; ObjectID = "cJS-M8-dJb"; */
+"cJS-M8-dJb.normalTitle" = "Register/Sign In";

@@ -301,28 +301,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-Nr-vLa">
-                                <rect key="frame" x="102" y="184" width="148" height="21"/>
-                                <animations/>
+                                <rect key="frame" x="108" y="181" width="148" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="CMH-7E-hpZ">
-                                <rect key="frame" x="155" y="240" width="355" height="70"/>
-                                <animations/>
+                                <rect key="frame" x="139" y="245" width="355" height="70"/>
                                 <date key="date" timeIntervalSinceReferenceDate="466382395.81427801">
                                     <!--2015-10-12 22:39:55 +0000-->
                                 </date>
                             </datePicker>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.27349951798369004" green="0.91660748106060608" blue="0.76838257970653545" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="Zrb-eH-Iu5"/>
+                    <tabBarItem key="tabBarItem" title="DRIVER" id="Zrb-eH-Iu5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s30-Ue-5Mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="-273" y="304"/>
+=======
+            <point key="canvasLocation" x="-283" y="228"/>
+>>>>>>> d04c269adc83f650174902e8ecd95d95013e6aa5
         </scene>
         <!--PASSENGER-->
         <scene sceneID="hVB-OA-f7E">
@@ -335,19 +337,28 @@
                     <view key="view" contentMode="scaleToFill" id="x9f-gW-DS2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSL-xv-ziy">
+                                <rect key="frame" x="241" y="496" width="96" height="30"/>
+                                <state key="normal" title="Send Request"/>
+                            </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
+                                <rect key="frame" x="143" y="53" width="363" height="427"/>
+                            </mapView>
+                        </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.273499518" green="0.91660748110000001" blue="0.76838257970000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="Bq2-5F-9Ab"/>
+                    <tabBarItem key="tabBarItem" title="PASSENGER" id="Bq2-5F-9Ab"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUM-5D-O1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-273" y="-593"/>
+            <point key="canvasLocation" x="-427" y="-617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WRy-Tg-YNy">
             <objects>
-                <tabBarController id="kza-BC-whZ" sceneMemberID="viewController">
+                <tabBarController id="kza-BC-whZ" customClass="TabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="ybK-ga-1Q1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

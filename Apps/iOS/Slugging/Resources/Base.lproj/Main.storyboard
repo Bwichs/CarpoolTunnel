@@ -119,6 +119,9 @@
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="MYf-uU-tLw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0YC-oc-vmp"/>
                             <constraint firstItem="MYf-uU-tLw" firstAttribute="centerX" secondItem="cJS-M8-dJb" secondAttribute="centerX" id="0hf-Gk-ewR"/>
@@ -327,7 +330,7 @@
         <!--PASSENGER-->
         <scene sceneID="hVB-OA-f7E">
             <objects>
-                <viewController id="Iu8-id-lEG" userLabel="PASSENGER" sceneMemberID="viewController">
+                <viewController id="Iu8-id-lEG" userLabel="PASSENGER" customClass="MapViewController" customModule="ParseStarterProject_Swift" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eib-q6-CMJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Tu8-wC-hG4"/>
@@ -336,18 +339,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSL-xv-ziy">
-                                <rect key="frame" x="241" y="496" width="96" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Send Request"/>
-                            </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
-                                <rect key="frame" x="143" y="53" width="363" height="427"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
+                                <rect key="frame" x="162" y="137" width="277" height="325"/>
                                 <animations/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07b-af-o85">
+                                <rect key="frame" x="273" y="83" width="55" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="Iu8-id-lEG" eventType="touchUpInside" id="8WP-Eo-2vu"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="backToSignIn" id="xT4-Qq-vc0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.273499518" green="0.91660748110000001" blue="0.76838257970000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="TgZ-yF-Pfq" firstAttribute="centerY" secondItem="x9f-gW-DS2" secondAttribute="centerY" id="2yW-8a-Und"/>
+                            <constraint firstItem="TgZ-yF-Pfq" firstAttribute="top" secondItem="07b-af-o85" secondAttribute="bottom" constant="24" id="I7u-lL-7oH"/>
+                            <constraint firstItem="TgZ-yF-Pfq" firstAttribute="centerX" secondItem="x9f-gW-DS2" secondAttribute="centerX" id="Nv2-cG-DrF"/>
+                            <constraint firstItem="07b-af-o85" firstAttribute="centerX" secondItem="x9f-gW-DS2" secondAttribute="centerX" id="c47-dd-HmX"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PASSENGER" id="Bq2-5F-9Ab"/>
                 </viewController>

@@ -26,6 +26,7 @@ class ViewController: UIViewController {
             (return_user: PFUser?, error: NSError?) -> Void in
             if return_user != nil {
                 // Do stuff after successful login.
+                self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
             } else {
                 // The login failed. Check error to see why.
                 user.signUpInBackgroundWithBlock {
@@ -63,7 +64,8 @@ class ViewController: UIViewController {
         let currentUser = PFUser.currentUser()
         if currentUser != nil {
             // Do stuff with the user
-            self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
+        
+        self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
             
         } else {
             // Show the signup or login screen

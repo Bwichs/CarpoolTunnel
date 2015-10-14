@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.parse.FindCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -56,22 +58,25 @@ public class PassengerActivityListTab extends ListFragment {
                 // Locate the class table named "Country" in Parse.com
                 ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
                         "ParseRoute");
+                query.include("user");
                 // by ascending
                 query.orderByAscending("createdAt");
                 ob = query.find();
                 for (ParseObject route : ob) {
+                    ParseObject n = new ParseObject("User");
+                    n = route.getParseObject("user");
                     PassengerRouteClass map = new PassengerRouteClass();
                     map.setDepDay((String) route.get("depDay"));
                     map.setDepTime((String) route.get("depTime"));
                     map.setFrom((String) route.get("from"));
                     map.setNumPass((String) route.get("numPass"));
                     map.setTo((String) route.get("to"));
-                    String name = "";
-                    try {
-                        name = route.fetch().getString("user");
+                    String name = n.getString("username");
+                    /*try {
+                        name = route.fetch().getString("ObjectId");
                     } catch (ParseException e){
                         e.printStackTrace();
-                    }
+                    }*/
                     map.setDriverUser(name);
                     map.setCreatedAt(route.getCreatedAt().toString());
                     map.setUpdatedAt(route.getUpdatedAt().toString());

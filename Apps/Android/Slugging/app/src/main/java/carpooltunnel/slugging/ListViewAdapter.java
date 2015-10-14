@@ -97,8 +97,8 @@ public class ListViewAdapter extends BaseAdapter {
                         (PassengerRouteClasslist.get(position).getNumPass()));
                 intent.putExtra("to",
                         (PassengerRouteClasslist.get(position).getTo()));
-                //intent.putExtra("driverUser",
-                //        (PassengerRouteClasslist.get(position).getDriverUser()));
+                intent.putExtra("driverUser",
+                        (PassengerRouteClasslist.get(position).getDriverUser()));
                 intent.putExtra("createdAt",
                         (PassengerRouteClasslist.get(position).getCreatedAt()));
                 intent.putExtra("updatedAt",

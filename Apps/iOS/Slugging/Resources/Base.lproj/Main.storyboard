@@ -302,12 +302,14 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-Nr-vLa">
                                 <rect key="frame" x="108" y="181" width="148" height="21"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="CMH-7E-hpZ">
                                 <rect key="frame" x="139" y="245" width="355" height="70"/>
+                                <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="466382395.81427801">
                                     <!--2015-10-12 22:39:55 +0000-->
                                 </date>
@@ -320,11 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s30-Ue-5Mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
-            <point key="canvasLocation" x="-273" y="304"/>
-=======
             <point key="canvasLocation" x="-283" y="228"/>
->>>>>>> d04c269adc83f650174902e8ecd95d95013e6aa5
         </scene>
         <!--PASSENGER-->
         <scene sceneID="hVB-OA-f7E">
@@ -340,10 +338,12 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QSL-xv-ziy">
                                 <rect key="frame" x="241" y="496" width="96" height="30"/>
+                                <animations/>
                                 <state key="normal" title="Send Request"/>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
                                 <rect key="frame" x="143" y="53" width="363" height="427"/>
+                                <animations/>
                             </mapView>
                         </subviews>
                         <animations/>

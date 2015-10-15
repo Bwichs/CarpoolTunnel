@@ -18,8 +18,8 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
-    <string name="prompt_start">Start</string>
-    <string name="prompt_finish">Destination</string>
+    <string name="prompt_start">Start e.g. 100 Shaffer Road, Santa Cruz, CA 95060</string>
+    <string name="prompt_finish">Destination e.g. 1156 High Street, Santa Cruz, CA 95064</string>
     <string name="prompt_numpass"># of Passengers</string>
     <string name="prompt_time">Departure Time</string>
     <string name="prompt_day">Day</string>

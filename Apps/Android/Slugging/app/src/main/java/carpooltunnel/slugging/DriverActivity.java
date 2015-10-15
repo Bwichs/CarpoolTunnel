@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,7 +23,9 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 
 public class DriverActivity extends FragmentActivity {
     public final String TAG = "DriverActivity";
@@ -170,23 +174,71 @@ public class DriverActivity extends FragmentActivity {
         depTime = mTime.getText().toString();
         depDay = mDay.getText().toString();
         if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
-             ParseRoute route = new ParseRoute();
-             user = ParseUser.getCurrentUser();
-             route.setFrom(from);
-             route.setTo(to);
-             route.setNumPass(numPass);
-             route.setDepTime(depTime);
-             route.setDepDay(depDay);
-             route.setUser(user);
-             route.saveInBackground(new SaveCallback() {
-                 @Override
-                 public void done(ParseException e) {
-                     Toast.makeText(getApplicationContext(),
-                             "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
-                             Toast.LENGTH_LONG).show();
-                     finish();
+        boolean locationFrom = false;
+            boolean locationTo = false;
+
+            List<Address> foundGeocodeFrom = null;
+            List<Address> foundGeocodeTo = null;
+             try{
+             foundGeocodeFrom = new Geocoder(this).getFromLocationName(from,1);
+                 if(foundGeocodeFrom != null && !foundGeocodeFrom.isEmpty()){
+             foundGeocodeFrom.get(0).getLatitude();
+             foundGeocodeFrom.get(0).getLongitude();
+             Log.e(TAG,"location from, latlong:"+foundGeocodeFrom.get(0).getLatitude()+" "+foundGeocodeFrom.get(0).getLongitude());
+                     locationFrom = true;
                  }
-             });
+                 else{
+                     Log.e(TAG,"location not found");
+                 }
+
+                 foundGeocodeTo = new Geocoder(this).getFromLocationName(to,1);
+                 if(foundGeocodeTo != null && !foundGeocodeTo.isEmpty()){
+                     foundGeocodeTo.get(0).getLatitude();
+                     foundGeocodeTo.get(0).getLongitude();
+                     Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + " " + foundGeocodeTo.get(0).getLongitude());
+                     locationTo = true;
+                 }
+                 else{
+                     Log.e(TAG,"location not found");
+                 }
+             }
+             catch (IOException ioexception){
+                 Log.e(TAG, "location error",ioexception);
+             }
+            if(locationFrom == true && locationTo == true) {
+                ParseRoute route = new ParseRoute();
+                user = ParseUser.getCurrentUser();
+                route.setFrom(from);
+                route.setTo(to);
+                route.setNumPass(numPass);
+                route.setDepTime(depTime);
+                route.setDepDay(depDay);
+                route.setUser(user);
+                route.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Toast.makeText(getApplicationContext(),
+                                "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
+            }
+            else if(locationFrom == false && locationTo == true){
+                Toast.makeText(getApplicationContext(),
+                        "Please enter a valid start address",
+                        Toast.LENGTH_LONG).show();
+            }
+            else if(locationFrom == true && locationTo == false){
+                Toast.makeText(getApplicationContext(),
+                        "Please enter a valid destination address",
+                        Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),
+                        "Please enter valid start and destination addresses",
+                        Toast.LENGTH_LONG).show();
+            }
          }
         else{
             Toast.makeText(getApplicationContext(),

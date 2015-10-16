@@ -35,9 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
+
 
 public class AccountActivity extends AppCompatActivity {
     public static final String TAG = "map";
@@ -49,12 +47,28 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        final EditText name = (EditText) findViewById(R.id.nameContent);
+        if(user.getString("name") != null) name.setText(user.getString("name"));
+        TextView un = (TextView) findViewById(R.id.anContent);
+        un.setText(user.getUsername());
+        final EditText pn = (EditText) findViewById(R.id.pnContent);
+        pn.setText(user.getString("phoneNumber"));
+        final EditText ct = (EditText) findViewById(R.id.ctContent);
+        ct.setText(user.getString("carType"));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
+                String phoneNumber = pn.getText().toString();
+                user.put("phoneNumber", phoneNumber);
+                pn.setText(phoneNumber);
+                String carType = ct.getText().toString();
+                user.put("carType", carType);
+                ct.setText(carType);
+                String n = name.getText().toString();
+                user.put("name", n);
+                user.saveInBackground();
                 startActivity(intent);
                 finish();
             }
@@ -76,26 +90,6 @@ public class AccountActivity extends AppCompatActivity {
                 }
             });
         }
-        TextView un = (TextView) findViewById(R.id.anContent);
-        un.setText(user.getUsername());
-        final EditText pn = (EditText) findViewById(R.id.pnContent);
-        pn.setText(user.getString("phoneNumber"));
-        final EditText ct = (EditText) findViewById(R.id.ctContent);
-        ct.setText(user.getString("carType"));
-
-        final Button submitButton = (Button) findViewById(R.id.sbutton);
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-                String phoneNumber = pn.getText().toString();
-                user.put("phoneNumber", phoneNumber);
-                pn.setText(phoneNumber);
-                String carType = ct.getText().toString();
-                user.put("carType", carType);
-                ct.setText(carType);
-                user.saveInBackground();
-            }
-        });
 
         final Button passwordButton = (Button) findViewById(R.id.pwbutton);
         passwordButton.setOnClickListener(new View.OnClickListener() {

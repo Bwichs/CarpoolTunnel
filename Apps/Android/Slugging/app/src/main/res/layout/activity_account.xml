@@ -15,7 +15,34 @@
     <LinearLayout android:id="@+id/sched_enter_form" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:orientation="vertical"
         android:layout_gravity="center">
-
+        <LinearLayout
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:textSize="20dp"
+                android:text="Name"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:layout_weight="1"
+                android:layout_gravity="center|left"
+                android:id="@+id/nameTitle"
+                />
+            <android.support.design.widget.TextInputLayout android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <EditText android:id="@+id/nameContent" android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:hint="Press to add"
+                    android:inputType="text" android:maxLines="1"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/user"
             android:layout_width="match_parent"
@@ -151,27 +178,6 @@
                 android:layout_weight="1"
                 android:layout_gravity="left"
                 android:id="@+id/pwbutton" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:weightSum="2">
-            <Button
-                android:layout_width="0dp"
-                android:fontFamily="sans-serif-light"
-                android:background="#00796B"
-                android:textColor="@color/white"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:layout_gravity="left"
-                android:id="@+id/sbutton" />
         </LinearLayout>
     </LinearLayout>
     <android.support.design.widget.FloatingActionButton android:id="@+id/fab"

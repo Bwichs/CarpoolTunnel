@@ -96,17 +96,33 @@
                 android:layout_gravity="center|left"
                 android:id="@+id/ctTitle"
                 />
-            <android.support.design.widget.TextInputLayout android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-                <EditText android:id="@+id/ctContent" android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:hint="Press to add"
-                    android:inputType="text" android:maxLines="1"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+                    <EditText android:id="@+id/ctContent" android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" android:hint="Press to add"
+                        android:inputType="text" android:maxLines="1"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/facebook"
+            android:id="@+id/carimage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:weightSum="2">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/image"
+                android:src="@drawable/caricon"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/account"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -117,13 +133,13 @@
                 android:fontFamily="sans-serif-light"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Login With Facebook"
+                android:text="Delete Account"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:background="#3b5998"
                 android:textColor="@color/white"
                 android:layout_gravity="left"
-                android:id="@+id/fbButton" />
+                android:id="@+id/dButton" />
             <Button
                 android:fontFamily="sans-serif-light"
                 android:layout_width="0dp"

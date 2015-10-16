@@ -1,25 +1,25 @@
 //
-//  MapViewController.swift
-//  
+//  AccountViewController.swift
+//  ParseStarterProject-Swift
 //
-//  Created by Brian Wichers on 10/13/15.
-//
+//  Created by Brian Wichers on 10/15/15.
+//  Copyright © 2015 Parse. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-class MapViewController: UIViewController {
+class AccountViewController: UIViewController {
+    @IBOutlet weak var menuButton: UIBarButtonItem!
 
-    @IBAction func logOut(sender: AnyObject) {
-        PFUser.logOut();
-        self.performSegueWithIdentifier("backToSignIn", sender: self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = "revealToggle:"
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
     }
 
     override func didReceiveMemoryWarning() {

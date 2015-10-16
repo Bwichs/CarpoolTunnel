@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2727223B1BCE13BC000DA48D /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727223A1BCE13BC000DA48D /* MapViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2727223B1BCE13BC000DA48D /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727223A1BCE13BC000DA48D /* PassengerViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		272722401BD08952000DA48D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727223E1BD08952000DA48D /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
+		272722421BD09A78000DA48D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 272722411BD09A78000DA48D /* menu.png */; settings = {ASSET_TAGS = (); }; };
+		272722441BD0A142000DA48D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722431BD0A142000DA48D /* AccountViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		272722461BD0A858000DA48D /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722451BD0A858000DA48D /* DriverViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		69E876684AA2990877F73685 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5407D95FEACC496DE0090E /* libPods.a */; };
 		814C3ACA1B69877600E307BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC61B69877600E307BB /* Main.storyboard */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
-		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
+		81BA814D1A49DA1800E65899 /* LogginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* LogginViewController.swift */; };
 		81BA81701A49DB6800E65899 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA816B1A49DB6800E65899 /* Bolts.framework */; };
 		81BA81711A49DB6800E65899 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA816C1A49DB6800E65899 /* Parse.framework */; };
 		81BA81771A49E0D500E65899 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81761A49E0D500E65899 /* libsqlite3.dylib */; };
@@ -20,11 +24,16 @@
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		992D269D1BCDB1620010FAFE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992D269C1BCDB1620010FAFE /* MapKit.framework */; settings = {ASSET_TAGS = (); }; };
-		99375BD51BCD93EC008AE8F1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99375BD41BCD93EC008AE8F1 /* TabBarController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2727223A1BCE13BC000DA48D /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		2727223A1BCE13BC000DA48D /* PassengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
+		2727223D1BD08952000DA48D /* ParseStarterProject-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		2727223E1BD08952000DA48D /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		2727223F1BD08952000DA48D /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		272722411BD09A78000DA48D /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		272722431BD0A142000DA48D /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		272722451BD0A858000DA48D /* DriverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverViewController.swift; sourceTree = "<group>"; };
 		5B5407D95FEACC496DE0090E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6073ACB49F7BD68BC765906D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		814C3AC71B69877600E307BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,7 +41,7 @@
 		814C3AC91B69877600E307BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* ParseStarterProject-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ParseStarterProject-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		81BA814C1A49DA1800E65899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		81BA814C1A49DA1800E65899 /* LogginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginViewController.swift; sourceTree = "<group>"; };
 		81BA816B1A49DB6800E65899 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		81BA816C1A49DB6800E65899 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		81BA816D1A49DB6800E65899 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
@@ -43,7 +52,6 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		992D269C1BCDB1620010FAFE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = ../../../../Downloads/MapKit.framework; sourceTree = "<group>"; };
-		99375BD41BCD93EC008AE8F1 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CBB304B9954F57B5D29E9F9E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,10 +83,30 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		2727223C1BD0893F000DA48D /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2727223E1BD08952000DA48D /* SWRevealViewController.m */,
+				2727223F1BD08952000DA48D /* SWRevealViewController.h */,
+				2727223D1BD08952000DA48D /* ParseStarterProject-Swift-Bridging-Header.h */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		272722471BD0A8B4000DA48D /* Non-Views */ = {
+			isa = PBXGroup;
+			children = (
+				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				814C3AC61B69877600E307BB /* Main.storyboard */,
+			);
+			name = "Non-Views";
+			sourceTree = "<group>";
+		};
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				814C3AC81B69877600E307BB /* Images.xcassets */,
+				272722411BD09A78000DA48D /* menu.png */,
 				814C3AC91B69877600E307BB /* Info.plist */,
 			);
 			path = Resources;
@@ -106,11 +134,12 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
-				2727223A1BCE13BC000DA48D /* MapViewController.swift */,
-				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
-				81BA814C1A49DA1800E65899 /* ViewController.swift */,
-				99375BD41BCD93EC008AE8F1 /* TabBarController.swift */,
-				814C3AC61B69877600E307BB /* Main.storyboard */,
+				272722471BD0A8B4000DA48D /* Non-Views */,
+				2727223C1BD0893F000DA48D /* SWRevealViewController */,
+				2727223A1BCE13BC000DA48D /* PassengerViewController.swift */,
+				272722451BD0A858000DA48D /* DriverViewController.swift */,
+				81BA814C1A49DA1800E65899 /* LogginViewController.swift */,
+				272722431BD0A142000DA48D /* AccountViewController.swift */,
 			);
 			path = ParseStarterProject;
 			sourceTree = "<group>";
@@ -206,6 +235,7 @@
 			files = (
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
+				272722421BD09A78000DA48D /* menu.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,10 +308,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99375BD51BCD93EC008AE8F1 /* TabBarController.swift in Sources */,
-				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				81BA814D1A49DA1800E65899 /* LogginViewController.swift in Sources */,
+				272722441BD0A142000DA48D /* AccountViewController.swift in Sources */,
+				272722401BD08952000DA48D /* SWRevealViewController.m in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
-				2727223B1BCE13BC000DA48D /* MapViewController.swift in Sources */,
+				272722461BD0A858000DA48D /* DriverViewController.swift in Sources */,
+				2727223B1BCE13BC000DA48D /* PassengerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -397,6 +430,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.parse.Slugging;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -406,6 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -417,6 +453,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.parse.Slugging;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";
 			};
 			name = Release;
 		};

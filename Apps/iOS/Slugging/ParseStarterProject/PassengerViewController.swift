@@ -1,15 +1,32 @@
 //
-//  TabBarControllerViewController.swift
-//  ParseStarterProject-Swift
+//  MapViewController.swift
+//  
 //
-//  Created by April Mao on 10/13/15.
-//  Copyright © 2015 Parse. All rights reserved.
+//  Created by Brian Wichers on 10/13/15.
+//
 //
 
 import UIKit
+import Parse
 
-class TabBarController: UITabBarController {
+class MapViewController: UIViewController {
 
+    @IBAction func logOut(sender: AnyObject) {
+        processSignOut()
+    }
+    
+    // Sign the current user out of the app
+    func processSignOut() {
+        
+        // // Sign out
+        PFUser.logOut()
+        
+        // Display sign in / up view controller
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("log_in_home_screen")
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

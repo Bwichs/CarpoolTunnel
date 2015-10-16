@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
@@ -17,18 +18,31 @@ import com.parse.SaveCallback;
 
 import java.util.Arrays;
 import java.util.List;
-
-
+import android.util.Log;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import java.security.MessageDigest;
+import android.util.Base64;
+import android.widget.Toast;
 
 
 public class AccountActivity extends AppCompatActivity {
+    public static final String TAG = "map";
 
+    final ParseUser user = ParseUser.getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        final Button facebookButton = (Button) findViewById(R.id.fbButton);
+        if (ParseFacebookUtils.isLinked(user)) {
+            Log.d(TAG, "Logged in");
+            facebookButton.setText("Go to Account");
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +55,7 @@ public class AccountActivity extends AppCompatActivity {
         });
 
 
-        final ParseUser user = ParseUser.getCurrentUser();
+
         TextView un = (TextView) findViewById(R.id.anContent);
         un.setText(user.getUsername());
         final EditText pn = (EditText) findViewById(R.id.pnContent);
@@ -66,9 +80,13 @@ public class AccountActivity extends AppCompatActivity {
         final Button passwordButton = (Button) findViewById(R.id.pwbutton);
         passwordButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                ParseUser.requestPasswordResetInBackground("myemail@example.com", new RequestPasswordResetCallback() {
+                ParseUser.requestPasswordResetInBackground(user.getEmail(), new RequestPasswordResetCallback() {
                     public void done(ParseException e) {
                         if (e == null) {
+                            Log.e(TAG,"Sent email reset");
+                            Toast.makeText(getApplicationContext(),
+                                    "Successfully sent password reset email!",
+                                    Toast.LENGTH_LONG).show();
                             // An email was successfully sent with reset instructions.
                         } else {
                             // Something went wrong. Look at the ParseException to see what's up.
@@ -78,38 +96,28 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        final Button facebookButton = (Button) findViewById(R.id.fbButton);
+
         facebookButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (!ParseFacebookUtils.isLinked(user)) {
-                    List<String> permissions = Arrays.asList("public_profile");
-                    ParseFacebookUtils.linkWithReadPermissionsInBackground(user, AccountActivity.this, permissions, new SaveCallback() {
+
+                if (!ParseFacebookUtils.isLinked(ParseUser.getCurrentUser())) {
+                    final List<String> permissions = Arrays.asList("public_profile");
+                    ParseFacebookUtils.linkWithReadPermissionsInBackground(ParseUser.getCurrentUser(), AccountActivity.this, permissions, new SaveCallback() {
                         @Override
                         public void done(ParseException ex) {
                             if (ParseFacebookUtils.isLinked(user)) {
-                                facebookButton.setText("Go to Account");
+                                Log.e(TAG, "Linked");
                             }
                         }
                     });
                 }
                 else
                 {
-                    /*
-                    GraphRequest request = GraphRequest.newMeRequest(
-                            accessToken,
-                            new GraphRequest.GraphJSONObjectCallback() {
-                                @Override
-                                public void onCompleted(
-                                        JSONObject object,
-                                        GraphResponse response) {
-                                    // Application code
-                                }
-                            });
-                    Bundle parameters = new Bundle();
-                    parameters.putString("fields", "id,name,link");
-                    request.setParameters(parameters);
-                    request.executeAsync();
-                    */
+                    Log.e(TAG,"Pressed");
+                    if (ParseFacebookUtils.isLinked(user)) {
+                        Log.e(TAG,"Logged in");
+                        facebookButton.setText("Go to Account");
+                    }
                 }
             }
         });

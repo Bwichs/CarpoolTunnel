@@ -23,6 +23,7 @@ import android.database.Cursor;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
+import com.parse.SaveCallback;
 
 import android.util.Log;
 import android.app.AlertDialog;
@@ -30,17 +31,16 @@ import android.widget.Toast;
 import android.content.DialogInterface;
 
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.BufferedInputStream;
+
 
 
 public class AccountActivity extends AppCompatActivity {
     public static final String TAG = "map";
     public static int RESULT_LOAD_IMAGE = 1;
     final ParseUser user = ParseUser.getCurrentUser();
+    public boolean picSaved;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,48 +48,56 @@ public class AccountActivity extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         final EditText name = (EditText) findViewById(R.id.nameContent);
-        if(user.getString("name") != null) name.setText(user.getString("name"));
+        name.setText(user.getString("name"));
         TextView un = (TextView) findViewById(R.id.anContent);
         un.setText(user.getUsername());
         final EditText pn = (EditText) findViewById(R.id.pnContent);
         pn.setText(user.getString("phoneNumber"));
         final EditText ct = (EditText) findViewById(R.id.ctContent);
         ct.setText(user.getString("carType"));
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
-                String phoneNumber = pn.getText().toString();
-                user.put("phoneNumber", phoneNumber);
-                pn.setText(phoneNumber);
-                String carType = ct.getText().toString();
-                user.put("carType", carType);
-                ct.setText(carType);
-                String n = name.getText().toString();
-                user.put("name", n);
-                user.saveInBackground();
-                startActivity(intent);
-                finish();
-            }
-        });
-        ParseFile carpic = (ParseFile) user.get("carpic");
+
+        ParseFile carpic = user.getParseFile("carpic");
         if(carpic != null) {
             carpic.getDataInBackground(new GetDataCallback() {
                 public void done(byte[] data, ParseException e) {
                     if (e == null) {
-                        // data has the bytes for the resume
+                        // data has the bytes
                         Log.e("TAG", "car pic data loaded");
                         Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
                         ImageView image = (ImageView) findViewById(R.id.image);
-                        image.setImageBitmap(Bitmap.createScaledBitmap(bm, 2048, 2048, false));
+                        image.setImageBitmap(Bitmap.createScaledBitmap(bm, 640, 512, false));
                     } else {
                         // something went wrong
                         Log.e("TAG", "no car pic data loaded");
                     }
                 }
             });
-        }
+        }else{Log.e("TAG", "car pic null");}
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumber = pn.getText().toString();
+                pn.setText(phoneNumber);
+                String carType = ct.getText().toString();
+                ct.setText(carType);
+                String n = name.getText().toString();
+                user.put("name", n);
+                user.put("carType", carType);
+                user.put("phoneNumber", phoneNumber);
+                Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
+                SaveCallback sc = new SaveCallback() {
+                    @Override
+                    public void done(ParseException arg0) {
+                        Log.e("TAG", "after saveinbackground is done");
+                        if(picSaved) finish();
+                    }
+                };
+                user.saveInBackground(sc);
+                startActivity(intent);
+            }
+        });
 
         final Button passwordButton = (Button) findViewById(R.id.pwbutton);
         passwordButton.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +138,9 @@ public class AccountActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),
                                         "Successfully deleted Account!",
                                         Toast.LENGTH_LONG).show();
-                                finish();
                                 Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
                                 startActivity(intent);
+                                finish();
                             }
 
                         })
@@ -197,32 +205,39 @@ public class AccountActivity extends AppCompatActivity {
             Bitmap bm;
             try{
                bm = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage));
-               image.setImageBitmap(Bitmap.createScaledBitmap(bm, 2048, 2048, false ));
+               Bitmap bmap = Bitmap.createScaledBitmap(bm, 640, 512, false);
+               image.setImageBitmap(bmap);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bmap.compress(Bitmap.CompressFormat.PNG, 30, stream);
+                byte[] byteArray = stream.toByteArray();
+                final ParseFile file = new ParseFile("accountpic.jpg", byteArray);
+                SaveCallback sc = new SaveCallback() {
+                    @Override
+                    public void done(ParseException arg0) {
+                        user.put("carpic", file);
+                        SaveCallback sc2 = new SaveCallback() {
+                            @Override
+                            public void done(ParseException arg0) {
+                                Toast.makeText(getApplicationContext(),
+                                        "Picture Saved!",
+                                        Toast.LENGTH_LONG).show();
+                                picSaved = true;
+                            }
+                        };
+                        user.saveInBackground(sc2);
+                    }
+                };
+                file.saveInBackground(sc);
+                Toast.makeText(getApplicationContext(),
+                        "Saving... Please Wait",
+                        Toast.LENGTH_LONG).show();
+
+
             }
             catch(FileNotFoundException e){
                 Log.e(TAG, "file not found");
             }
 
-
-            //try to save image as byte[] to store in parse database
-            File imagefile = new File(picturePath);
-            int size = (int) imagefile.length();
-            byte[] bytes = new byte[size];
-            try {
-                BufferedInputStream buf = new BufferedInputStream(new FileInputStream(imagefile));
-                buf.read(bytes, 0, bytes.length);
-                buf.close();
-                ParseFile file = new ParseFile("accountpic.jpg", bytes);
-                file.saveInBackground();
-                user.put("carpic", file);
-                user.saveInBackground();
-            } catch (FileNotFoundException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
         }
     }
 }

@@ -30,11 +30,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
-
+import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,7 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+    private final String TAG = "Login";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -82,6 +85,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        Button password = (Button) findViewById(R.id.reset_password);
+        password.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetPass();
+            }
+        });
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -98,6 +109,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getLoaderManager().initLoader(0, null, this);
     }
 
+    private void resetPass(){
+        email = mEmailView.getText().toString();
+
+        if (TextUtils.isEmpty(email)){
+            Toast.makeText(getApplicationContext(),
+                    "Enter username please",
+                    Toast.LENGTH_LONG).show();
+        }else {
+            ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
+                    public void done(ParseException e) {
+                    Log.e(TAG, "Attempting to send password reset " + email);
+                    if (e == null) {
+                        Log.e(TAG, "Sent password reset");
+                        Toast.makeText(getApplicationContext(),
+                                "Successfully sent password reset email!",
+                                Toast.LENGTH_LONG).show();
+                        // An email was successfully sent with reset instructions.
+                    } else {
+                        // Something went wrong. Look at the ParseException to see what's up
+                        Log.e(TAG, "Error: " + e.toString());
+                    }
+                }
+            });
+        }
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -294,6 +330,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 Handler handler = new Handler();
                                 handler.postDelayed(new Runnable() {
                                     public void run() {
+                                        Log.e(TAG,"Deleting account");
                                         if (Integer.valueOf(android.os.Build.VERSION.SDK) >= 21) {
                                              user.deleteInBackground();
                                             Log.e(TAG,">21: ");
@@ -302,7 +339,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                             Log.e(TAG, "<21: ");
                                         }
                                     }
-                                }, 20000);//deletes user in 20 seconds
+                                }, 60000);//deletes user in 1 minute
 //                            Log.d("U+P", String.valueOf(mEmail) + " " + String.valueOf(mPassword));
                             } else {
                                 ParseUser.logInInBackground(email, password, new LogInCallback() {

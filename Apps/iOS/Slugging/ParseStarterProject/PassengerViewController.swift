@@ -9,25 +9,9 @@
 import UIKit
 import Parse
 
-class MapViewController: UIViewController {
+class PassengerViewController: UIViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
-
-    @IBAction func logOut(sender: AnyObject) {
-        processSignOut()
-    }
-    
-    // Sign the current user out of the app
-    func processSignOut() {
-        
-        // // Sign out
-        PFUser.logOut()
-        
-        // Display sign in / up view controller
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("log_in_home_screen")
-        self.presentViewController(vc, animated: true, completion: nil)
-    }
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 

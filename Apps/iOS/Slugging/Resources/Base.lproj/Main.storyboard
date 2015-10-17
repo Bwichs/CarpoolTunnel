@@ -301,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-9" y="-804"/>
+            <point key="canvasLocation" x="-1049" y="-682"/>
         </scene>
         <!--DRIVER-->
         <scene sceneID="u7g-d1-Et0">
@@ -348,7 +348,7 @@
         <!--PASSENGER-->
         <scene sceneID="hVB-OA-f7E">
             <objects>
-                <viewController id="Iu8-id-lEG" userLabel="PASSENGER" customClass="MapViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Iu8-id-lEG" userLabel="PASSENGER" customClass="PassengerViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eib-q6-CMJ"/>
                         <viewControllerLayoutGuide type="bottom" id="Tu8-wC-hG4"/>
@@ -365,22 +365,12 @@
                                     <constraint firstAttribute="width" constant="277" id="kyt-3f-Mqr"/>
                                 </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07b-af-o85">
-                                <rect key="frame" x="273" y="83" width="55" height="30"/>
-                                <animations/>
-                                <state key="normal" title="Log Out"/>
-                                <connections>
-                                    <action selector="logOut:" destination="Iu8-id-lEG" eventType="touchUpInside" id="8WP-Eo-2vu"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="0.273499518" green="0.91660748110000001" blue="0.76838257970000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="TgZ-yF-Pfq" firstAttribute="centerY" secondItem="x9f-gW-DS2" secondAttribute="centerY" id="2yW-8a-Und"/>
-                            <constraint firstItem="TgZ-yF-Pfq" firstAttribute="top" secondItem="07b-af-o85" secondAttribute="bottom" constant="24" id="I7u-lL-7oH"/>
                             <constraint firstItem="TgZ-yF-Pfq" firstAttribute="centerX" secondItem="x9f-gW-DS2" secondAttribute="centerX" id="Nv2-cG-DrF"/>
-                            <constraint firstItem="07b-af-o85" firstAttribute="centerX" secondItem="x9f-gW-DS2" secondAttribute="centerX" id="c47-dd-HmX"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PASSENGER" id="Bq2-5F-9Ab"/>
@@ -418,12 +408,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Df-ab-faF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915" y="-814"/>
+            <point key="canvasLocation" x="-221" y="-682"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Menu Table View Controller-->
         <scene sceneID="1Eh-VH-Rac">
             <objects>
-                <tableViewController id="gvH-yS-MgX" sceneMemberID="viewController">
+                <tableViewController id="gvH-yS-MgX" customClass="MenuTableViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DUZ-3W-HVL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -498,6 +488,26 @@
                                             <segue destination="rdo-3S-Qo3" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="dcZ-20-mJS"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dhm-Ue-hBa">
+                                        <rect key="frame" x="0.0" y="132" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dhm-Ue-hBa" id="TMN-ok-Ff8">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUt-ZY-zKb">
+                                                    <rect key="frame" x="7" y="7" width="585" height="30"/>
+                                                    <animations/>
+                                                    <state key="normal" title="Logout"/>
+                                                    <connections>
+                                                        <action selector="logOut:" destination="gvH-yS-MgX" eventType="touchUpInside" id="mgV-Ex-q3g"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -509,7 +519,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tlK-kC-sS0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1929" y="-848"/>
+            <point key="canvasLocation" x="642" y="-682"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lv2-H5-rww">

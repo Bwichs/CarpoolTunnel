@@ -38,25 +38,40 @@ class LogginViewController: UIViewController {
         
         PFUser.logInWithUsernameInBackground(userEmailAddress!, password: (userPassword)!) {
             (return_user: PFUser?, error: NSError?) -> Void in
-            if return_user != nil {
-                //Verify email
-                if return_user?["emailVerified"] as! Bool == true {
-                    self.activityIndicator.stopAnimating()
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.performSegueWithIdentifier(
-                            "go_to_main_menu",
-                            sender: self
-                        )
-                    }
-                }
-                else {
-                    self.signIn_alert("Email address verification",
-                                      alert_message: "We have sent you an email that contains a link - you must click this link before you can continue.")
-                }
-            } else {
-                // The login failed. Check error to see why. Either incorrect password, or does not exist yet
-                self.try_signUp(user)
+            let is_UCSC = self.check_ucsc_email(userEmailAddress!)
+            if !is_UCSC {
+                self.signIn_alert("Email address",
+                    alert_message: "Please enter a valid @ucsc.edu email address to use this app.")
             }
+            else {
+                if return_user != nil {
+                    //Verify email
+                    if return_user?["emailVerified"] as! Bool == true {
+                        self.activityIndicator.stopAnimating()
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.performSegueWithIdentifier(
+                                "go_to_main_menu",
+                                sender: self)
+                        }
+                    }
+                    else {
+                        self.signIn_alert("Email address verification",
+                            alert_message: "We have sent you an email that contains a link - you must click this link before you can continue.")
+                    }
+                } else {
+                    // The login failed. Check error to see why. Either incorrect password, or does not exist yet
+                    self.try_signUp(user)
+                }
+            }
+        }
+    }
+    
+    func check_ucsc_email(userEmailAddress: String) -> Bool{
+        if userEmailAddress.rangeOfString("@ucsc.edu") != nil{
+            return true
+        }
+        else {
+            return false
         }
     }
     

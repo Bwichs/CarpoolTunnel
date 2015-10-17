@@ -90,6 +90,16 @@
                 android:textColor="@color/btn_login"
                 android:fontFamily="sans-serif-light" />
 
+            <Button
+                android:id="@+id/reset_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reset Password"
+                android:layout_marginTop="20dip"
+                android:background="#00796B"
+                android:textColor="@color/btn_login"
+                android:fontFamily="sans-serif-light" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

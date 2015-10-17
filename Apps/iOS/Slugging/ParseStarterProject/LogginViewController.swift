@@ -44,7 +44,7 @@ class LogginViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                     dispatch_async(dispatch_get_main_queue()) {
                         self.performSegueWithIdentifier(
-                            "tabBarForPassDriver",
+                            "go_to_main_menu",
                             sender: self
                         )
                     }
@@ -99,7 +99,7 @@ class LogginViewController: UIViewController {
         if currentUser != nil {
             // Do stuff with the user
         
-        self.performSegueWithIdentifier("tabBarForPassDriver", sender: self)
+        self.performSegueWithIdentifier("go_to_main_menu", sender: self)
             
         } else {
             // Show the signup or login screen

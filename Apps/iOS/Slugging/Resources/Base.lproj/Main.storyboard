@@ -296,7 +296,7 @@
                         <outlet property="activityIndicator" destination="I8H-8I-c8o" id="DWa-zP-cim"/>
                         <outlet property="emailAddress" destination="bfE-eZ-m89" id="Vy2-pq-x3N"/>
                         <outlet property="password" destination="WhE-bk-HJg" id="3EQ-9W-m9C"/>
-                        <segue destination="UZ6-Fr-IQe" kind="presentation" identifier="tabBarForPassDriver" id="VFT-s4-BOV"/>
+                        <segue destination="UZ6-Fr-IQe" kind="presentation" identifier="go_to_main_menu" id="VFT-s4-BOV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -334,7 +334,12 @@
                         <color key="backgroundColor" red="0.27349951798369004" green="0.91660748106060608" blue="0.76838257970653545" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="DRIVER" id="Zrb-eH-Iu5"/>
-                    <navigationItem key="navigationItem" id="dbK-Qx-1K4"/>
+                    <navigationItem key="navigationItem" id="dbK-Qx-1K4">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="dOg-xp-I0J"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="dOg-xp-I0J" id="dGf-rD-d8e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s30-Ue-5Mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -352,11 +357,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
                                 <rect key="frame" x="162" y="137" width="277" height="325"/>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="325" id="8X8-2q-WGd"/>
+                                    <constraint firstAttribute="width" constant="277" id="kyt-3f-Mqr"/>
+                                </constraints>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07b-af-o85">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="07b-af-o85">
                                 <rect key="frame" x="273" y="83" width="55" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Log Out"/>
@@ -375,7 +384,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="PASSENGER" id="Bq2-5F-9Ab"/>
-                    <navigationItem key="navigationItem" id="Elq-n0-8ZZ"/>
+                    <navigationItem key="navigationItem" id="Elq-n0-8ZZ">
+                        <barButtonItem key="leftBarButtonItem" image="menu.png" id="NEZ-cK-1PW"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="menuButton" destination="NEZ-cK-1PW" id="C8f-cV-kDT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUM-5D-O1u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -410,42 +424,83 @@
         <scene sceneID="1Eh-VH-Rac">
             <objects>
                 <tableViewController id="gvH-yS-MgX" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DUZ-3W-HVL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="DUZ-3W-HVL">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jre-ja-gXc">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jre-ja-gXc" id="QxX-v1-a5f">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PXk-pl-FnT">
-                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PXk-pl-FnT" id="zr3-0d-98I">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkD-cE-Eg8">
-                                            <rect key="frame" x="92" y="11" width="64" height="21"/>
+                        <sections>
+                            <tableViewSection id="jos-m9-GWl">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="jre-ja-gXc">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jre-ja-gXc" id="QxX-v1-a5f">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkD-cE-Eg8">
+                                                    <rect key="frame" x="8" y="11" width="64" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <segue destination="Ol7-bp-onq" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="5c3-Yu-jXP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="PXk-pl-FnT">
+                                        <rect key="frame" x="0.0" y="44" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PXk-pl-FnT" id="zr3-0d-98I">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Passenger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a74-gz-Rt3">
+                                                    <rect key="frame" x="8" y="11" width="81" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <segue destination="Rbu-G4-rkJ" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="tJ9-L8-M6z"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="USZ-hc-E6U">
+                                        <rect key="frame" x="0.0" y="88" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="USZ-hc-E6U" id="2mz-QZ-cRA">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yeD-8S-ecB">
+                                                    <rect key="frame" x="8" y="11" width="46" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                        <connections>
+                                            <segue destination="rdo-3S-Qo3" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="dcZ-20-mJS"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="gvH-yS-MgX" id="b7V-Me-oH8"/>
                             <outlet property="delegate" destination="gvH-yS-MgX" id="AVX-Yx-Sw0"/>
@@ -526,4 +581,9 @@
     <resources>
         <image name="menu.png" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="5c3-Yu-jXP"/>
+        <segue reference="tJ9-L8-M6z"/>
+        <segue reference="dcZ-20-mJS"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -20,6 +20,7 @@ class AccountViewController: UIViewController {
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
+        self.revealViewController().rearViewRevealWidth = 160
     }
 
     override func didReceiveMemoryWarning() {

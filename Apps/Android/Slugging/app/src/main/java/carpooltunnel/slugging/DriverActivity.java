@@ -2,7 +2,6 @@ package carpooltunnel.slugging;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.location.Address;
@@ -18,7 +17,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
+import android.app.FragmentManager;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -57,16 +56,17 @@ public class DriverActivity extends FragmentActivity {
         //setSupportActionBar(toolbar);
 
         //this declares the map fragment, and hides them
-        fragmentManagerDest = getFragmentManager();
-        fragmentManagerStarting = getFragmentManager();
+        fragmentManagerDest = new DriverActivityMapFinishFragment().getFragmentManager();
+        fragmentManagerStarting = new DriverActivityMapStartFragment().getFragmentManager();
+        Log.e(TAG,"fragstartest:"+fragmentManagerStarting);
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.hide(fragmentManagerDest.findFragmentById(R.id.location_mapDest));
-        ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
+        //ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_map_start));
+        //ft.hide(fragmentManagerDest.findFragmentById(R.id.location_map_dest));
         ft.commit();
         //function call for buttons to show/hide map fragments
 
-        addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentById(R.id.location_mapStarting));
-        addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_mapDest));
+        //addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentByTag("hello"));
+        //addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_map_dest));
 
         mFrom = (EditText) findViewById(R.id.start);
         mTo = (EditText) findViewById(R.id.finish);

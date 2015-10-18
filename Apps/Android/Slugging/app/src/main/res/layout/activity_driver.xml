@@ -52,13 +52,6 @@
         </Button>
         </LinearLayout>
 
-        <fragment
-            android:id="@+id/location_mapStarting"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.MapFragment"
-            tools:layout="@layout/location_fragment" />
-
         <LinearLayout
         android:layout_width="fill_parent" android:layout_height="wrap_content"
         android:weightSum="2">
@@ -89,13 +82,6 @@
             android:scaleType="fitCenter">
         </Button>
         </LinearLayout>
-
-        <fragment
-            android:id="@+id/location_mapDest"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.MapFragment"
-            tools:layout="@layout/location_fragment" />
 
         <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
             android:layout_height="wrap_content">

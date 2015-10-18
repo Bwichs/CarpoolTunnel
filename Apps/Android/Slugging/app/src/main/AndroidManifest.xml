@@ -100,8 +100,6 @@
             android:label="@string/title_activity_single_item_view"
             android:theme="@style/Theme.App.Base" >
         </activity>
-        <activity android:name=".LocationFragment" >
-        </activity>
         <activity android:name=".PagerAdapter" >
         </activity>
         <activity android:name=".PassengerActivityListTab" >

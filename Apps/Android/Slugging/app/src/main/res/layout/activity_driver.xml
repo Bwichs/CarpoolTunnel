@@ -1,166 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/bg_login"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:weightSum="1"
-    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:fitsSystemWindows="true"
     tools:context="carpooltunnel.slugging.DriverActivity">
 
     <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_width="match_parent"
+
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
+        <android.support.design.widget.TabLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/tab_layout"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/tab_layout"/>
+
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <LinearLayout android:id="@+id/sched_enter_form" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="vertical"
-        android:layout_gravity="center">
-
-        <LinearLayout
-            android:layout_width="fill_parent" android:layout_height="wrap_content"
-            android:weightSum="2">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.60">
-
-            <AutoCompleteTextView android:id="@+id/start" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:hint="@string/prompt_start"
-                android:inputType="text" android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textColorHighlight="@color/white"/>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:layout_height="48dp"
-            android:layout_width="0dp"
-            android:layout_weight="0.40"
-            android:background="@drawable/ic_my_location_black_24dp"
-            android:id="@+id/startlocation"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter">
-        </Button>
-        </LinearLayout>
-
-        <LinearLayout
-        android:layout_width="fill_parent" android:layout_height="wrap_content"
-        android:weightSum="2">
-
-        <android.support.design.widget.TextInputLayout android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.60"
-            >
-
-            <EditText android:id="@+id/finish" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:hint="@string/prompt_finish"
-                android:inputType="text" android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textColorHighlight="@color/white"/>
-
-
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:layout_height="48dp"
-            android:layout_width="0dp"
-            android:layout_weight="0.40"
-            android:background="@drawable/ic_action_place"
-            android:id="@+id/destlocation"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter">
-        </Button>
-        </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText android:id="@+id/numpass" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:hint="@string/prompt_numpass"
-                android:inputType="number" android:maxLines="1"
-                android:singleLine="true"
-                android:enabled="true"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textColorHighlight="@color/white"
-                android:editable="true" />
-
-        </android.support.design.widget.TextInputLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:weightSum="2">
-            <android.support.design.widget.TextInputLayout android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
-
-                <EditText android:id="@+id/time" android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:hint="@string/prompt_time"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:focusable="false"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textColorHighlight="@color/white"
-                    android:layout_gravity="center|left"
-                    android:inputType="none"
-                    android:textIsSelectable="true"
-                    android:layout_margin="10dp"
-                    android:enabled="true" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <EditText android:id="@+id/date" android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" android:hint="@string/prompt_day"
-                    android:maxLines="1"
-                    android:focusable="false"
-                    android:singleLine="true"
-                    android:inputType="none"
-                    android:textIsSelectable="true"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textColorHighlight="@color/white"
-                    android:layout_margin="10dp"
-                    android:layout_gravity="center|right"
-                    android:enabled="true" />
-
-        </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
-
-        <Button android:id="@+id/sched_sub_button" style="?android:textAppearanceSmall"
-            android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" android:text="@string/sched_sub"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:textColorHighlight="@color/white"
-            android:layout_margin="8dp"
-            android:fontFamily="sans-serif-light"
-        android:background="#00796B"/>
-
-    </LinearLayout>
     <include layout="@layout/content_driver" />
-
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>

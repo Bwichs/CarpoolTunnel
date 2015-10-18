@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.parse.FindCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -105,5 +103,10 @@ public class PassengerActivityListTab extends ListFragment {
             // Close the progressdialog
             mProgressDialog.dismiss();
         }
+    }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 }

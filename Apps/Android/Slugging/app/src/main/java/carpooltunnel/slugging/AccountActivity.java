@@ -1,35 +1,33 @@
 package carpooltunnel.slugging;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
-import android.database.Cursor;
-
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SaveCallback;
-
-import android.util.Log;
-import android.app.AlertDialog;
-import android.widget.Toast;
-import android.content.DialogInterface;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -239,5 +237,25 @@ public class AccountActivity extends AppCompatActivity {
             }
 
         }
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.backbtn) {
+
+            Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+        //respond to menu item selection
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_backbtn, menu);
+        return true;
     }
 }

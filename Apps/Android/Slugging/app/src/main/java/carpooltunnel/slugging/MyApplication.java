@@ -16,5 +16,7 @@ public class MyApplication extends Application {
         Parse.initialize(this, "VPZjlR7XLjBjn7KPCiCgaAexMUSX13fNe2wZ4mps", "lMHGifcMpdu9yKDL5YFT1Rw79fo466o7BngcneUF");
         FacebookSdk.sdkInitialize(getApplicationContext());
         ParseFacebookUtils.initialize(getApplicationContext());
+
+
     }
 }

@@ -32,52 +32,54 @@
         android:layout_toRightOf="@+id/depTimelabel" />
 
     <TextView
-        android:id="@+id/fromlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/depTimelabel"
-        android:text="@string/fromlabel" />
-
-    <TextView
-        android:id="@+id/from"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/depTime"
-        android:layout_toRightOf="@+id/fromlabel" />
-
-    <TextView
         android:id="@+id/numPasslabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fromlabel"
+        android:layout_below="@+id/depTimelabel"
         android:text="@string/numPasslabel" />
 
     <TextView
         android:id="@+id/numPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/from"
+        android:layout_below="@id/depTime"
         android:layout_toRightOf="@+id/numPasslabel" />
+
+    <TextView
+        android:id="@+id/fromlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numPasslabel"
+        android:text="@string/fromlabel" />
+
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numPass"
+        android:layout_toRightOf="@+id/fromlabel" />
+
 
     <TextView
         android:id="@+id/tolabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numPasslabel"
+        android:layout_below="@+id/from"
         android:text="@string/tolabel" />
 
     <TextView
         android:id="@+id/to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numPass"
+        android:layout_below="@+id/from"
         android:layout_toRightOf="@+id/tolabel" />
 
     <TextView
         android:id="@+id/driverUserlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tolabel"
+        android:layout_below="@+id/to"
         android:text="@string/driverUserlabel" />
 
     <TextView
@@ -114,5 +116,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/createdAt"
         android:layout_toRightOf="@+id/updatedAtlabel" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_below="@id/updatedAt"
+        android:text="Book!"/>
 
 </RelativeLayout>

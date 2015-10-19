@@ -24,6 +24,7 @@ public class DriverActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Submit"));
         tabLayout.addTab(tabLayout.newTab().setText("Your Routes"));
+        //tabLayout.addTab(tabLayout.newTab().setText("TBD"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);

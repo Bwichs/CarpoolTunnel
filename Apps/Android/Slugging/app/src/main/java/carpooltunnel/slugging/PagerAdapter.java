@@ -1,8 +1,5 @@
 package carpooltunnel.slugging;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -25,6 +22,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 PassengerActivityMapTab tab2 = new PassengerActivityMapTab();
                 return tab2;
+            case 2:
+                PassengerMyRoutes tab3 = new PassengerMyRoutes();
+                return tab3;
             default:
                 return null;
         }

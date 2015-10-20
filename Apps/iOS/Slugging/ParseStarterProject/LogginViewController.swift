@@ -42,6 +42,9 @@ class LogginViewController: UIViewController {
             if !is_UCSC {
                 self.signIn_alert("Email address",
                     alert_message: "Please enter a valid @ucsc.edu email address to use this app.")
+                
+                // // Sign out
+                PFUser.logOut()                
             }
             else {
                 if return_user != nil {

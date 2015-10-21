@@ -54,8 +54,6 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         changePasswordButton.hidden = true
         myName.userInteractionEnabled = true
         myName.borderStyle = UITextBorderStyle.RoundedRect
-        myEmail.userInteractionEnabled = true
-        myEmail.borderStyle = UITextBorderStyle.RoundedRect
         myNumber.userInteractionEnabled = true
         myNumber.borderStyle = UITextBorderStyle.RoundedRect
         myCarType.userInteractionEnabled = true
@@ -77,7 +75,15 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.myCarType.text = myself!.objectForKey("carType") as? String
                 self.myEmail.text = myself!.objectForKey("email") as? String
                 self.myNumber.text = myself!.objectForKey("phoneNumber") as? String
-                self.myCar.image = myself!.objectForKey("carpic") as? UIImage
+                if let carImage = myself!["carpic"] as? PFFile {
+                    carImage.getDataInBackgroundWithBlock({
+                        (imageData: NSData?, error NSError) -> Void in
+                        if (error == nil) {
+                            let image = UIImage(data:imageData!)
+                            self.myCar.image = image
+                        }
+                    })
+                }
             }
             else {
                 print(error)
@@ -123,7 +129,17 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
                 myself!["carType"] = self.myCarType.text
                 myself!["email"] = self.myEmail.text
                 myself!["phoneNumber"] = self.myNumber.text
-                myself!["carpic"] = self.myCar.image
+                
+                var carImageFile = "carpic.jpg"
+                if (self.myCarType.text != "") {
+                    carImageFile = self.myCarType.text! + ".jpg"
+                }
+                
+                
+                if let imageData = UIImageJPEGRepresentation(self.myCar.image!, 0.5){
+                    let imageFile = PFFile(name: carImageFile, data: imageData)
+                    myself!["carpic"] = imageFile
+                }
                 myself!.saveInBackgroundWithBlock {
                     (success, error) -> Void in
                 }

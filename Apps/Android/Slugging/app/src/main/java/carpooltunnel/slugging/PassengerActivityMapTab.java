@@ -56,7 +56,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
      * Note that this may be null if the Google Play services APK is not
      * available.
      */
-
+    boolean canBook = true;;
     private static GoogleMap mMap;
     private static Double latitude, longitude;
 
@@ -114,6 +114,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         String to = null;
         final String routeDriver;
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        final ParseUser me = ParseUser.getCurrentUser();
         try {
             /*address = geocoder.getFromLocation(coord.latitude,coord.longitude, 1);
             for(int i = 0; i < address.get(0).getMaxAddressLineIndex(); i++) {
@@ -144,6 +145,14 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                 }catch (IOException ioexception){
                     Log.e(TAG, "address error",ioexception);
                 }
+
+                if(route.getList("bookers")!=null){
+                    List<String> ary = route.getList("bookers");
+                    //Log.e(TAG, "bookers" + ary.toString());
+                    if(ary.contains(me.getUsername().toString())){
+                        canBook = false;
+                    }
+                }
                 Location point = new Location("point");
 
                 point.setLatitude(coord.latitude);
@@ -164,7 +173,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 
                 //Log.e(TAG, "Distances: " + distance1 + ", " + distance2);
                 if( distance1 < .1 || distance2 < .1){
-                    final ParseUser me = ParseUser.getCurrentUser();
+
                     final ParseObject n = route.getParseObject("user");
                     Log.e(TAG, "got route by " + n.getString("username"));
                     new AlertDialog.Builder(getActivity())
@@ -174,15 +183,19 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    if (((Integer.parseInt(route.getString("numPass")) - 1) >= 0) && !me.getUsername().equals(n.getString("username"))) {
+                                    if (((Integer.parseInt(route.getString("numPass")) - 1) >= 0) && !me.getUsername().equals(n.getString("username")) && canBook) {
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Successfully booked route!",
                                                 Toast.LENGTH_LONG).show();
                                             int x = Integer.parseInt(route.getString("numPass")) - 1;
-
                                             route.add("bookers", me.getUsername().toString());
                                             route.put("numPass", String.valueOf(x));
                                             route.saveInBackground();
+                                            canBook = false;
+                                    }else{
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Error, you may already have booked this route or there is no room!",
+                                                Toast.LENGTH_LONG).show();
                                     }
                                 }
 

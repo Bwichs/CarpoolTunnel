@@ -13,12 +13,19 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 
+import org.json.JSONArray;
+
+import java.io.IOException;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SingleItemView extends AppCompatActivity {
@@ -43,8 +50,12 @@ public class SingleItemView extends AppCompatActivity {
     String updatedAt;
     ParseObject route;
     public final String TAG = "SIV";
+    boolean canBook = true;;
     List<ParseObject> ob;
+    final ParseUser me = ParseUser.getCurrentUser();
     String name;
+    final Button btn = (Button) findViewById(R.id.book);
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,17 +63,30 @@ public class SingleItemView extends AppCompatActivity {
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");
+        final List<String> bookers = new ArrayList<String>();
+
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your game score
-
                     route = object;
+
+                    if(route.getList("bookers")!=null){
+                        List<String> ary = route.getList("bookers");
+                        //Log.e(TAG, "bookers" + ary.toString());
+                        if(ary.contains(me.getUsername().toString())){
+                            canBook = false;
+
+                        }
+                    }
                 } else {
                     // something went wrong
                 }
             }
         });
+
+
+
         depDay = i.getStringExtra("depDay");
         depTime = i.getStringExtra("depTime");
         from = i.getStringExtra("from");
@@ -72,8 +96,6 @@ public class SingleItemView extends AppCompatActivity {
         createdAt = i.getStringExtra("createdAt");
         updatedAt = i.getStringExtra("updatedAt");
 
-        final Button btn = (Button) findViewById(R.id.book);
-        final ParseUser me = ParseUser.getCurrentUser();
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(SingleItemView.this)
@@ -83,14 +105,22 @@ public class SingleItemView extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (((Integer.parseInt(numPass) - 1) >= 0) && !me.getUsername().equals(driverUser)) {
+                                if (((Integer.parseInt(numPass) - 1) >= 0) && !me.getUsername().equals(driverUser) && canBook) {
                                     Toast.makeText(getApplicationContext(),
                                             "Successfully booked route!",
                                             Toast.LENGTH_LONG).show();
                                     int x = Integer.parseInt(route.getString("numPass")) - 1;
                                     route.add("bookers", me.getUsername().toString());
                                     route.put("numPass", String.valueOf(x));
-                                    route.saveInBackground();
+                                    canBook =false;
+                                    try{
+                                        route.save();
+                                    }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }
+                                }
+                                else{
+                                    Toast.makeText(SingleItemView.this.getApplicationContext(),
+                                            "Error, you may already have booked this route or there is no room!",
+                                            Toast.LENGTH_LONG).show();
                                 }
                             }
 

@@ -118,6 +118,7 @@
         android:layout_toRightOf="@+id/updatedAtlabel" />
 
     <Button
+        android:id="@+id/book"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"

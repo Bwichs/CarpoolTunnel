@@ -179,7 +179,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                                             ParseObject n = route.getParseObject("user");
 
                                             if(!me.getUsername().equals(n.getString("username")));
-                                            route.add("bookers", me.getUsername());
+                                            route.add("bookers", me);
                                             route.put("numPass", Integer.parseInt(route.getString("numPass"))-1);
                                             route.saveInBackground();
                                 }

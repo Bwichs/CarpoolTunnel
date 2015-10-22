@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -39,7 +41,7 @@ public class SingleItemView extends AppCompatActivity {
     String driverUser;
     String createdAt;
     String updatedAt;
-
+    ParseObject route;
     public final String TAG = "SIV";
     List<ParseObject> ob;
     String name;
@@ -49,56 +51,54 @@ public class SingleItemView extends AppCompatActivity {
         setContentView(R.layout.activity_single_item_view);
         // Retrieve data from MainActivity on item click event
         Intent i = getIntent();
-        final ParseUser user = ParseUser.getCurrentUser();
-        try {
-            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                    "ParseRoute");
-            query.include("user");
-            // by ascending
-            query.orderByAscending("createdAt");
-            ob = query.find();
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");
+        query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                    // object will be your game score
 
-            for (final ParseObject route : ob) {
-                ParseObject n = route.getParseObject("user");
-                name = n.getString("username");
-                final Button button = (Button) findViewById(R.id.book);
-                button.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        new AlertDialog.Builder(SingleItemView.this)
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setTitle("Sign up for route?")
-                                .setMessage("Do you want to book this route?")
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        Toast.makeText(getApplicationContext(),
-                                                "Successfully booked route!",
-                                                Toast.LENGTH_LONG).show();
-                                        route.add("bookers", user);
-                                        route.put("numPass", Integer.parseInt(route.getString("numPass")) - 1);
-                                        route.saveInBackground();
-                                    }
-
-                                })
-                                .setNegativeButton("No", null)
-                                .show();
-                    }
-                });
+                    route = object;
+                } else {
+                    // something went wrong
+                }
             }
-        }
-        catch(ParseException e){
-
-        }
-
+        });
         depDay = i.getStringExtra("depDay");
         depTime = i.getStringExtra("depTime");
         from = i.getStringExtra("from");
         numPass = i.getStringExtra("numPass");
         to = i.getStringExtra("to");
-        driverUser = i.getStringExtra(name);
+        driverUser = i.getStringExtra("driverUser");
         createdAt = i.getStringExtra("createdAt");
         updatedAt = i.getStringExtra("updatedAt");
 
+        final Button btn = (Button) findViewById(R.id.book);
+        final ParseUser me = ParseUser.getCurrentUser();
+        btn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                new AlertDialog.Builder(SingleItemView.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Sign up for route?")
+                        .setMessage("Do you want to book this route?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (((Integer.parseInt(numPass) - 1) >= 0) && !me.getUsername().equals(driverUser)) {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Successfully booked route!",
+                                            Toast.LENGTH_LONG).show();
+                                    int x = Integer.parseInt(route.getString("numPass")) - 1;
+                                    route.add("bookers", me.getUsername().toString());
+                                    route.put("numPass", String.valueOf(x));
+                                    route.saveInBackground();
+                                }
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
         // Locate the TextViews in singleitemview.xml
         txtDepDay = (TextView) findViewById(R.id.depDay);
         txtDepTime = (TextView) findViewById(R.id.depTime);
@@ -115,12 +115,12 @@ public class SingleItemView extends AppCompatActivity {
         txtFrom.setText(from);
         txtNumPass.setText(numPass);
         txtTo.setText(to);
-        txtDriverUser.setText(name);
-        Log.e(TAG, "CA:" + createdAt);
-        Log.e(TAG,"UA:"+updatedAt);
+        txtDriverUser.setText(driverUser);
+        //Log.e(TAG, "CA:" + createdAt);
+        //Log.e(TAG,"UA:"+updatedAt);
         txtCreatedAt.setText(createdAt);
         txtUpdatedAt.setText(updatedAt);
 
-        Log.e(TAG, "user:" + name);
+        //Log.e(TAG, "user:" + name);
     }
 }

@@ -61,25 +61,21 @@ public class PassengerActivityListTab extends ListFragment {
                 query.orderByAscending("createdAt");
                 ob = query.find();
                 for (ParseObject route : ob) {
-                    ParseObject n = new ParseObject("User");
-                    n = route.getParseObject("user");
+                    ParseObject n = route.getParseObject("user");
                     PassengerRouteClass map = new PassengerRouteClass();
                     map.setDepDay((String) route.get("depDay"));
                     map.setDepTime((String) route.get("depTime"));
                     map.setFrom((String) route.get("from"));
                     map.setNumPass((String) route.get("numPass"));
                     map.setTo((String) route.get("to"));
+                    map.setRouteId((String) route.getObjectId());
                     String name = n.getString("username");
-                    /*try {
-                        name = route.fetch().getString("ObjectId");
-                    } catch (ParseException e){
-                        e.printStackTrace();
-                    }*/
+                    //Log.e("id: ", (String) route.getObjectId());
                     map.setDriverUser(name);
                     map.setCreatedAt(route.getCreatedAt().toString());
                     map.setUpdatedAt(route.getUpdatedAt().toString());
-                    Log.e(TAG, "user:" + name);
-                    Log.e(TAG, "UA:" + route.getUpdatedAt().toString());
+                    //Log.e(TAG, "user:" + name);
+                    //Log.e(TAG, "UA:" + route.getUpdatedAt().toString());
                     PassengerRouteClasslist.add(map);
                 }
             } catch (ParseException e) {

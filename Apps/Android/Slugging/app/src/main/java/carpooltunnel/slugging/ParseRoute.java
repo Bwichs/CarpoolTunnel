@@ -43,7 +43,9 @@ public class ParseRoute extends ParseObject {
     }
 
     public String getUser() {
-        return getString ("user");
+        final ParseObject n = this.getParseObject("user");
+        String name = n.getString("username");
+        return name;
     }
     public void setDriverUser(String value) {
         put("user", value);
@@ -54,7 +56,7 @@ public class ParseRoute extends ParseObject {
     }
 
     public Array getBookers() { return (Array) get("bookers");}
-    public void addBooker(String value) { add("booker", value);}
+    public void addBooker(String value) { add("bookers", value);}
 
 
     public static ParseQuery<ParseRoute> getQuery() {

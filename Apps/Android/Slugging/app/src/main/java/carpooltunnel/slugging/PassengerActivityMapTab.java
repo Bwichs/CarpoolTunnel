@@ -164,7 +164,9 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 
                 //Log.e(TAG, "Distances: " + distance1 + ", " + distance2);
                 if( distance1 < .1 || distance2 < .1){
-                    Log.e(TAG, "got route" + route.getObjectId());
+                    final ParseUser me = ParseUser.getCurrentUser();
+                    final ParseObject n = route.getParseObject("user");
+                    Log.e(TAG, "got route by " + n.getString("username"));
                     new AlertDialog.Builder(getActivity())
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Sign up for route?")
@@ -172,16 +174,16 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(getActivity().getApplicationContext(),
-                                            "Successfully booked route!",
-                                            Toast.LENGTH_LONG).show();
-                                            ParseUser me = ParseUser.getCurrentUser();
-                                            ParseObject n = route.getParseObject("user");
+                                    if (((Integer.parseInt(route.getString("numPass")) - 1) >= 0) && !me.getUsername().equals(n.getString("username"))) {
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Successfully booked route!",
+                                                Toast.LENGTH_LONG).show();
+                                            int x = Integer.parseInt(route.getString("numPass")) - 1;
 
-                                            if(!me.getUsername().equals(n.getString("username")));
-                                            route.add("bookers", me);
-                                            route.put("numPass", Integer.parseInt(route.getString("numPass"))-1);
+                                            route.add("bookers", me.getUsername().toString());
+                                            route.put("numPass", String.valueOf(x));
                                             route.saveInBackground();
+                                    }
                                 }
 
                             })

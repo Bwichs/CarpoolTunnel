@@ -1,8 +1,11 @@
 package carpooltunnel.slugging;
 
 
+import com.parse.ParseObject;
+
 public class PassengerRouteClass {
 
+    private String routeId;
     private String depDay;
     private String depTime;
     private String from;
@@ -12,6 +15,8 @@ public class PassengerRouteClass {
     private String createdAt;
     private String updatedAt;
 
+    public String getRouteId() { return routeId; }
+    public void setRouteId(String r) {this.routeId = r;}
     public String getDepDay() { return depDay; }
     public void setDepDay(String depDay) { this.depDay = depDay; }
     public String getDepTime() { return depTime; }

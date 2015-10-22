@@ -13,6 +13,7 @@
 		272722441BD0A142000DA48D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722431BD0A142000DA48D /* AccountViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		272722461BD0A858000DA48D /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722451BD0A858000DA48D /* DriverViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722501BD20ABB000DA48D /* MenuTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		27C81C6F1BD77560007AE269 /* toyota_camry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 27C81C6E1BD77560007AE269 /* toyota_camry.jpg */; settings = {ASSET_TAGS = (); }; };
 		27C81C751BD81C44007AE269 /* teal_car_icon 12-08-13-634.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C81C741BD81C44007AE269 /* teal_car_icon 12-08-13-634.png */; settings = {ASSET_TAGS = (); }; };
 		69E876684AA2990877F73685 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B5407D95FEACC496DE0090E /* libPods.a */; };
@@ -38,6 +39,7 @@
 		272722431BD0A142000DA48D /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		272722451BD0A858000DA48D /* DriverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverViewController.swift; sourceTree = "<group>"; };
 		272722501BD20ABB000DA48D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27C81C6E1BD77560007AE269 /* toyota_camry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = toyota_camry.jpg; path = ../../../../../Desktop/toyota_camry.jpg; sourceTree = "<group>"; };
 		27C81C741BD81C44007AE269 /* teal_car_icon 12-08-13-634.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "teal_car_icon 12-08-13-634.png"; path = "../../../../../Desktop/teal_car_icon 12-08-13-634.png"; sourceTree = "<group>"; };
 		5B5407D95FEACC496DE0090E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +106,7 @@
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */,
 			);
 			name = "Non-Views";
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */,
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				27C81C751BD81C44007AE269 /* teal_car_icon 12-08-13-634.png in Resources */,

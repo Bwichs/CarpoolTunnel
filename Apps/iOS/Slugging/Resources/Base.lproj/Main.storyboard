@@ -337,14 +337,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="CMH-7E-hpZ">
-                                <rect key="frame" x="139" y="245" width="355" height="70"/>
+                                <rect key="frame" x="130" y="259" width="355" height="70"/>
                                 <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="466382395.81427801">
                                     <!--2015-10-12 22:39:55 +0000-->
                                 </date>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MM/DD/YY HH:MM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brJ-Nr-vLa">
-                                <rect key="frame" x="108" y="181" width="148" height="21"/>
+                                <rect key="frame" x="233" y="198" width="148" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -936,6 +936,6 @@
         <image name="teal_car_icon 12-08-13-634.png" width="640" height="480"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="h4w-QD-XEP"/>
+        <segue reference="5c3-Yu-jXP"/>
     </inferredMetricsTieBreakers>
 </document>

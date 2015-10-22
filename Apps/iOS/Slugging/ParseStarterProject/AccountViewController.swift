@@ -39,12 +39,15 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         changePasswordButton.hidden = false
         myName.userInteractionEnabled = false
         myName.borderStyle = UITextBorderStyle.None
+        myName.textColor = UIColor.whiteColor()
         myEmail.userInteractionEnabled = false
         myEmail.borderStyle = UITextBorderStyle.None
         myNumber.userInteractionEnabled = false
         myNumber.borderStyle = UITextBorderStyle.None
+        myNumber.textColor = UIColor.whiteColor()
         myCarType.userInteractionEnabled = false
         myCarType.borderStyle = UITextBorderStyle.None
+        myCarType.textColor = UIColor.whiteColor()
     }
     
     func editingAccount(){
@@ -54,10 +57,13 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         changePasswordButton.hidden = true
         myName.userInteractionEnabled = true
         myName.borderStyle = UITextBorderStyle.RoundedRect
+        myName.textColor = UIColor.blackColor()
         myNumber.userInteractionEnabled = true
         myNumber.borderStyle = UITextBorderStyle.RoundedRect
+        myNumber.textColor = UIColor.blackColor()
         myCarType.userInteractionEnabled = true
         myCarType.borderStyle = UITextBorderStyle.RoundedRect
+        myCarType.textColor = UIColor.blackColor()
     }
     
     override func viewDidLoad() {

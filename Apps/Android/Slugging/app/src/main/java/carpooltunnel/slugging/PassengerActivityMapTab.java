@@ -1,9 +1,13 @@
 package carpooltunnel.slugging;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,11 +24,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.json.JSONObject;
 
@@ -34,8 +42,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 
@@ -57,7 +67,6 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
             return null;
         }
 
-
         view = (RelativeLayout) inflater.inflate(R.layout.activity_passenger_activity_map_tab, container, false);
         // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
         latitude = 36.9719;
@@ -77,17 +86,122 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 //        }
         // For dropping a marker at a point on the Map
         //googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng coord) {
+                //Log.d(TAG, "Coordinates of press: " + coord.latitude + "-" + coord.longitude);
+
+            }
+        });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                LatLng coord = marker.getPosition();
+                //Log.d(TAG, "Coordinates of press: " + coord.latitude + "-" + coord.longitude);
+                routeFromClick(coord);
+                return false;
+            }
+        });
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.9719, -122.0264), 12));
         new RemoteDataTask().execute();
     }
 
-    public void drawFromMap (Double fromLat, Double fromLong, Double toLat, Double toLong)
+    public void routeFromClick (LatLng coord){
+        List<Address> foundGeocodeFrom = null;
+        List<Address> foundGeocodeTo = null;
+        String from = null;
+        String to = null;
+        final String routeDriver;
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            /*address = geocoder.getFromLocation(coord.latitude,coord.longitude, 1);
+            for(int i = 0; i < address.get(0).getMaxAddressLineIndex(); i++) {
+                if(i!=0) ad+= ", ";
+                ad += address.get(0).getAddressLine(i).toString();
+                //Log.e(TAG, address.get(0).getAddressLine(i).toString());
+            }
+            Log.e(TAG, "address = " + ad);
+
+            }catch (IOException ioexception){
+                Log.e(TAG, "address error",ioexception);
+            }*/
+            // Locate the class table named "Country" in Parse.com
+            ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                    "ParseRoute");
+            // by ascending
+            query.orderByAscending("createdAt");
+            query.include("user");
+            ob = query.find();
+            //Log.e(TAG, "coord, latlong:" + coord.latitude + ", " + coord.longitude);
+            for (final ParseObject route : ob) {
+                try{
+                    from = (String) route.get("from");
+                    foundGeocodeFrom = geocoder.getFromLocationName(from, 1);
+                    to = (String) route.get("to");
+                    foundGeocodeTo = geocoder.getFromLocationName(to, 1);
+                    //Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + ", " + foundGeocodeTo.get(0).getLongitude());
+                }catch (IOException ioexception){
+                    Log.e(TAG, "address error",ioexception);
+                }
+                Location point = new Location("point");
+
+                point.setLatitude(coord.latitude);
+                point.setLongitude(coord.longitude);
+
+                Location coordTo = new Location("coordTo");
+
+                coordTo.setLatitude(foundGeocodeTo.get(0).getLatitude());
+                coordTo.setLongitude(foundGeocodeTo.get(0).getLongitude());
+
+                Location coordFrom = new Location("coordFrom");
+
+                coordFrom.setLatitude(foundGeocodeFrom.get(0).getLatitude());
+                coordFrom.setLongitude(foundGeocodeFrom.get(0).getLongitude());
+
+                float distance1 = coordTo.distanceTo(point);
+                float distance2 = coordFrom.distanceTo(point);
+
+                //Log.e(TAG, "Distances: " + distance1 + ", " + distance2);
+                if( distance1 < .1 || distance2 < .1){
+                    Log.e(TAG, "got route" + route.getObjectId());
+                    new AlertDialog.Builder(getActivity())
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Sign up for route?")
+                            .setMessage("Do you want to book this route?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "Successfully booked route!",
+                                            Toast.LENGTH_LONG).show();
+                                            ParseUser me = ParseUser.getCurrentUser();
+                                            ParseObject n = route.getParseObject("user");
+
+                                            if(!me.getUsername().equals(n.getString("username")));
+                                            route.add("bookers", me);
+                                            route.put("numPass", Integer.parseInt(route.getString("numPass"))-1);
+                                            route.saveInBackground();
+                                }
+
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                }
+            }
+        } catch (ParseException e) {
+            Log.e("Error", e.getMessage());
+        }
+    }
+
+    public void drawFromMap (Double fromLat, Double fromLong, Double toLat, Double toLong, String from, String to)
     {
-        if(fromLat != null && fromLong != null) mMap.addMarker(new MarkerOptions().position(new LatLng(fromLat, fromLong)).title("From").snippet("Home Address"));
-        if(toLat != null && toLat != null) mMap.addMarker(new MarkerOptions().position(new LatLng(toLat, toLong)).title("To").snippet("Home Address")
+        if(fromLat != null && fromLong != null) mMap.addMarker(new MarkerOptions().position(new LatLng(fromLat, fromLong)).title("From").snippet(from));
+        if(toLat != null && toLat != null) mMap.addMarker(new MarkerOptions().position(new LatLng(toLat, toLong)).title("To").snippet(to)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
     }
+
 
     private String getDirectionsUrl(LatLng origin,LatLng dest){
         // Origin of route
@@ -163,13 +277,16 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 
     public class mapcoords{
         public Double fromlat, fromlong, tolat, tolong;
+        public String from, to;
 
-        public mapcoords(Double d1, Double d2, Double d3, Double d4){
+        public mapcoords(Double d1, Double d2, Double d3, Double d4, String fromd, String tod){
             super();
             fromlat = d1;
             fromlong = d2;
             tolat = d3;
             tolong = d4;
+            from = fromd;
+            to = tod;
         }
     }
 
@@ -213,11 +330,12 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                     String numPass = (String) route.get("numPass");
                     String mapTo = (String) route.get("to");
                     String name = n.getString("username");
+
                     try {
                         List<Address> addressesFrom = geocoder.getFromLocationName(mapFrom,1);
                         List<Address> addressesTo = geocoder.getFromLocationName(mapTo,1);
                         if( addressesFrom.size() > 0){
-                            mapcoords data = new mapcoords(addressesFrom.get(0).getLatitude(),addressesFrom.get(0).getLongitude(),addressesTo.get(0).getLatitude(),addressesTo.get(0).getLongitude());
+                            mapcoords data = new mapcoords(addressesFrom.get(0).getLatitude(),addressesFrom.get(0).getLongitude(),addressesTo.get(0).getLatitude(),addressesTo.get(0).getLongitude(), mapFrom, mapTo);
                             mapLatitude.add(data);
                         }
                     } catch (IOException e){
@@ -238,7 +356,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 //            //Log.e(TAG,"postDraw:"+mapLatitude[i]+" "+mapLongitude[i]);
 //                if(mapLatitude[i] != null) drawFromMap(mapLatitude[i],mapLongitude[i]);}
             for(mapcoords member: mapLatitude){
-                if(member.fromlat != null && member.fromlong != null && member.tolat != null && member.tolong != null) drawFromMap(member.fromlat,member.fromlong,member.tolat,member.tolong);
+                if(member.fromlat != null && member.fromlong != null && member.tolat != null && member.tolong != null) drawFromMap(member.fromlat,member.fromlong,member.tolat,member.tolong, member.from, member.to);
                 String url = getDirectionsUrl(new LatLng(member.fromlat,member.fromlong),new LatLng(member.tolat,member.tolong));
                 DownloadTask downloadTask = new DownloadTask();
                 downloadTask.execute(url);

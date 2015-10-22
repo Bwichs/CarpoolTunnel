@@ -5,6 +5,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.lang.reflect.Array;
+
 @ParseClassName("ParseRoute")
 public class ParseRoute extends ParseObject {
     public String getFrom() {
@@ -51,6 +53,8 @@ public class ParseRoute extends ParseObject {
         put("user", value);
     }
 
+    public Array getBookers() { return (Array) get("bookers");}
+    public void addBooker(String value) { add("booker", value);}
 
 
     public static ParseQuery<ParseRoute> getQuery() {

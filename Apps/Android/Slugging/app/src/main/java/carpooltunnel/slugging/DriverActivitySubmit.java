@@ -222,6 +222,7 @@ public class DriverActivitySubmit extends Fragment {
                 route.setDepTime(depTime);
                 route.setDepDay(depDay);
                 route.setUser(user);
+                route.addBooker("");
                 route.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

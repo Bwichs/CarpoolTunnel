@@ -19,8 +19,6 @@ public class MyApplication extends Application {
         FacebookSdk.sdkInitialize(getApplicationContext());
         ParseFacebookUtils.initialize(getApplicationContext());
         ParseInstallation.getCurrentInstallation().saveInBackground();
-        ParseInstallation.getCurrentInstallation().put("user", ParseUser.getCurrentUser());
-        ParseInstallation.getCurrentInstallation().saveEventually();
 
 
     }

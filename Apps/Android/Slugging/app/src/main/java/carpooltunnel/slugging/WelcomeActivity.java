@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -16,6 +17,10 @@ public class WelcomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ParseInstallation.getCurrentInstallation().put("user", ParseUser.getCurrentUser());
+        ParseInstallation.getCurrentInstallation().saveEventually();
+
         setContentView(R.layout.activity_welcome);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);

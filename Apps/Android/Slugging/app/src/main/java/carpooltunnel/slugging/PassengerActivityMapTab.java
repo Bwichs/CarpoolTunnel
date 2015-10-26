@@ -29,7 +29,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -107,6 +109,18 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         new RemoteDataTask().execute();
     }
 
+    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        ParseUser driver = new ParseUser();
+        driver.setObjectId("driverid");
+        pushQuery.whereEqualTo("user", driver);
+        push.setQuery(pushQuery);
+        push.setMessage(passenger + " has booked your route from "
+                        + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
+    }
+
     public void routeFromClick (LatLng coord){
         List<Address> foundGeocodeFrom = null;
         List<Address> foundGeocodeTo = null;
@@ -115,6 +129,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         final String routeDriver;
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
         final ParseUser me = ParseUser.getCurrentUser();
+        final String myUser = me.getUsername().toString();
         try {
             /*address = geocoder.getFromLocation(coord.latitude,coord.longitude, 1);
             for(int i = 0; i < address.get(0).getMaxAddressLineIndex(); i++) {
@@ -149,7 +164,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                 if(route.getList("bookers")!=null){
                     List<String> ary = route.getList("bookers");
                     //Log.e(TAG, "bookers" + ary.toString());
-                    if(ary.contains(me.getUsername().toString())){
+                    if(ary.contains(myUser)){
                         canBook = false;
                     }
                 }
@@ -188,10 +203,15 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                                                 "Successfully booked route!",
                                                 Toast.LENGTH_LONG).show();
                                             int x = Integer.parseInt(route.getString("numPass")) - 1;
-                                            route.add("bookers", me.getUsername().toString());
+                                            route.add("bookers", myUser);
                                             route.put("numPass", String.valueOf(x));
                                             route.saveInBackground();
                                             canBook = false;
+                                            String driverid = (String) route.get("user");
+                                            String origin = (String) route.get("from");
+                                            String dest = (String) route.get("to");
+                                            String date = (String) route.get("depDay");
+                                            sendPushToDriver(driverid, myUser, origin, dest, date);
                                     }else{
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Error, you may already have booked this route or there is no room!",

@@ -15,7 +15,9 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
@@ -53,8 +55,21 @@ public class SingleItemView extends AppCompatActivity {
     boolean canBook = true;;
     List<ParseObject> ob;
     final ParseUser me = ParseUser.getCurrentUser();
+    final String myUser = me.getUsername().toString();
     String name;
     final Button btn = (Button) findViewById(R.id.book);
+
+    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        ParseUser driver = new ParseUser();
+        driver.setObjectId("driverid");
+        pushQuery.whereEqualTo("user", driver);
+        push.setQuery(pushQuery);
+        push.setMessage(passenger + " has booked your route from "
+                + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +128,11 @@ public class SingleItemView extends AppCompatActivity {
                                     route.add("bookers", me.getUsername().toString());
                                     route.put("numPass", String.valueOf(x));
                                     canBook =false;
+                                    String driverid = (String) route.get("user");
+                                    String origin = (String) route.get("from");
+                                    String dest = (String) route.get("to");
+                                    String date = (String) route.get("depDay");
+                                    sendPushToDriver(driverid, myUser, origin, dest, date);
                                     try{
                                         route.save();
                                     }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }

@@ -25,7 +25,7 @@ public class PassengerMyRoutes extends ListFragment {
     ListView listview;
     List<ParseObject> ob;
     ProgressDialog mProgressDialog;
-    ListViewAdapter adapter;
+    MyRouteAdapter adapter;
     final List<String> bookers = new ArrayList<String>();
 
     final ParseUser me = ParseUser.getCurrentUser();
@@ -69,7 +69,19 @@ public class PassengerMyRoutes extends ListFragment {
                         List<String> ary = route.getList("bookers");
                         //Log.e(TAG, "bookers" + ary.toString());
                         if(ary.contains(me.getUsername().toString())){
-
+                            ParseObject n = route.getParseObject("user");
+                            PassengerRouteClass map = new PassengerRouteClass();
+                            map.setDepDay((String) route.get("depDay"));
+                            map.setDepTime((String) route.get("depTime"));
+                            map.setFrom((String) route.get("from"));
+                            map.setNumPass((String) route.get("numPass"));
+                            map.setTo((String) route.get("to"));
+                            map.setRouteId((String) route.getObjectId());
+                            String name = n.getString("username");
+                            map.setDriverUser(name);
+                            map.setCreatedAt(route.getCreatedAt().toString());
+                            map.setUpdatedAt(route.getUpdatedAt().toString());
+                            PassengerRouteClasslist.add(map);
                         }
                     }
                 }
@@ -87,7 +99,7 @@ public class PassengerMyRoutes extends ListFragment {
             // Pass the results into ListViewAdapter.java
 //            adapter = new ListViewAdapter(PassengerActivityListTab.this,
 //                    PassengerRouteClasslist);
-            adapter = new ListViewAdapter(getActivity(),
+            adapter = new MyRouteAdapter(getActivity(),
                     PassengerRouteClasslist);
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);

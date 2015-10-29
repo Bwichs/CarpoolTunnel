@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/depDaylabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/depDaylabel" />
+
+    <TextView
+        android:id="@+id/depDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/depDaylabel" />
+
+    <TextView
+        android:id="@+id/depTimelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/depDaylabel"
+        android:text="@string/depTimelabel" />
+
+    <TextView
+        android:id="@+id/depTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/depDay"
+        android:layout_toRightOf="@+id/depTimelabel" />
+
+    <TextView
+        android:id="@+id/numPasslabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/depTimelabel"
+        android:text="@string/numPasslabel" />
+
+    <TextView
+        android:id="@+id/numPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/depTime"
+        android:layout_toRightOf="@+id/numPasslabel" />
+
+    <TextView
+        android:id="@+id/fromlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numPasslabel"
+        android:text="@string/fromlabel" />
+
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/numPass"
+        android:layout_toRightOf="@+id/fromlabel" />
+
+
+    <TextView
+        android:id="@+id/tolabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/from"
+        android:text="@string/tolabel" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/from"
+        android:layout_toRightOf="@+id/tolabel" />
+
+    <TextView
+        android:id="@+id/driverUserlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/to"
+        android:text="@string/driverUserlabel" />
+
+    <TextView
+        android:id="@+id/driverUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/to"
+        android:layout_toRightOf="@+id/driverUserlabel" />
+
+    <TextView
+        android:id="@+id/createdAtlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/driverUserlabel"
+        android:text="@string/createdAtlabel" />
+
+    <TextView
+        android:id="@+id/createdAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/driverUser"
+        android:layout_toRightOf="@+id/createdAtlabel" />
+
+    <TextView
+        android:id="@+id/updatedAtlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createdAtlabel"
+        android:text="@string/updatedAtlabel" />
+
+    <TextView
+        android:id="@+id/updatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/createdAt"
+        android:layout_toRightOf="@+id/updatedAtlabel" />
+
+    <Button
+        android:id="@+id/book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_below="@id/updatedAt"
+        android:text="Unbook!"/>
+
+</RelativeLayout>

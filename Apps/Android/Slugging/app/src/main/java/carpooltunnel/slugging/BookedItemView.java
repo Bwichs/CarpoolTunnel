@@ -3,34 +3,30 @@ package carpooltunnel.slugging;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.RequestPasswordResetCallback;
 
-import org.json.JSONArray;
-
-import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-public class SingleItemView extends AppCompatActivity {
+public class BookedItemView extends AppCompatActivity {
     // Declare Variables
     TextView txtDepDay;
     TextView txtDepTime;
@@ -56,24 +52,10 @@ public class SingleItemView extends AppCompatActivity {
     List<ParseObject> ob;
     final ParseUser me = ParseUser.getCurrentUser();
     final String myUser = me.getUsername().toString();
-
-    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
-        ParsePush push = new ParsePush();
-        ParseQuery pushQuery = ParseInstallation.getQuery();
-        ParseUser driver = new ParseUser();
-        driver.setObjectId("driverid");
-        pushQuery.whereEqualTo("user", driver);
-        push.setQuery(pushQuery);
-        push.setMessage(passenger + " has booked your route from "
-                + from + " to " + to + " on " + date + ".");
-        push.sendInBackground();
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_item_view);
-        // Retrieve data from MainActivity on item click event
+        setContentView(R.layout.activity_booked_item_view);
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");
         query.include("user");
@@ -112,38 +94,32 @@ public class SingleItemView extends AppCompatActivity {
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                new AlertDialog.Builder(SingleItemView.this)
+                new AlertDialog.Builder(BookedItemView.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Sign up for route?")
-                        .setMessage("Do you want to book this route?")
+                        .setTitle("Unbook route?")
+                        .setMessage("Do you want to unbook this route?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (((Integer.parseInt(numPass) - 1) >= 0) && !me.getUsername().equals(driverUser) && canBook) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Successfully booked route!",
-                                            Toast.LENGTH_LONG).show();
-                                    int x = Integer.parseInt(route.getString("numPass")) - 1;
-                                    route.add("bookers", me.getUsername().toString());
-                                    route.put("numPass", String.valueOf(x));
-                                    canBook =false;
-                                    /*
-                                    ParseObject n = route.getParseObject("user");
-                                    String driverid = n.getString("username");
-                                    String origin = (String) route.get("from");
-                                    String dest = (String) route.get("to");
-                                    String date = (String) route.get("depDay");
-                                    sendPushToDriver(driverid, myUser, origin, dest, date);
-                                    */
-                                    try{
-                                        route.save();
-                                    }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }
-                                }
-                                else{
-                                    Toast.makeText(SingleItemView.this.getApplicationContext(),
-                                            "Error, you may already have booked this route or there is no room!",
-                                            Toast.LENGTH_LONG).show();
-                                }
+                                Toast.makeText(getApplicationContext(),
+                                        "Successfully unbooked route!",
+                                        Toast.LENGTH_LONG).show();
+                                int x = Integer.parseInt(route.getString("numPass")) + 1;
+                                List<String> temp = new ArrayList<String>();
+                                temp.add(me.getUsername().toString());
+                                route.removeAll("bookers", temp);
+                                route.put("numPass", String.valueOf(x));
+                                /*
+                                ParseObject n = route.getParseObject("user");
+                                String driverid = n.getString("username");
+                                String origin = (String) route.get("from");
+                                String dest = (String) route.get("to");
+                                String date = (String) route.get("depDay");
+                                sendPushToDriver(driverid, myUser, origin, dest, date);
+                                */
+                                try{
+                                    route.save();
+                                }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }
                             }
 
                         })
@@ -172,7 +148,17 @@ public class SingleItemView extends AppCompatActivity {
         //Log.e(TAG,"UA:"+updatedAt);
         txtCreatedAt.setText(createdAt);
         txtUpdatedAt.setText(updatedAt);
+    }
 
-        //Log.e(TAG, "user:" + name);
+    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        ParseUser driver = new ParseUser();
+        driver.setObjectId("driverid");
+        pushQuery.whereEqualTo("user", driver);
+        push.setQuery(pushQuery);
+        push.setMessage(passenger + " has booked your route from "
+                + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
     }
 }

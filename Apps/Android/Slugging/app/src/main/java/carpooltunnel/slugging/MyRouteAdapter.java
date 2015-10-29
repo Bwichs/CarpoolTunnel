@@ -2,9 +2,10 @@ package carpooltunnel.slugging;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListViewAdapter extends BaseAdapter {
+public class MyRouteAdapter extends BaseAdapter {
 
     // Declare Variables
     Context mContext;
@@ -20,7 +21,7 @@ public class ListViewAdapter extends BaseAdapter {
     private List<PassengerRouteClass> PassengerRouteClasslist = null;
     private ArrayList<PassengerRouteClass> arraylist;
 
-    public ListViewAdapter(Context context,
+    public MyRouteAdapter(Context context,
                            List<PassengerRouteClass> PassengerRouteClasslist) {
         mContext = context;
         this.PassengerRouteClasslist = PassengerRouteClasslist;
@@ -78,12 +79,12 @@ public class ListViewAdapter extends BaseAdapter {
         holder.to.setText(PassengerRouteClasslist.get(position).getTo());
 
         // Listen for ListView Item Click
-        view.setOnClickListener(new OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                // Send single item click data to SingleItemView Class
-                Intent intent = new Intent(mContext, SingleItemView.class);
+                // Send single item click data to BookedItemView Class
+                Intent intent = new Intent(mContext, BookedItemView.class);
                 // Pass all data rank
                 intent.putExtra("depDay",
                         (PassengerRouteClasslist.get(position).getDepDay()));
@@ -104,7 +105,7 @@ public class ListViewAdapter extends BaseAdapter {
                 intent.putExtra("updatedAt",
                         (PassengerRouteClasslist.get(position).getUpdatedAt()));
                 intent.putExtra("routeId", (PassengerRouteClasslist.get(position).getRouteId()));
-                // Start SingleItemView Class
+                // Start BookedItemView Class
                 mContext.startActivity(intent);
             }
         });

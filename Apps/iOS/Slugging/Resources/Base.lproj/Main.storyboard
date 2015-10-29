@@ -378,8 +378,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
-                                <rect key="frame" x="162" y="137" width="277" height="325"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
+                                <rect key="frame" x="162" y="137.5" width="277" height="325"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="325" id="8X8-2q-WGd"/>
@@ -399,6 +399,7 @@
                         <barButtonItem key="leftBarButtonItem" image="menu.png" id="NEZ-cK-1PW"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapView" destination="TgZ-yF-Pfq" id="T0Q-Dg-Mpi"/>
                         <outlet property="menuButton" destination="NEZ-cK-1PW" id="C8f-cV-kDT"/>
                     </connections>
                 </viewController>

@@ -61,7 +61,7 @@ public class SingleItemView extends AppCompatActivity {
         ParsePush push = new ParsePush();
         ParseQuery pushQuery = ParseInstallation.getQuery();
         ParseUser driver = new ParseUser();
-        driver.setObjectId("driverid");
+        driver.setObjectId(driverid);
         pushQuery.whereEqualTo("user", driver);
         push.setQuery(pushQuery);
         push.setMessage(passenger + " has booked your route from "
@@ -128,8 +128,7 @@ public class SingleItemView extends AppCompatActivity {
                                     route.put("numPass", String.valueOf(x));
                                     canBook =false;
                                     /*
-                                    ParseObject n = route.getParseObject("user");
-                                    String driverid = n.getString("username");
+                                    String driverid = (String) route.get("user");
                                     String origin = (String) route.get("from");
                                     String dest = (String) route.get("to");
                                     String date = (String) route.get("depDay");

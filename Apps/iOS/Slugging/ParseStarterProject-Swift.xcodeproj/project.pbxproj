@@ -13,6 +13,8 @@
 		272722441BD0A142000DA48D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722431BD0A142000DA48D /* AccountViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		272722461BD0A858000DA48D /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722451BD0A858000DA48D /* DriverViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722501BD20ABB000DA48D /* MenuTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		27917BC01BE2EFDE0024DC6C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */; };
+		27917BC21BE57C480024DC6C /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27917BC11BE57C480024DC6C /* PinAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
 		27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		27C81C6F1BD77560007AE269 /* toyota_camry.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 27C81C6E1BD77560007AE269 /* toyota_camry.jpg */; settings = {ASSET_TAGS = (); }; };
 		27C81C751BD81C44007AE269 /* teal_car_icon 12-08-13-634.png in Resources */ = {isa = PBXBuildFile; fileRef = 27C81C741BD81C44007AE269 /* teal_car_icon 12-08-13-634.png */; settings = {ASSET_TAGS = (); }; };
@@ -39,6 +41,8 @@
 		272722431BD0A142000DA48D /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		272722451BD0A858000DA48D /* DriverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverViewController.swift; sourceTree = "<group>"; };
 		272722501BD20ABB000DA48D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		27917BC11BE57C480024DC6C /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27C81C6E1BD77560007AE269 /* toyota_camry.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = toyota_camry.jpg; path = ../../../../../Desktop/toyota_camry.jpg; sourceTree = "<group>"; };
 		27C81C741BD81C44007AE269 /* teal_car_icon 12-08-13-634.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "teal_car_icon 12-08-13-634.png"; path = "../../../../../Desktop/teal_car_icon 12-08-13-634.png"; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27917BC01BE2EFDE0024DC6C /* CoreLocation.framework in Frameworks */,
 				81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */,
 				81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */,
 				81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */,
@@ -152,6 +157,7 @@
 				81BA814C1A49DA1800E65899 /* LogginViewController.swift */,
 				272722431BD0A142000DA48D /* AccountViewController.swift */,
 				272722501BD20ABB000DA48D /* MenuTableViewController.swift */,
+				27917BC11BE57C480024DC6C /* PinAnnotation.swift */,
 			);
 			path = ParseStarterProject;
 			sourceTree = "<group>";
@@ -159,6 +165,7 @@
 		81BA816A1A49DB5600E65899 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */,
 				992D269C1BCDB1620010FAFE /* MapKit.framework */,
 				81BA816B1A49DB6800E65899 /* Bolts.framework */,
 				81BA816C1A49DB6800E65899 /* Parse.framework */,
@@ -323,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27917BC21BE57C480024DC6C /* PinAnnotation.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* LogginViewController.swift in Sources */,
 				272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */,
 				272722441BD0A142000DA48D /* AccountViewController.swift in Sources */,

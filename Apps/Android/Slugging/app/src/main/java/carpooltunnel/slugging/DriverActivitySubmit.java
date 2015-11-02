@@ -21,6 +21,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -49,6 +52,16 @@ public class DriverActivitySubmit extends Fragment {
     String depTime;
     String depDay;
     ParseUser user;
+
+    public void pushRouteSuccess(ParseUser driver, String from, String to, String date) {
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereEqualTo("user", driver);
+        push.setQuery(pushQuery);
+        push.setMessage("You have successfully submitted your route "
+                + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
+    }
 
     private View view;
 
@@ -231,6 +244,7 @@ public class DriverActivitySubmit extends Fragment {
                         //finish();
                     }
                 });
+                pushRouteSuccess(user, from, to, depDay);
             }
             else if(locationFrom == false && locationTo == true){
                 Toast.makeText(getActivity().getApplicationContext(),

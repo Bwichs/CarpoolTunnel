@@ -113,7 +113,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         ParsePush push = new ParsePush();
         ParseQuery pushQuery = ParseInstallation.getQuery();
         ParseUser driver = new ParseUser();
-        driver.setObjectId("driverid");
+        driver.setObjectId(driverid);
         pushQuery.whereEqualTo("user", driver);
         push.setQuery(pushQuery);
         push.setMessage(passenger + " has booked your route from "
@@ -207,11 +207,13 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                                             route.put("numPass", String.valueOf(x));
                                             route.saveInBackground();
                                             canBook = false;
+                                            /*
                                             String driverid = (String) route.get("user");
                                             String origin = (String) route.get("from");
                                             String dest = (String) route.get("to");
                                             String date = (String) route.get("depDay");
                                             sendPushToDriver(driverid, myUser, origin, dest, date);
+                                            */
                                     }else{
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Error, you may already have booked this route or there is no room!",

@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -201,26 +202,44 @@ public class DriverActivitySubmit extends Fragment {
             try{
                 geocoder = new Geocoder(getActivity(), Locale.getDefault());
                 foundGeocodeFrom = geocoder.getFromLocationName(from, 1);
+                //radius of 50 miles ~ 80467.2 metres from SC
                 if(foundGeocodeFrom != null && !foundGeocodeFrom.isEmpty()){
                     foundGeocodeFrom.get(0).getLatitude();
                     foundGeocodeFrom.get(0).getLongitude();
                     Log.e(TAG,"location from, latlong:"+foundGeocodeFrom.get(0).getLatitude()+" "+foundGeocodeFrom.get(0).getLongitude());
-                    locationFrom = true;
+                    float[] distance = new float[3];
+                    Location.distanceBetween(36.9719,-122.0264,foundGeocodeFrom.get(0).getLatitude(),foundGeocodeFrom.get(0).getLongitude(),distance );
+                    if(distance[0] <= 80500)
+                        locationFrom = true;
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                "Please enter an address within 50 miles of Santa Cruz",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
-                    Log.e(TAG,"location not found");
+                    Log.e(TAG,"From location not found");
                 }
 
                 geocoder = new Geocoder(getActivity(), Locale.getDefault());
                 foundGeocodeTo = geocoder.getFromLocationName(to, 1);
+                //radius of 50 miles ~ 80467.2 metres from SC
                 if(foundGeocodeTo != null && !foundGeocodeTo.isEmpty()){
                     foundGeocodeTo.get(0).getLatitude();
                     foundGeocodeTo.get(0).getLongitude();
-                    Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + " " + foundGeocodeTo.get(0).getLongitude());
+                    float[] distance = new float[3];
+                    Location.distanceBetween(36.9719,-122.0264,foundGeocodeTo.get(0).getLatitude(),foundGeocodeTo.get(0).getLongitude(),distance );
+                    Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + " " + foundGeocodeTo.get(0).getLongitude()+" distbwtTo:"+distance[0]+" "+distance[1]+" "+distance[2]);
+                    if(distance[0] <= 80500)
                     locationTo = true;
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),
+                                "Please enter an address within a 50 mile radius of Santa Cruz",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
                 else{
-                    Log.e(TAG,"location not found");
+                    Log.e(TAG,"To location not found");
                 }
             }
             catch (IOException ioexception){

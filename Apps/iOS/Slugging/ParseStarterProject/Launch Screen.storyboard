@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teal_car_icon 12-08-13-634.png" translatesAutoresizingMaskIntoConstraints="NO" id="1zc-gV-R5e">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="teal_car.png" translatesAutoresizingMaskIntoConstraints="NO" id="1zc-gV-R5e">
                                 <rect key="frame" x="70" y="231" width="320" height="240"/>
                                 <animations/>
                                 <constraints>
@@ -74,6 +74,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="teal_car_icon 12-08-13-634.png" width="640" height="480"/>
+        <image name="teal_car.png" width="640" height="480"/>
     </resources>
 </document>

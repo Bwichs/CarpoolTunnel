@@ -541,8 +541,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
-                                <rect key="frame" x="151" y="100" width="300" height="400"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgZ-yF-Pfq">
+                                <rect key="frame" x="150" y="100" width="300" height="400"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="325" id="8X8-2q-WGd"/>

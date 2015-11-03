@@ -103,6 +103,8 @@ public class DriverListViewAdapter extends BaseAdapter {
                         (PassengerRouteClasslist.get(position).getCreatedAt()));
                 intent.putExtra("updatedAt",
                         (PassengerRouteClasslist.get(position).getUpdatedAt()));
+                intent.putExtra("routeId",
+                        (PassengerRouteClasslist.get(position).getRouteId()));
                 // Start SingleItemView Class
                 mContext.startActivity(intent);
             }

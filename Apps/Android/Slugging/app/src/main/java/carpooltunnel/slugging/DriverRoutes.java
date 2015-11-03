@@ -22,7 +22,7 @@ public class DriverRoutes extends Fragment {
     ListView listview;
     List<ParseObject> ob;
     ProgressDialog mProgressDialog;
-    ListViewAdapter adapter;
+    DriverListViewAdapter adapter;
     private List<PassengerRouteClass> PassengerRouteClasslist = null;
 
     @Override
@@ -69,6 +69,7 @@ public class DriverRoutes extends Fragment {
                     map.setFrom((String) route.get("from"));
                     map.setNumPass((String) route.get("numPass"));
                     map.setTo((String) route.get("to"));
+                    map.setRouteId(route.getObjectId());
                     String name = n.getString("username");
                     /*try {
                         name = route.fetch().getString("ObjectId");
@@ -98,7 +99,7 @@ public class DriverRoutes extends Fragment {
             // Pass the results into ListViewAdapter.java
 //            adapter = new ListViewAdapter(PassengerActivityListTab.this,
 //                    PassengerRouteClasslist);
-            adapter = new ListViewAdapter(getActivity(),
+            adapter = new DriverListViewAdapter(getActivity(),
                     PassengerRouteClasslist);
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);

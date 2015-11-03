@@ -19,7 +19,7 @@
 		272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722501BD20ABB000DA48D /* MenuTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		27917BC01BE2EFDE0024DC6C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */; };
 		27917BC21BE57C480024DC6C /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27917BC11BE57C480024DC6C /* PinAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
-		27917BC41BE8A5000024DC6C /* teal_car_icon 12-08-13-634.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917BC31BE8A5000024DC6C /* teal_car_icon 12-08-13-634.png */; settings = {ASSET_TAGS = (); }; };
+		27917BC61BE8A6C30024DC6C /* teal_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 27917BC51BE8A6C30024DC6C /* teal_car.png */; settings = {ASSET_TAGS = (); }; };
 		27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		814C3ACA1B69877600E307BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC61B69877600E307BB /* Main.storyboard */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
@@ -46,7 +46,7 @@
 		272722501BD20ABB000DA48D /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27917BC11BE57C480024DC6C /* PinAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
-		27917BC31BE8A5000024DC6C /* teal_car_icon 12-08-13-634.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "teal_car_icon 12-08-13-634.png"; path = "../../../../../Desktop/teal_car_icon 12-08-13-634.png"; sourceTree = "<group>"; };
+		27917BC51BE8A6C30024DC6C /* teal_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teal_car.png; path = ../../../../../Desktop/teal_car.png; sourceTree = "<group>"; };
 		27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6073ACB49F7BD68BC765906D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		814C3AC71B69877600E307BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		814C3AC51B69877600E307BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27917BC31BE8A5000024DC6C /* teal_car_icon 12-08-13-634.png */,
+				27917BC51BE8A6C30024DC6C /* teal_car.png */,
 				814C3AC81B69877600E307BB /* Images.xcassets */,
 				272722411BD09A78000DA48D /* menu.png */,
 				814C3AC91B69877600E307BB /* Info.plist */,
@@ -245,7 +245,7 @@
 			files = (
 				27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */,
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
-				27917BC41BE8A5000024DC6C /* teal_car_icon 12-08-13-634.png in Resources */,
+				27917BC61BE8A6C30024DC6C /* teal_car.png in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				272722421BD09A78000DA48D /* menu.png in Resources */,
 			);

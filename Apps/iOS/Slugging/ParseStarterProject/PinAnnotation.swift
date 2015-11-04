@@ -12,9 +12,11 @@ import UIKit
 
 class PinAnnotation : NSObject, MKAnnotation {
     private var coord: CLLocationCoordinate2D
+    var parseObjectID: String?
     
-    init(pinCoord: CLLocationCoordinate2D){
+    init(pinCoord: CLLocationCoordinate2D, objectID: String){
         self.coord = pinCoord
+        self.parseObjectID = objectID
     }
     
     var coordinate: CLLocationCoordinate2D {

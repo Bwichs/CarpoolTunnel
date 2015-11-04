@@ -12,30 +12,6 @@ import ParseUI
 import Parse
 
 
-//class DriverViewController:UIViewController {
-//    @IBOutlet weak var menuButton: UIBarButtonItem!
-//    override func viewDidLoad() {
-//                super.viewDidLoad()
-//        
-//                // Do any additional setup after loading the view.
-//                if self.revealViewController() != nil {
-//                    menuButton.target = self.revealViewController()
-//                    menuButton.action = "revealToggle:"
-//                    self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//                }
-//                self.revealViewController().rearViewRevealWidth = 160
-//            }
-//        
-//            override func didReceiveMemoryWarning() {
-//                super.didReceiveMemoryWarning()
-//                // Dispose of any resources that can be recreated.
-//            }
-//
-//}
-
-
-
-
 class DriverViewController: PFQueryTableViewController {
     @IBOutlet var menuButton: UIBarButtonItem!
     override func viewDidLoad() {
@@ -167,47 +143,6 @@ class DriverViewTableDetail: UIViewController {
 
 }
 
-//class DriverViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-//    @IBOutlet weak var menuButton: UIBarButtonItem!
-//
-//    @IBOutlet weak var tableView: UITableView!
-//    
-//    var textArray: NSMutableArray! = NSMutableArray()
-//    
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        // Do any additional setup after loading the view.
-//        if self.revealViewController() != nil {
-//            menuButton.target = self.revealViewController()
-//            menuButton.action = "revealToggle:"
-//            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-//        }
-//        self.revealViewController().rearViewRevealWidth = 160
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
-//        self.tableView.estimatedRowHeight = 44.0
-//
-//        
-//    }
-//
-//    override func didReceiveMemoryWarning() {
-//        super.didReceiveMemoryWarning()
-//        // Dispose of any resources that can be recreated.
-//    }
-//    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.textArray.count
-//    }
-//    
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-//
-//        
-//        cell.textLabel?.text = self.textArray.objectAtIndex(indexPath.row) as? String
-//        
-//        return cell;
-//    }
     /*
     // MARK: - Navigation
 

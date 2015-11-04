@@ -11,8 +11,14 @@ import MapKit
 import Parse
 import CoreLocation
 
+class PinButton: UIButton {
+    var parseObjectID: String?
+}
+
 @available(iOS 8.0, *)
 class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    var parseObjectID: String?
+    
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     @IBOutlet weak var mapView: MKMapView!
@@ -26,8 +32,8 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func addPin(location: CLLocation, pinLabel: String){
-        let dropPin = PinAnnotation(pinCoord: location.coordinate)
+    func addPin(location: CLLocation, pinLabel: String, objectID: String){
+        let dropPin = PinAnnotation(pinCoord: location.coordinate, objectID: objectID)
         dropPin.title = pinLabel
         mapView.addAnnotation(dropPin)
     }
@@ -35,11 +41,16 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     //Click pins to join ride
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is PinAnnotation {
+            let pinAnnotation = annotation as! PinAnnotation
             let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
             
             pinAnnotationView.canShowCallout = true
             
-            let routeInfoButton = UIButton(type: UIButtonType.System)
+            let routeInfoButton = PinButton(type: UIButtonType.System)
+            routeInfoButton.parseObjectID = pinAnnotation.parseObjectID
+            routeInfoButton.addTarget(self, action: "pinPressed:", forControlEvents: .TouchUpInside)
+            
+            
             if let image = UIImage(named: "menu.png") {
                 routeInfoButton.setImage(image, forState: .Normal)
             }
@@ -52,6 +63,16 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         }
         
         return nil
+    }
+    func pinPressed(sender: PinButton!) {
+        self.parseObjectID = sender.parseObjectID
+        performSegueWithIdentifier("routeInfo", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Create a new variable to store the instance of PlayerTableViewController
+        let destinationVC = segue.destinationViewController as! RouteInfoViewController
+        destinationVC.parseObjectID = self.parseObjectID
     }
     
     override func viewDidLoad() {
@@ -86,9 +107,10 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
                     for object in objects {
                         let fromAddress = object["from"] as! String
                         let toAddress = object["to"] as! String
+                        let objectID = object.objectId! as String
                         self.executeWithAddressString(fromAddress)
                             { convertedLocation, error in
-                                self.addPin(convertedLocation!, pinLabel: toAddress)
+                                self.addPin(convertedLocation!, pinLabel: toAddress, objectID: objectID)
                                 //OR handle the error appropriately
                         }
                     }
@@ -136,9 +158,12 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
                 latitude: placeMark.location!.coordinate.latitude,
                 longitude: placeMark.location!.coordinate.longitude
             )
+            
+            //for testing
+            /*
             for place in placeArray{
                 print(place.location!.coordinate.latitude)
-            }
+            }*/
 
             getLocCompletionHandler(convertedLocation: location, error: error)
         })

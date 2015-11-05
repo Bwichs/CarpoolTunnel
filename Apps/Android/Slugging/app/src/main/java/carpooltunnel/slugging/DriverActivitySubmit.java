@@ -1,8 +1,10 @@
 package carpooltunnel.slugging;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -145,7 +147,19 @@ public class DriverActivitySubmit extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitRoute();
+                new AlertDialog.Builder(DriverActivitySubmit.this.getContext())
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Submit?")
+                        .setMessage("Are you sure?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                submitRoute();
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
 
@@ -247,6 +261,10 @@ public class DriverActivitySubmit extends Fragment {
             }
             if(locationFrom == true && locationTo == true) {
                 ParseRoute route = new ParseRoute();
+
+                to = to.substring(0,1).toUpperCase() + to.substring(1).toLowerCase();
+                from = from.substring(0,1).toUpperCase() + from.substring(1).toLowerCase();
+
                 user = ParseUser.getCurrentUser();
                 route.setFrom(from);
                 route.setTo(to);

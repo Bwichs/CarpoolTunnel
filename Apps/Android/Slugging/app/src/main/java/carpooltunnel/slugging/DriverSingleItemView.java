@@ -1,5 +1,7 @@
 package carpooltunnel.slugging;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -133,35 +135,31 @@ public class DriverSingleItemView extends AppCompatActivity {
         mDeleteButton.setOnClickListener(new OnClickListener() {
 
             public void onClick (View view){
-                //delete();
-                if(route != null) route.deleteInBackground();
 
-                Intent intent = new Intent(DriverSingleItemView.this, DriverActivity.class);
-                startActivity(intent);
-                finish();
+
+
+                new AlertDialog.Builder(DriverSingleItemView.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Delete?")
+                        .setMessage("Are you sure you wish to delete this route?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (route != null) {
+                                    route.deleteInBackground();
+                                    Intent intent = new Intent(DriverSingleItemView.this, DriverActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
             }
         });
     }
-    void delete(){
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
-                "ParseRoute");
-        query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
-            ParseObject delobj;
-
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your game score
-                    delobj = object;
-                    if (delobj.equals(route)) Log.e(TAG, "delete" + route + " " + delobj);
-
-                } else {
-                    Log.e(TAG, "null delete");
-                    // something went wrong
-                }
-            }
-        });
-    }
     // Sends push notification to each Passenger that booked upon Route Delete.
     public void pushToEachPassenger(ParseObject route){
         List<String> bookers = route.getList("bookers");

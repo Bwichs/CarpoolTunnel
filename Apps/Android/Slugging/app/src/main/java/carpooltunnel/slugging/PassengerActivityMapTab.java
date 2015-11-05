@@ -109,15 +109,13 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         new RemoteDataTask().execute();
     }
 
-    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
+    public void bookPushToDriver(ParseUser driver, String passenger, String from, String to, String date) {
         ParsePush push = new ParsePush();
         ParseQuery pushQuery = ParseInstallation.getQuery();
-        ParseUser driver = new ParseUser();
-        driver.setObjectId(driverid);
         pushQuery.whereEqualTo("user", driver);
         push.setQuery(pushQuery);
         push.setMessage(passenger + " has booked your route from "
-                        + from + " to " + to + " on " + date + ".");
+                + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
     }
 
@@ -207,13 +205,11 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                                             route.put("numPass", String.valueOf(x));
                                             route.saveInBackground();
                                             canBook = false;
-                                            /*
-                                            String driverid = (String) route.get("user");
+                                            ParseUser driver = (ParseUser) route.get("user");
                                             String origin = (String) route.get("from");
                                             String dest = (String) route.get("to");
                                             String date = (String) route.get("depDay");
-                                            sendPushToDriver(driverid, myUser, origin, dest, date);
-                                            */
+                                            bookPushToDriver(driver, myUser, origin, dest, date);
                                     }else{
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Error, you may already have booked this route or there is no room!",

@@ -109,14 +109,11 @@ public class BookedItemView extends AppCompatActivity {
                                 temp.add(me.getUsername().toString());
                                 route.removeAll("bookers", temp);
                                 route.put("numPass", String.valueOf(x));
-                                /*
-                                ParseObject n = route.getParseObject("user");
-                                String driverid = n.getString("username");
+                                ParseUser driver = (ParseUser) route.get("user");
                                 String origin = (String) route.get("from");
                                 String dest = (String) route.get("to");
                                 String date = (String) route.get("depDay");
-                                sendPushToDriver(driverid, myUser, origin, dest, date);
-                                */
+                                unBookPushToDriver(driver, myUser, origin, dest, date);
                                 try{
                                     route.save();
                                 }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }
@@ -150,14 +147,12 @@ public class BookedItemView extends AppCompatActivity {
         txtUpdatedAt.setText(updatedAt);
     }
 
-    public void sendPushToDriver(String driverid, String passenger, String from, String to, String date) {
+    public void unBookPushToDriver(ParseUser driver, String passenger, String from, String to, String date) {
         ParsePush push = new ParsePush();
         ParseQuery pushQuery = ParseInstallation.getQuery();
-        ParseUser driver = new ParseUser();
-        driver.setObjectId("driverid");
         pushQuery.whereEqualTo("user", driver);
         push.setQuery(pushQuery);
-        push.setMessage(passenger + " has booked your route from "
+        push.setMessage(passenger + " has unbooked your route from "
                 + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
     }

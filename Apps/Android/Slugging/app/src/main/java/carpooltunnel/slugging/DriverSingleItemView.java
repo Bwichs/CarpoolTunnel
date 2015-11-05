@@ -9,10 +9,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -144,17 +148,45 @@ public class DriverSingleItemView extends AppCompatActivity {
                 "ParseRoute");
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             ParseObject delobj;
+
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
                     // object will be your game score
                     delobj = object;
-                    if(delobj.equals(route))Log.e(TAG,"delete"+route+" "+delobj);
+                    if (delobj.equals(route)) Log.e(TAG, "delete" + route + " " + delobj);
 
                 } else {
-                    Log.e(TAG,"null delete");
+                    Log.e(TAG, "null delete");
                     // something went wrong
                 }
             }
         });
+    }
+    // Sends push notification to each Passenger that booked upon Route Delete.
+    public void pushToEachPassenger(ParseObject route){
+        List<String> bookers = route.getList("bookers");
+        final String driver = ParseUser.getCurrentUser().getUsername();
+        final String origin = (String) route.get("from");
+        final String dest = (String) route.get("to");
+        final String date = (String) route.get("depDay");
+        for(String booker:bookers){
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("username", booker);
+            query.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> objects, ParseException e) {
+                    deletePushToPassenger(objects.get(0),driver,origin,dest,date);
+                }
+            });
+        }
+    }
+    public void deletePushToPassenger(ParseUser passenger, String driver, String from, String to, String date) {
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereEqualTo("user", passenger);
+        push.setQuery(pushQuery);
+        push.setMessage(driver + " has deleted your booked route from "
+                + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
     }
 }

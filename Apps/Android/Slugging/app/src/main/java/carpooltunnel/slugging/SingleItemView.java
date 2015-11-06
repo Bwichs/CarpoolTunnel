@@ -77,6 +77,7 @@ public class SingleItemView extends AppCompatActivity {
         query.include("user");
         final List<String> bookers = new ArrayList<String>();
         final Button btn = (Button) findViewById(R.id.book);
+        final Button btn2 = (Button) findViewById(R.id.back);
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
@@ -108,6 +109,11 @@ public class SingleItemView extends AppCompatActivity {
         createdAt = i.getStringExtra("createdAt");
         updatedAt = i.getStringExtra("updatedAt");
 
+        btn2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(SingleItemView.this)

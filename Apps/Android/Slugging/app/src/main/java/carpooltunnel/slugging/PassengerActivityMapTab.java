@@ -2,6 +2,7 @@ package carpooltunnel.slugging;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,7 +16,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -62,6 +65,12 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
     private static GoogleMap mMap;
     private static Double latitude, longitude;
 
+    private ViewGroup infoWindow;
+    private TextView infoTitle;
+    private TextView infoSnippet;
+    private Button infoButton;
+    private OnInfoWindowElemTouchListener infoButtonListener;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -69,11 +78,10 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
             return null;
         }
 
-        view = (RelativeLayout) inflater.inflate(R.layout.activity_passenger_activity_map_tab, container, false);
+        view = inflater.inflate(R.layout.activity_passenger_activity_map_tab, container, false);
         // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
         latitude = 36.9719;
         longitude = -122.0264;
-        //return inflater.inflate(R.layout.activity_passenger_activity_map_tab, container, false);
         return view;
     }
 
@@ -81,32 +89,52 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
     public void onMapReady (GoogleMap googleMap){
         mMap = googleMap;
         googleMap.setMyLocationEnabled(true);
-//        LatLng location = mMap.getMyLocation();
-//        if (location != null) {
-//           LatLng myLocation = new LatLng(location.getLatitude(),
-//                    location.getLongitude());
-//        }
-        // For dropping a marker at a point on the Map
-        //googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng coord) {
-                //Log.d(TAG, "Coordinates of press: " + coord.latitude + "-" + coord.longitude);
-
-            }
-        });
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                LatLng coord = marker.getPosition();
-                //Log.d(TAG, "Coordinates of press: " + coord.latitude + "-" + coord.longitude);
-                routeFromClick(coord);
-                return false;
-            }
-        });
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.9719, -122.0264), 12));
+        Log.e(TAG, "Map loaded");
+        final MapWrapperLayout mapWrapperLayout = (MapWrapperLayout)view.findViewById(R.id.mapLayout);
+        mapWrapperLayout.init(mMap, getPixelsFromDp(getActivity().getApplicationContext(), 39+20));
+        this.infoWindow = (ViewGroup) getActivity().getLayoutInflater().inflate(R.layout.info_window, null);
+        this.infoTitle = (TextView) infoWindow.findViewById(R.id.title);
+        this.infoSnippet = (TextView)infoWindow.findViewById(R.id.snippet);
+        this.infoButton = (Button)infoWindow.findViewById(R.id.button);
+
+        this.infoButtonListener = new OnInfoWindowElemTouchListener(infoButton)
+        {
+            @Override
+            protected void onClickConfirmed(View v, Marker marker) {
+                // Here we can perform some action triggered after clicking the button
+                routeFromClick(marker.getPosition(), marker);
+                //Toast.makeText(getActivity().getApplicationContext(), marker.getTitle() + "'s button clicked!", Toast.LENGTH_SHORT).show();
+            }
+        };
+        this.infoButton.setOnTouchListener(infoButtonListener);
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                // Setting up the infoWindow with current's marker info
+                infoTitle.setText(marker.getTitle());
+                infoSnippet.setText(marker.getSnippet());
+                infoButtonListener.setMarker(marker);
+
+                // We must call this to set the current marker and infoWindow references
+                // to the MapWrapperLayout
+                mapWrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
+                return infoWindow;
+            }
+        });
+
         new RemoteDataTask().execute();
+    }
+
+    public static int getPixelsFromDp(Context context, float dp) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int)(dp * scale + 0.5f);
     }
 
     public void bookPushToDriver(ParseUser driver, String passenger, String from, String to, String date) {
@@ -119,12 +147,11 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         push.sendInBackground();
     }
 
-    public void routeFromClick (LatLng coord){
+    public void routeFromClick (LatLng coord, Marker marker){
         List<Address> foundGeocodeFrom = null;
         List<Address> foundGeocodeTo = null;
-        String from = null;
-        String to = null;
-        final String routeDriver;
+        String from;
+        String to;
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
         final ParseUser me = ParseUser.getCurrentUser();
         final String myUser = me.getUsername().toString();
@@ -188,7 +215,33 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                 if( distance1 < .1 || distance2 < .1){
 
                     final ParseObject n = route.getParseObject("user");
+                    String name = n.getString("username");
                     Log.e(TAG, "got route by " + n.getString("username"));
+                    Intent intent = new Intent(getContext(), SingleItemView.class);
+                    // Pass all data rank
+                    intent.putExtra("depDay",
+                            ((String) route.get("depDay")));
+                    // Pass all data country
+                    intent.putExtra("depTime",
+                            ((String) route.get("depTime")));
+                    // Pass all data population
+                    intent.putExtra("from",
+                            ((String) route.get("from")));
+                    intent.putExtra("numPass",
+                            ((String) route.get("numPass")));
+                    intent.putExtra("to",
+                            ((String) route.get("to")));
+                    intent.putExtra("driverUser",
+                            (name));
+                    intent.putExtra("createdAt",
+                            (route.getCreatedAt().toString()));
+                    intent.putExtra("updatedAt",
+                            (route.getUpdatedAt().toString()));
+                    intent.putExtra("routeId",
+                            ((String) route.getObjectId()));
+                    startActivity(intent);
+                    getActivity().finish();
+                    /*
                     new AlertDialog.Builder(getActivity())
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Sign up for route?")
@@ -219,7 +272,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 
                             })
                             .setNegativeButton("No", null)
-                            .show();
+                            .show();*/
                 }
             }
         } catch (ParseException e) {

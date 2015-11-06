@@ -3,6 +3,7 @@ package carpooltunnel.slugging;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,10 +11,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -39,12 +43,21 @@ public class AccountActivity extends AppCompatActivity {
     public static int RESULT_LOAD_IMAGE = 1;
     final ParseUser user = ParseUser.getCurrentUser();
     public boolean picSaved;
+    private DrawerLayout mDrawer;
+    private NavigationView nvDrawer;
+    ActionBarDrawerToggle drawerToggle;
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        setupDrawerContent(nvDrawer);
+        drawerToggle = setupDrawerToggle();
+
         final EditText name = (EditText) findViewById(R.id.nameContent);
         name.setText(user.getString("name"));
         TextView un = (TextView) findViewById(R.id.anContent);
@@ -53,6 +66,11 @@ public class AccountActivity extends AppCompatActivity {
         pn.setText(user.getString("phoneNumber"));
         final EditText ct = (EditText) findViewById(R.id.ctContent);
         ct.setText(user.getString("carType"));
+
+        TextView navname = (TextView) findViewById(R.id.nav_header_name);
+        //navname.setText(user.getString("name"));
+        TextView navemail = (TextView) findViewById(R.id.nav_header_email);
+        //navemail.setText(user.getUsername());
 
         ParseFile carpic = user.getParseFile("carpic");
         if(carpic != null) {
@@ -84,7 +102,7 @@ public class AccountActivity extends AppCompatActivity {
                 user.put("name", n);
                 user.put("carType", carType);
                 user.put("phoneNumber", phoneNumber);
-                Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
+                Intent intent = new Intent(AccountActivity.this, PassengerActivity.class);
                 SaveCallback sc = new SaveCallback() {
                     @Override
                     public void done(ParseException arg0) {
@@ -238,24 +256,86 @@ public class AccountActivity extends AppCompatActivity {
 
         }
     }
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+
+    public void selectDrawerItem(MenuItem menuItem) {
+        switch(menuItem.getItemId()) {
+            case R.id.nav_first_fragment:
+                startActivity(new Intent(this, DriverActivity.class));
+                break;
+            case R.id.nav_second_fragment:
+                startActivity(new Intent(this, PassengerActivity.class));
+                break;
+            case R.id.nav_third_fragment:
+                startActivity(new Intent(this, AccountActivity.class));
+                break;
+            case R.id.nav_fourth_fragment:
+                break;
+            case R.id.nav_fifth_fragment:
+                new AlertDialog.Builder(AccountActivity.this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Logout?")
+                        .setMessage("Are you sure you wish to logout?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ParseUser.logOut();
+                                startActivity(new Intent(AccountActivity.this, LoginActivity.class));
+                                finish();
+                            }
+
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+                break;
+            default:
+                startActivity(new Intent(this, PassengerActivity.class));
+        }
+        // Highlight the selected item, update the title, and close the drawer
+        menuItem.setChecked(true);
+        setTitle(menuItem.getTitle());
+        mDrawer.closeDrawers();
+    }
+
+    private ActionBarDrawerToggle setupDrawerToggle()
+    {
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.backbtn) {
-
-            Intent intent = new Intent(AccountActivity.this, WelcomeActivity.class);
-            startActivity(intent);
-            finish();
-
+        if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        switch (item.getItemId()){
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+        }
+
         return super.onOptionsItemSelected(item);
         //respond to menu item selection
     }
 
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_backbtn, menu);
-        return true;
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 }

@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:padding="16dp">
+    android:layout_height="fill_parent">
 
     <TextView
         android:id="@+id/depDaylabel"
@@ -125,4 +124,12 @@
         android:layout_below="@id/updatedAt"
         android:text="Book!"/>
 
+    <Button
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="Back!"
+        android:layout_below="@+id/book"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

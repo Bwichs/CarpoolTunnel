@@ -81,11 +81,6 @@
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name=".WelcomeActivity"
-            android:label="@string/title_activity_welcome"
-            android:theme="@style/Theme.App.Base" >
-        </activity>
-        <activity
             android:name=".DriverActivity"
             android:label="@string/title_activity_driver"
             android:theme="@style/stupidtest" >
@@ -98,7 +93,7 @@
         <activity
             android:name=".AccountActivity"
             android:label="@string/title_activity_account"
-            android:theme="@style/Theme.App.Base" >
+            android:theme="@style/stupidtest" >
         </activity>
         <activity android:name=".ListViewAdapter" >
         </activity>
@@ -143,7 +138,7 @@
         </activity>
         <activity android:name=".MyRouteAdapter" >
         </activity>
-        <activity android:name=".MapWrapperLayout" >
+        <activity android:name=".DriverSingleItemView">
         </activity>
     </application>
 

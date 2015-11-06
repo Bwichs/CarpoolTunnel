@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -18,7 +19,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverRoutes extends Fragment {
+public class DriverRoutes extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     ListView listview;
     List<ParseObject> ob;
     ProgressDialog mProgressDialog;
@@ -28,10 +29,13 @@ public class DriverRoutes extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         new RemoteDataTask().execute();
-        return inflater.inflate(R.layout.activity_passenger_activity_list_tab, container, false);
+        return inflater.inflate(R.layout.activity_driver_activity_list_routes, container, false);
     }
 
-
+    @Override
+    public void onRefresh() {
+        new RemoteDataTask().execute();
+    }
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override
@@ -104,6 +108,9 @@ public class DriverRoutes extends Fragment {
             // Binds the Adapter to the ListView
             listview.setAdapter(adapter);
             // Close the progressdialog
+            adapter.refresh();
+            adapter.notifyDataSetChanged();
+            //swipeRefresh.setRefreshing(false);
             mProgressDialog.dismiss();
         }
     }

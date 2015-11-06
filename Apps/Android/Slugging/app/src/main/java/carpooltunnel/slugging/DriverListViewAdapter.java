@@ -55,6 +55,10 @@ public class DriverListViewAdapter extends BaseAdapter {
         return position;
     }
 
+    public void refresh(){
+        notifyDataSetChanged();
+    }
+
     public View getView(final int position, View view, ViewGroup parent) {
         final ViewHolder holder;
         if (view == null) {

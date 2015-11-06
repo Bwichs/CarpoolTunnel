@@ -30,13 +30,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
-import com.parse.ParseQuery;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -350,7 +349,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                                 Toast.makeText(getApplicationContext(),
                                                         "Welcome back!",
                                                         Toast.LENGTH_LONG).show();
-                                                Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+                                                Intent intent = new Intent(LoginActivity.this, PassengerActivity.class);
                                                 startActivity(intent);
                                                 finish();
                                             }

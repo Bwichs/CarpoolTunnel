@@ -63,6 +63,8 @@
     <string name="demo_external_activity">Demo External Activity</string>
     <string name="demo_collection">Demo Collection</string>
 
+    <string name="drawer_open">open nav drawer</string>
+    <string name="drawer_close">close nav drawer</string>
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<carpooltunnel.slugging.MapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:id = "@+id/mapLayout"
 
+    >
 
     <fragment
         android:id="@+id/location_maps_routes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.SupportMapFragment"
- />
+        tools:layout="@layout/activity_passenger_activity_map_tab" />
 
-</RelativeLayout>
+</carpooltunnel.slugging.MapWrapperLayout>

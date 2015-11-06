@@ -17,6 +17,12 @@ class RouteInfoViewController: UIViewController {
     @IBOutlet weak var to: UITextField!
     @IBOutlet weak var passengers: UITextField!
     
+    
+    @IBAction func joinCarpool(sender: AnyObject) {
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

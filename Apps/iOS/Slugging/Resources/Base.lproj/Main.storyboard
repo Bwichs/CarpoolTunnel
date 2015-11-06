@@ -660,6 +660,9 @@
                                 <rect key="frame" x="218" y="397" width="165" height="30"/>
                                 <animations/>
                                 <state key="normal" title="Request to Join Carpool"/>
+                                <connections>
+                                    <action selector="joinCarpool:" destination="dGQ-lJ-V0D" eventType="touchUpInside" id="1gY-E3-3am"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="From Address" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zSa-LF-A6e">
                                 <rect key="frame" x="200" y="84" width="200" height="21"/>

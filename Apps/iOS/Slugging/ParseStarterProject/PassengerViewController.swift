@@ -88,13 +88,16 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
             locationManager.startUpdatingLocation()
         }
         
-        /*
-        executeWithAddressString("112 Peach Terrace, Santa Cruz, CA, 95060")
+        
+        /*executeWithAddressString("112 Peach Terrace, Santa Cruz, CA, 95060")
             { convertedLocation, error in
                 self.convertCoordsToAddress(convertedLocation!)
+                print (convertedLocation!.coordinate.longitude)
+                print (convertedLocation!.coordinate.latitude)
+                
                 //OR handle the error appropriately
-            }
-        */
+            }*/
+        
         
         //Loop through querying Parse routes to drop pins
         let query = PFQuery(className:"ParseRoute")

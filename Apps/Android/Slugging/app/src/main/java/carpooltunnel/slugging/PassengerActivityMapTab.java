@@ -89,7 +89,8 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
     public void onMapReady (GoogleMap googleMap){
         mMap = googleMap;
         googleMap.setMyLocationEnabled(true);
-
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.9719, -122.0264), 12));
+        Log.e(TAG, "Map loaded");
         final MapWrapperLayout mapWrapperLayout = (MapWrapperLayout)view.findViewById(R.id.mapLayout);
         mapWrapperLayout.init(mMap, getPixelsFromDp(getActivity().getApplicationContext(), 39+20));
         this.infoWindow = (ViewGroup) getActivity().getLayoutInflater().inflate(R.layout.info_window, null);
@@ -128,7 +129,6 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
             }
         });
 
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(36.9719, -122.0264), 12));
         new RemoteDataTask().execute();
     }
 

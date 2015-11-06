@@ -66,6 +66,11 @@
             android:value="@integer/google_play_services_version" />
         <!-- main activity -->
         <activity
+            android:name=".PassengerActivity"
+            android:label="@string/title_activity_passenger"
+            android:theme="@style/stupidtest" >
+        </activity>
+        <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
@@ -83,11 +88,6 @@
         <activity
             android:name=".DriverActivity"
             android:label="@string/title_activity_driver"
-            android:theme="@style/stupidtest" >
-        </activity>
-        <activity
-            android:name=".PassengerActivity"
-            android:label="@string/title_activity_passenger"
             android:theme="@style/stupidtest" >
         </activity>
         <activity
@@ -139,6 +139,8 @@
         <activity android:name=".MyRouteAdapter" >
         </activity>
         <activity android:name=".DriverSingleItemView">
+        </activity>
+        <activity android:name=".MapWrapperLayout">
         </activity>
     </application>
 

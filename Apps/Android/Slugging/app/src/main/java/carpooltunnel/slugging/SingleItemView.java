@@ -111,6 +111,8 @@ public class SingleItemView extends AppCompatActivity {
 
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Intent intent = new Intent(SingleItemView.this, PassengerActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

@@ -178,7 +178,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                         String url = getDirectionsUrl(frm, tto);
                         //Log.e(TAG, url.toString());
                         SelectedDownloadTask x = new SelectedDownloadTask();
-                        x.execute(url);
+                        //x.execute(url);
                     }
                 } catch (ParseException e) {
                     Log.e("Error", e.getMessage());

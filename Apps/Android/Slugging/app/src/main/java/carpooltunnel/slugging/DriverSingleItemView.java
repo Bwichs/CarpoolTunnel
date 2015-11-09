@@ -32,7 +32,7 @@ public class DriverSingleItemView extends AppCompatActivity {
     TextView txtDriverUser;
     TextView txtCreatedAt;
     TextView txtUpdatedAt;
-
+    TextView driverUserLabel;
 
     String depDay;
     String depTime;
@@ -45,8 +45,7 @@ public class DriverSingleItemView extends AppCompatActivity {
 
     public final String TAG = "DSIV";
     List<ParseObject> ob;
-    String name;
-    String object;
+    String name = "";
     ParseObject route;
     Intent i;
 
@@ -63,24 +62,23 @@ public class DriverSingleItemView extends AppCompatActivity {
             query.include("user");
             // by ascending
             query.orderByAscending("createdAt");
-//            ob = query.find();
-//            for (ParseObject route : ob) {
-//                ParseObject n = new ParseObject("User");
-//                n = route.getParseObject("user");
-//                object = route.getObjectId();
-//                Log.e(TAG, "ObjectID create:"+object);
-//                name = n.getString("username");
-//            }
+            txtDriverUser = (TextView) findViewById(R.id.driverUser);
             query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
                 public void done(ParseObject object, ParseException e) {
                     if (e == null) {
                         // object will be your game score
                         route = object;
-                        //ParseObject n = new ParseObject("User");
-                        ParseObject n = route.getParseObject("user");
-                        name = n.getString("username");
-                        Log.e(TAG,"create error"+route);
 
+                        if(route.getList("passengers")!=null){
+                            List<String> ary = route.getList("passengers");
+                            for(String n : ary){
+                                name += n + ", ";
+                                txtDriverUser.setText(name);
+                            }
+                            Log.e(TAG, name);
+                        }
+                        //ParseObject n = new ParseObject("User");
+                        //ParseObject n = route.getParseObject("user");
                     } else {
                         Log.e(TAG,"null get");
                         // something went wrong
@@ -106,27 +104,26 @@ public class DriverSingleItemView extends AppCompatActivity {
         txtFrom = (TextView) findViewById(R.id.from);
         txtNumPass = (TextView) findViewById(R.id.numPass);
         txtTo = (TextView) findViewById(R.id.to);
-        txtDriverUser = (TextView) findViewById(R.id.driverUser);
+
         txtCreatedAt = (TextView) findViewById(R.id.createdAt);
         txtUpdatedAt = (TextView) findViewById(R.id.updatedAt);
-
+        driverUserLabel = (TextView) findViewById(R.id.driverUserlabel);
         // Load the results into the TextViews
         txtDepDay.setText(depDay);
         txtDepTime.setText(depTime);
         txtFrom.setText(from);
         txtNumPass.setText(numPass);
         txtTo.setText(to);
-        txtDriverUser.setText(name);
-        Log.e(TAG, "CA:" + createdAt);
-        Log.e(TAG, "UA:" + updatedAt);
+        driverUserLabel.setText("Passengers: ");
+
         txtCreatedAt.setText(createdAt);
         txtUpdatedAt.setText(updatedAt);
 
-        Log.e(TAG, "user:" + name);
+        //Log.e(TAG, "user:" + name);
 
         Button mEditButton = (Button) findViewById(R.id.editbutton);
         mEditButton.setOnClickListener(new OnClickListener() {
-            public void onClick (View view){
+            public void onClick(View view) {
 
             }
         });
@@ -156,6 +153,21 @@ public class DriverSingleItemView extends AppCompatActivity {
                         })
                         .setNegativeButton("No", null)
                         .show();
+            }
+        });
+
+        Button pendingButton = (Button) findViewById(R.id.pendingbutton);
+        pendingButton.setOnClickListener(new OnClickListener() {
+
+            public void onClick (View view){
+
+                Intent intent = new Intent(DriverSingleItemView.this, DriverPending.class);
+                // Pass all data rank
+                intent.putExtra("routeId",
+                        (route.getObjectId()));
+                // Start SingleItemView Class
+                startActivity(intent);
+                finish();
             }
         });
     }

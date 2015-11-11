@@ -17,9 +17,45 @@ class RouteInfoViewController: UIViewController {
     @IBOutlet weak var to: UITextField!
     @IBOutlet weak var passengers: UITextField!
     
-    
     @IBAction func joinCarpool(sender: AnyObject) {
+        //passenger 
         
+        let currentUserID = PFUser.currentUser()?.objectId
+        let query = PFQuery(className: "ParseRoute")
+        query.includeKey("objectId")
+        query.whereKey("objectId", equalTo: self.parseObjectID!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if error == nil {
+                for route in objects! {
+                    let userPointer:PFObject = (route["user"] as? PFObject)!
+                    let userQuery = PFUser.query()
+                    userQuery!.getObjectInBackgroundWithId(userPointer.objectId!){
+                        (driver: PFObject?, error: NSError?) -> Void in
+                        if error == nil && driver != nil {
+                            var reqArray = driver!["reqPassengers"] as? [String]
+                            if reqArray == nil {
+                                reqArray = []
+                            }
+                            reqArray!.append(currentUserID!)
+                            driver!["reqPassengers"] = reqArray
+                            driver!.saveInBackgroundWithBlock {
+                                (success, error) -> Void in
+                            }
+                        }
+                    }
+                }
+            }
+                
+        /*
+        userPointer["objectId"] as? String
+        let userPointer:PFObject = (route["user"] as? PFObject)!
+        var reqArray = driver!["reqPassengers"] as? [String]
+        reqArray!.append(currentUserID!)
+        route!["user"] = reqArray
+        route!.saveInBackgroundWithBlock {
+        */
+
+        }
     }
     
     
@@ -29,11 +65,11 @@ class RouteInfoViewController: UIViewController {
         // Do any additional setup after loading the view.
         let query = PFQuery(className: "ParseRoute")
         query.getObjectInBackgroundWithId(self.parseObjectID!) {
-            (user: PFObject?, error: NSError?) -> Void in
-            if error == nil && user != nil {
-                self.from.text = user!["from"] as? String
-                self.to.text = user!["to"] as? String
-                self.passengers.text = user!["numPass"] as? String
+            (route: PFObject?, error: NSError?) -> Void in
+            if error == nil && route != nil {
+                self.from.text = route!["from"] as? String
+                self.to.text = route!["to"] as? String
+                self.passengers.text = route!["numPass"] as? String
             }
         }
     }

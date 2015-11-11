@@ -14,6 +14,10 @@ public class PassengerRouteClass {
     private String driverUser;
     private String createdAt;
     private String updatedAt;
+    private String booker;
+
+    public String getBooker() { return booker;}
+    public void setBooker(String r){ this.booker = r;}
 
     public String getRouteId() { return routeId; }
     public void setRouteId(String r) {this.routeId = r;}

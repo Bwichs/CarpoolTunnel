@@ -129,6 +129,65 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
             }
         });
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                final ParseUser me = ParseUser.getCurrentUser();
+                LatLng coord = marker.getPosition();
+                List<Address> foundGeocodeFrom = null;
+                List<Address> foundGeocodeTo = null;
+                String from;
+                String to;
+                try {
+                    ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
+                            "ParseRoute");
+                    // by ascending
+                    query.orderByAscending("createdAt");
+                    query.include("user");
+                    ob = query.find();
+                    //Log.e(TAG, "coord, latlong:" + coord.latitude + ", " + coord.longitude);
+                    for (final ParseObject route : ob) {
+                        try{
+                            from = (String) route.get("from");
+                            foundGeocodeFrom = geocoder.getFromLocationName(from, 1);
+                            to = (String) route.get("to");
+                            foundGeocodeTo = geocoder.getFromLocationName(to, 1);
+                            //Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + ", " + foundGeocodeTo.get(0).getLongitude());
+                        }catch (IOException ioexception){
+                            Log.e(TAG, "address error",ioexception);
+                        }
+
+                        Location point = new Location("point");
+
+                        point.setLatitude(coord.latitude);
+                        point.setLongitude(coord.longitude);
+
+                        Location coordTo = new Location("coordTo");
+
+                        coordTo.setLatitude(foundGeocodeTo.get(0).getLatitude());
+                        coordTo.setLongitude(foundGeocodeTo.get(0).getLongitude());
+
+                        Location coordFrom = new Location("coordFrom");
+
+                        coordFrom.setLatitude(foundGeocodeFrom.get(0).getLatitude());
+                        coordFrom.setLongitude(foundGeocodeFrom.get(0).getLongitude());
+
+                        LatLng frm = new LatLng(foundGeocodeTo.get(0).getLatitude(), foundGeocodeTo.get(0).getLongitude());
+                        LatLng tto = new LatLng(foundGeocodeFrom.get(0).getLatitude(), foundGeocodeFrom.get(0).getLongitude());
+                        String url = getDirectionsUrl(frm, tto);
+                        //Log.e(TAG, url.toString());
+                        SelectedDownloadTask x = new SelectedDownloadTask();
+                        //x.execute(url);
+                    }
+                } catch (ParseException e) {
+                    Log.e("Error", e.getMessage());
+                }
+
+                return false;
+            }
+        });
+
         new RemoteDataTask().execute();
     }
 
@@ -282,8 +341,8 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
 
     public void drawFromMap (Double fromLat, Double fromLong, Double toLat, Double toLong, String from, String to)
     {
-        if(fromLat != null && fromLong != null) mMap.addMarker(new MarkerOptions().position(new LatLng(fromLat, fromLong)).title("From").snippet(from));
-        if(toLat != null && toLat != null) mMap.addMarker(new MarkerOptions().position(new LatLng(toLat, toLong)).title("To").snippet(to)
+        if(fromLat != null && fromLong != null) mMap.addMarker(new MarkerOptions().position(new LatLng(fromLat, fromLong)).title("From: ").snippet(from));
+        if(toLat != null && toLat != null) mMap.addMarker(new MarkerOptions().position(new LatLng(toLat, toLong)).title("To: ").snippet(to)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
     }
@@ -379,7 +438,6 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
     List<ParseObject> ob;
     private ArrayList<mapcoords> mapLatitude = new ArrayList<>();
     ProgressDialog mProgressDialog;
-
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
@@ -451,6 +509,97 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         }
     }
 
+    //selected!!!!!!!!
+    // Fetches data from url passed
+    private class SelectedDownloadTask extends AsyncTask<String, Void, String>{
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+            try{
+                // Fetching the data from web service
+
+                data = downloadUrl(url[0]);
+                Log.e(TAG, "Selected Data: " + data);
+                //Log.e(TAG, "Selected Data: " + url[0]);
+            }catch(Exception e){
+                Log.d("Background Task", e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            SelectedParserTask parserTask = new SelectedParserTask();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /** A class to parse the Google Places in JSON format */
+    private class SelectedParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> route = null;
+
+            try{
+                jObject = new JSONObject(jsonData[0]);
+                DirectionsJSONParser parser = new DirectionsJSONParser();
+                // Starts parsing data
+                route = parser.parse(jObject);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return route;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+
+            // Traversing through all the routes
+            for(int i=0;i<result.size();i++){
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for(int j=0;j<path.size();j++){
+                    HashMap<String,String> point = path.get(j);
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
+                }
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+                lineOptions.width(10);
+                Random rnd = new Random();
+                int color = Color.argb(255,8,8,8);
+                lineOptions.color(color);
+            }
+            // Drawing polyline in the Google Map for the i-th route
+            mMap.addPolyline(lineOptions);
+            mProgressDialog.dismiss();
+        }
+    }
     // Fetches data from url passed
     private class DownloadTask extends AsyncTask<String, Void, String>{
 
@@ -465,7 +614,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                 // Fetching the data from web service
                 data = downloadUrl(url[0]);
             }catch(Exception e){
-                Log.d("Background Task",e.toString());
+                Log.d("Background Task", e.toString());
             }
             return data;
         }
@@ -510,7 +659,6 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
 
             // Traversing through all the routes
             for(int i=0;i<result.size();i++){

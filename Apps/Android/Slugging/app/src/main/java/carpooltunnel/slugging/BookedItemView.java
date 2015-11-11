@@ -112,7 +112,7 @@ public class BookedItemView extends AppCompatActivity {
                                 int x = Integer.parseInt(route.getString("numPass")) + 1;
                                 List<String> temp = new ArrayList<String>();
                                 temp.add(me.getUsername().toString());
-                                route.removeAll("bookers", temp);
+                                route.removeAll("passengers", temp);
                                 route.put("numPass", String.valueOf(x));
                                 ParseUser driver = (ParseUser) route.get("user");
                                 String origin = (String) route.get("from");

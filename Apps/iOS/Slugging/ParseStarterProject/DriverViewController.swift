@@ -3,7 +3,10 @@
 //  ParseStarterProject-Swift
 //
 //  Created by Brian Wichers on 10/15/15.
-//  Updated to table view and loading parse routes
+//  Kevin Jesse - Added table view and detail view
+//  Kevin Jesse - Made table view editable and reloadable
+//  Kevin Jesse - Added + with new route button
+//  Kevin Jesse - Fixed datepicker and made UI changes from TA (pagination)
 //  Copyright © 2015 Parse. All rights reserved.
 //
 
@@ -43,16 +46,14 @@ class DriverViewController: PFQueryTableViewController {
         self.parseClassName = "ParseRoute"
         self.textKey = "depDay"
         self.pullToRefreshEnabled = true
-        self.paginationEnabled = true
-        self.objectsPerPage = 5
+        self.paginationEnabled = false
     }
     
     // Define the query that will provide the data for the table view
     override func queryForTable() -> PFQuery {
-        let current = PFUser.currentUser()?.objectId
+        let current = PFUser.currentUser()
         let query = PFQuery(className: "ParseRoute")
-        query.orderByDescending("depDay")
-        //query.orderByDescending("depDay").whereKey("user", equalTo: current!)
+        query.orderByDescending("depDay").whereKey("user", equalTo: current!)
         return query
     }
 
@@ -74,7 +75,11 @@ class DriverViewController: PFQueryTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
+        //let detailScene = segue.destinationViewController as! DriverViewTableDetail
         let detailScene = segue.destinationViewController as! DriverViewTableDetail
+        detailScene.navigationItem.title = "Your Route"
+        navigationItem.title = "Routes"
+    
         
         // Pass the selected object to the destination view controller.
         if let indexPath = self.tableView.indexPathForSelectedRow {
@@ -83,11 +88,16 @@ class DriverViewController: PFQueryTableViewController {
         }
     }
     
-    
     override func viewDidAppear(animated: Bool) {
         
         // Refresh the table to ensure any data changes are displayed
         tableView.reloadData()
+    }
+    
+    @IBAction func add(sender: AnyObject) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.performSegueWithIdentifier("DriverViewTableDetail", sender: self)
+        }
     }
 }
 
@@ -97,22 +107,45 @@ class DriverViewTableDetail: UIViewController {
     @IBOutlet var from: UITextField!
     @IBOutlet var to: UITextField!
     @IBOutlet var numPass: UITextField!
-    @IBOutlet var date: UIDatePicker!
-    
-    
+    @IBOutlet weak var date: UIDatePicker!
+
     // The save button
     @IBAction func saveRoutes(sender: AnyObject) {
         
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let strDate = dateFormatter.stringFromDate(date.date)
+        dateFormatter.dateFormat = "HH:mm"
+        let strTime = dateFormatter.stringFromDate(date.date)
+        
         // Unwrap the current object object
-        if let object = currentObject {
+        if let object = currentObject as PFObject? {
             
+            //update the existing object
             object["from"] = from.text
             object["to"] = to.text
-            object["passengers"] = numPass.text
-            // object["depDay"] = currencyCode.text
+            object["numPass"] = numPass.text
+            object["depDay"] = strDate
+            object["depTime"] = strTime
             
             // Save the data back to the server in a background task
-            object.saveEventually(nil)
+            object.saveEventually()
+            
+        }else {
+            //create the new object
+            let object = PFObject(className: "ParseRoute")
+            
+            //update the existing object
+            object["from"] = from.text
+            object["to"] = to.text
+            object["numPass"] = numPass.text
+            object["depDay"] = strDate
+            object["depTime"] = strTime
+            object["user"] = PFUser.currentUser()
+            
+            // Save the data back to the server in a background task
+            object.saveEventually()
             
         }
         
@@ -129,8 +162,6 @@ class DriverViewTableDetail: UIViewController {
             from.text = object["from"] as? String
             to.text = object["to"] as? String
             numPass.text = object["numPass"] as? String
-            //date.textInputMode = object["depDay"] as? String
-            //date.text = object["currencyCode"] as! String
         }
     }
     

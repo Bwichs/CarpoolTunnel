@@ -111,6 +111,8 @@ public class SingleItemView extends AppCompatActivity {
 
         btn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Intent intent = new Intent(SingleItemView.this, PassengerActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -125,11 +127,11 @@ public class SingleItemView extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (((Integer.parseInt(numPass) - 1) >= 0) && !me.getUsername().equals(driverUser) && canBook) {
                                     Toast.makeText(getApplicationContext(),
-                                            "Successfully booked route!",
+                                            "Sent request to route driver!",
                                             Toast.LENGTH_LONG).show();
-                                    int x = Integer.parseInt(route.getString("numPass")) - 1;
+                                    //int x = Integer.parseInt(route.getString("numPass")) - 1;
                                     route.add("bookers", me.getUsername().toString());
-                                    route.put("numPass", String.valueOf(x));
+                                    //route.put("numPass", String.valueOf(x));
                                     canBook =false;
                                     ParseUser driver = (ParseUser) route.get("user");
                                     String origin = (String) route.get("from");

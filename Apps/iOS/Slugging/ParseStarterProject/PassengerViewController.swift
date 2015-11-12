@@ -151,24 +151,26 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     func executeWithAddressString(address: String, getLocCompletionHandler : (convertedLocation : CLLocation?, error : NSError?) -> Void) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address, completionHandler: { (placemarks, error) -> Void in
-            let placeArray = placemarks as [CLPlacemark]!
-            
-            // Place details
-            var placeMark: CLPlacemark!
-            placeMark = placeArray?[0]
-            
-            let location = CLLocation(
-                latitude: placeMark.location!.coordinate.latitude,
-                longitude: placeMark.location!.coordinate.longitude
-            )
-            
-            //for testing
-            /*
-            for place in placeArray{
-                print(place.location!.coordinate.latitude)
-            }*/
+            if error == nil {
+                let placeArray = placemarks as [CLPlacemark]!
+                
+                // Place details
+                var placeMark: CLPlacemark!
+                placeMark = placeArray?[0]
+                
+                let location = CLLocation(
+                    latitude: placeMark.location!.coordinate.latitude,
+                    longitude: placeMark.location!.coordinate.longitude
+                )
+                
+                //for testing
+                /*
+                for place in placeArray{
+                    print(place.location!.coordinate.latitude)
+                }*/
 
-            getLocCompletionHandler(convertedLocation: location, error: error)
+                getLocCompletionHandler(convertedLocation: location, error: error)
+            }
         })
     }
     

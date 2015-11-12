@@ -279,6 +279,7 @@ public class AccountActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AccountActivity.class));
                 break;
             case R.id.nav_fourth_fragment:
+                startActivity(new Intent(this, TutorialActivity.class));
                 break;
             case R.id.nav_fifth_fragment:
                 new AlertDialog.Builder(AccountActivity.this)

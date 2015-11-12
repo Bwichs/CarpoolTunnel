@@ -55,6 +55,8 @@ public class ParseRoute extends ParseObject {
         put("user", value);
     }
 
+    public void setColour(int value) { put("colour", value); }
+
     public Array getBookers() { return (Array) get("bookers");}
     public void addBooker(String value) { add("bookers", value);}
 

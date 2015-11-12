@@ -17,6 +17,7 @@ import Parse
 
 class DriverViewController: PFQueryTableViewController {
     @IBOutlet var menuButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,6 +48,7 @@ class DriverViewController: PFQueryTableViewController {
         self.textKey = "depDay"
         self.pullToRefreshEnabled = true
         self.paginationEnabled = false
+       
     }
     
     // Define the query that will provide the data for the table view
@@ -58,10 +60,14 @@ class DriverViewController: PFQueryTableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath, object: PFObject?) -> PFTableViewCell {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         var cell = tableView.dequeueReusableCellWithIdentifier("cell") as! PFTableViewCell!
         if cell == nil {
             cell = PFTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "cell")
         }
+        //cell.textLabel?.adjustsFontSizeToFitWidth = true
+        cell.textLabel?.font = UIFont.systemFontOfSize(24)
+        cell.detailTextLabel?.font = UIFont.systemFontOfSize(18)
         let from = object?["from"] as? String
         let date = object?["depDay"] as? String
         let deptime = object?["depTime"] as? String
@@ -113,7 +119,7 @@ class DriverViewController: PFQueryTableViewController {
     
 }
 
-class DriverViewTableDetail: UIViewController {
+class DriverViewTableDetail: UIViewController, UITextFieldDelegate {
     var currentObject : PFObject?
     
     @IBOutlet var from: UITextField!
@@ -122,8 +128,7 @@ class DriverViewTableDetail: UIViewController {
     @IBOutlet weak var date: UIDatePicker!
 
     // The save button
-    @IBAction func saveRoutes(sender: AnyObject) {
-        
+    @IBAction func saveRoute(sender: AnyObject) {
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -174,6 +179,26 @@ class DriverViewTableDetail: UIViewController {
             to.text = object["to"] as? String
             numPass.text = object["numPass"] as? String
         }
+        self.from.delegate = self
+        self.to.delegate = self
+        self.numPass.delegate = self
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {

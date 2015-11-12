@@ -20,11 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O71-Lh-j68">
-<<<<<<< HEAD
                                 <rect key="frame" x="260" y="290" width="80" height="21"/>
-=======
-                                <rect key="frame" x="260" y="290" width="80" height="20"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9e9-hn-teT"/>
@@ -89,11 +85,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WhE-bk-HJg">
-<<<<<<< HEAD
-                                <rect key="frame" x="200" y="318" width="200" height="30"/>
-=======
-                                <rect key="frame" x="200" y="317" width="200" height="30"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
+                                <rect key="frame" x="200" y="319" width="200" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="MG2-Fu-Q7y"/>
@@ -103,11 +95,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJS-M8-dJb">
-<<<<<<< HEAD
-                                <rect key="frame" x="245" y="387" width="110" height="30"/>
-=======
-                                <rect key="frame" x="245" y="386" width="110" height="30"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
+                                <rect key="frame" x="245" y="388" width="110" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="6qc-8P-MTI"/>
@@ -131,11 +119,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="I8H-8I-c8o">
-<<<<<<< HEAD
-                                <rect key="frame" x="282" y="425" width="37" height="37"/>
-=======
-                                <rect key="frame" x="282" y="424" width="37" height="37"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
+                                <rect key="frame" x="282" y="426" width="37" height="37"/>
                                 <animations/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
@@ -360,19 +344,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f62-mI-c5H" id="hiV-Wv-hHf">
-<<<<<<< HEAD
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9Q-vi-WpY">
                                             <rect key="frame" x="15" y="18" width="32" height="20"/>
-=======
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9Q-vi-WpY">
-                                            <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -381,11 +357,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="blL-L4-YDV">
-<<<<<<< HEAD
                                             <rect key="frame" x="15" y="38" width="41" height="14"/>
-=======
-                                            <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
->>>>>>> cc98ff27513ae18da9b8bfd67dde8a1722173b80
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -444,46 +416,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7j3-y2-zMI">
-                                <rect key="frame" x="20" y="91" width="64" height="30"/>
+                                <rect key="frame" x="20" y="91" width="64" height="33"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="I1L-ja-4nx">
-                                <rect key="frame" x="181" y="91" width="224" height="30"/>
+                                <rect key="frame" x="181" y="112" width="224" height="29"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="To" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98k-fD-gze">
-                                <rect key="frame" x="20" y="148" width="34" height="30"/>
+                                <rect key="frame" x="20" y="160" width="34" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="rb9-sH-Dbk">
-                                <rect key="frame" x="181" y="148" width="224" height="30"/>
+                                <rect key="frame" x="181" y="160" width="224" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Passengers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ug-bi-a1J">
-                                <rect key="frame" x="20" y="205" width="130" height="32"/>
+                                <rect key="frame" x="20" y="210" width="130" height="29"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="24" translatesAutoresizingMaskIntoConstraints="NO" id="MBi-Li-FCQ">
-                                <rect key="frame" x="181" y="206" width="224" height="30"/>
+                                <rect key="frame" x="181" y="209" width="224" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-ba-MjK">
-                                <rect key="frame" x="105" y="271" width="300" height="40"/>
+                                <rect key="frame" x="105" y="271" width="300" height="136"/>
                                 <animations/>
                                 <date key="date" timeIntervalSinceReferenceDate="468221453.62021297">
                                     <!--2015-11-03 05:30:53 +0000-->
@@ -502,7 +474,7 @@
                                 <items/>
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm5-Cp-QZX">
-                                <rect key="frame" x="105" y="366" width="207" height="51"/>
+                                <rect key="frame" x="105" y="497" width="207" height="51"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
                                 <state key="normal" title="SAVE ROUTE">

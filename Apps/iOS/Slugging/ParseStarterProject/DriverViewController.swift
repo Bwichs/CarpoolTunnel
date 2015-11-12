@@ -7,13 +7,13 @@
 //  Kevin Jesse - Made table view editable and reloadable
 //  Kevin Jesse - Added + with new route button
 //  Kevin Jesse - Fixed datepicker and made UI changes from TA (pagination)
+//  Kevin Jesse - Added Delete functionality
 //  Copyright © 2015 Parse. All rights reserved.
 //
 
 import UIKit
 import ParseUI
 import Parse
-
 
 class DriverViewController: PFQueryTableViewController {
     @IBOutlet var menuButton: UIBarButtonItem!
@@ -64,22 +64,32 @@ class DriverViewController: PFQueryTableViewController {
         }
         let from = object?["from"] as? String
         let date = object?["depDay"] as? String
+        let deptime = object?["depTime"] as? String
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        let timedate = dateFormatter.dateFromString(deptime!)
+        dateFormatter.dateFormat = "h:mm a"
+        let time = dateFormatter.stringFromDate(timedate!)
+        
         let passengers = object?["numPass"] as? String
         cell?.detailTextLabel?.text = "From :" + from! + " @ " + date! + " with " + passengers! + " passengers"
         
         if let to = object?["to"] as? String {
-            cell?.textLabel?.text = "To: " + to
+            cell?.textLabel?.text = "To: " + to + " - " + time
         }
         return cell
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.removeObjectAtIndexPath(indexPath)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        //let detailScene = segue.destinationViewController as! DriverViewTableDetail
         let detailScene = segue.destinationViewController as! DriverViewTableDetail
         detailScene.navigationItem.title = "Your Route"
         navigationItem.title = "Routes"
-    
         
         // Pass the selected object to the destination view controller.
         if let indexPath = self.tableView.indexPathForSelectedRow {
@@ -99,6 +109,8 @@ class DriverViewController: PFQueryTableViewController {
             self.performSegueWithIdentifier("DriverViewTableDetail", sender: self)
         }
     }
+    
+    
 }
 
 class DriverViewTableDetail: UIViewController {
@@ -153,7 +165,6 @@ class DriverViewTableDetail: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -169,9 +180,6 @@ class DriverViewTableDetail: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-
 }
 
     /*

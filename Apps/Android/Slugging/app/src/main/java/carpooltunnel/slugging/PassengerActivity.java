@@ -97,6 +97,7 @@ public class PassengerActivity extends AppCompatActivity {
                 startActivity(new Intent(this, AccountActivity.class));
                 break;
             case R.id.nav_fourth_fragment:
+                startActivity(new Intent(this, TutorialActivity.class));
                 break;
             case R.id.nav_fifth_fragment:
                 new AlertDialog.Builder(PassengerActivity.this)
@@ -140,6 +141,8 @@ public class PassengerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
         //respond to menu item selection
     }
+
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

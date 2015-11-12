@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -34,6 +35,7 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class DriverActivitySubmit extends Fragment {
@@ -265,6 +267,9 @@ public class DriverActivitySubmit extends Fragment {
                 to = to.substring(0,1).toUpperCase() + to.substring(1).toLowerCase();
                 from = from.substring(0,1).toUpperCase() + from.substring(1).toLowerCase();
 
+                Random rnd = new Random();
+                int colour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
                 user = ParseUser.getCurrentUser();
                 route.setFrom(from);
                 route.setTo(to);
@@ -272,6 +277,7 @@ public class DriverActivitySubmit extends Fragment {
                 route.setDepTime(depTime);
                 route.setDepDay(depDay);
                 route.setUser(user);
+                route.setColour(colour);
                 route.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {

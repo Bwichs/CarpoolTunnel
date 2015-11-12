@@ -11,19 +11,26 @@ import Parse
 
 class RouteInfoViewController: UIViewController {
     
-    var parseObjectID: String?
+    var routeObjectID: String?
+    var driverObjectID: String?
 
     @IBOutlet weak var from: UITextField!
     @IBOutlet weak var to: UITextField!
     @IBOutlet weak var passengers: UITextField!
     
+    //View Driver Account button
+    @IBAction func driverAccount(sender: AnyObject) {
+        performSegueWithIdentifier("viewDriverAccount", sender: self)
+    }
+    
+    //Request to Join Carpool button
     @IBAction func joinCarpool(sender: AnyObject) {
         //passenger 
         
         let currentUserID = PFUser.currentUser()?.objectId
         let query = PFQuery(className: "ParseRoute")
         query.includeKey("objectId")
-        query.whereKey("objectId", equalTo: self.parseObjectID!)
+        query.whereKey("objectId", equalTo: self.routeObjectID!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if error == nil {
                 for route in objects! {
@@ -64,12 +71,14 @@ class RouteInfoViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         let query = PFQuery(className: "ParseRoute")
-        query.getObjectInBackgroundWithId(self.parseObjectID!) {
+        query.getObjectInBackgroundWithId(self.routeObjectID!) {
             (route: PFObject?, error: NSError?) -> Void in
             if error == nil && route != nil {
                 self.from.text = route!["from"] as? String
                 self.to.text = route!["to"] as? String
                 self.passengers.text = route!["numPass"] as? String
+                let driverObject = route!["user"] as? PFObject
+                self.driverObjectID = driverObject?.objectId
             }
         }
     }
@@ -80,14 +89,10 @@ class RouteInfoViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Create a new variable to store the instance of PlayerTableViewController
+        let destinationVC = segue.destinationViewController as! AccountViewController
+        destinationVC.driverObjectID = self.driverObjectID
     }
-    */
 
 }

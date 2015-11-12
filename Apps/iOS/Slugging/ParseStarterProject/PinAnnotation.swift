@@ -14,9 +14,9 @@ class PinAnnotation : NSObject, MKAnnotation {
     private var coord: CLLocationCoordinate2D
     var parseObjectID: String?
     
-    init(pinCoord: CLLocationCoordinate2D, objectID: String){
+    init(pinCoord: CLLocationCoordinate2D, routeObjectID: String){
         self.coord = pinCoord
-        self.parseObjectID = objectID
+        self.parseObjectID = routeObjectID
     }
     
     var coordinate: CLLocationCoordinate2D {

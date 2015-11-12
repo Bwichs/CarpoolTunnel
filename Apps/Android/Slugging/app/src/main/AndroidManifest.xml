@@ -140,9 +140,15 @@
         </activity>
         <activity android:name=".DriverSingleItemView" >
         </activity>
+<<<<<<< Updated upstream
         <activity android:name=".MapWrapperLayout" >
         </activity>
         <activity android:name=".DriverPending" >
+=======
+        <activity android:name=".TutorialActivity" >
+        </activity>
+        <activity android:name=".TutorialPane" >
+>>>>>>> Stashed changes
         </activity>
     </application>
 

@@ -11,69 +11,20 @@ import MapKit
 import Parse
 import CoreLocation
 
-class PinButton: UIButton {
-    var parseObjectID: String?
+//custom button on each pin, this keeps track of the route's object id for use in RouteInfoView
+class CustomPinButton: UIButton {
+    var routeObjectID: String?
 }
 
 @available(iOS 8.0, *)
 class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    var parseObjectID: String?
+    var routeObjectID: String?
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
     @IBOutlet weak var mapView: MKMapView!
     
     var locationManager = CLLocationManager()
-    
-    func centerMapOnLocation(location: CLLocation) {
-        let regionRadius: CLLocationDistance = 1000
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    func addPin(location: CLLocation, pinLabel: String, objectID: String){
-        let dropPin = PinAnnotation(pinCoord: location.coordinate, objectID: objectID)
-        dropPin.title = pinLabel
-        mapView.addAnnotation(dropPin)
-    }
-   
-    //Click pins to join ride
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is PinAnnotation {
-            let pinAnnotation = annotation as! PinAnnotation
-            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
-            
-            pinAnnotationView.canShowCallout = true
-            
-            let routeInfoButton = PinButton(type: UIButtonType.System)
-            routeInfoButton.parseObjectID = pinAnnotation.parseObjectID
-            routeInfoButton.addTarget(self, action: "pinPressed:", forControlEvents: .TouchUpInside)
-            
-            
-            if let image = UIImage(named: "menu.png") {
-                routeInfoButton.setImage(image, forState: .Normal)
-            }
-            routeInfoButton.frame.size.width = 44
-            routeInfoButton.frame.size.height = 44
-            
-            pinAnnotationView.leftCalloutAccessoryView = routeInfoButton
-            
-            return pinAnnotationView
-        }
-        
-        return nil
-    }
-    func pinPressed(sender: PinButton!) {
-        self.parseObjectID = sender.parseObjectID
-        performSegueWithIdentifier("routeInfo", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        // Create a new variable to store the instance of PlayerTableViewController
-        let destinationVC = segue.destinationViewController as! RouteInfoViewController
-        destinationVC.parseObjectID = self.parseObjectID
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,13 +41,13 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         
         
         /*executeWithAddressString("112 Peach Terrace, Santa Cruz, CA, 95060")
-            { convertedLocation, error in
-                self.convertCoordsToAddress(convertedLocation!)
-                print (convertedLocation!.coordinate.longitude)
-                print (convertedLocation!.coordinate.latitude)
-                
-                //OR handle the error appropriately
-            }*/
+        { convertedLocation, error in
+        self.convertCoordsToAddress(convertedLocation!)
+        print (convertedLocation!.coordinate.longitude)
+        print (convertedLocation!.coordinate.latitude)
+        
+        //OR handle the error appropriately
+        }*/
         
         
         //Loop through querying Parse routes to drop pins
@@ -110,10 +61,10 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
                     for object in objects {
                         let fromAddress = object["from"] as! String
                         let toAddress = object["to"] as! String
-                        let objectID = object.objectId! as String
+                        let routeObjectID = object.objectId! as String
                         self.executeWithAddressString(fromAddress)
                             { convertedLocation, error in
-                                self.addPin(convertedLocation!, pinLabel: toAddress, objectID: objectID)
+                                self.addPin(convertedLocation!, pinLabel: toAddress, routeObjectID: routeObjectID)
                                 //OR handle the error appropriately
                         }
                     }
@@ -128,7 +79,7 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         //done with setting route on map*/
         
         
-
+        
         // Do any additional setup after loading the view.
         if self.revealViewController() != nil {
             menuButton.target = self.revealViewController()
@@ -137,6 +88,72 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         }
         self.revealViewController().rearViewRevealWidth = 160
     }
+    
+    //Updates user location to center initial mapview on self
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        centerMapOnLocation(userLocation)
+        locationManager.stopUpdatingLocation()
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location " + error.localizedDescription)
+    }
+    
+    
+    //Centers mapview around a provided location
+    func centerMapOnLocation(location: CLLocation) {
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+            regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
+    
+    //Adds a pin at a given location with a given label string and the objectID of the driver who created the route
+    func addPin(location: CLLocation, pinLabel: String, routeObjectID: String){
+        let dropPin = PinAnnotation(pinCoord: location.coordinate, routeObjectID: routeObjectID)
+        dropPin.title = pinLabel
+        mapView.addAnnotation(dropPin)
+    }
+   
+    
+    //Overrides pins on mapview to have custom looks and functionality
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is PinAnnotation {
+            let pinAnnotation = annotation as! PinAnnotation
+            let pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "myPin")
+            
+            pinAnnotationView.canShowCallout = true
+            
+            let routeInfoButton = CustomPinButton(type: UIButtonType.System)
+            routeInfoButton.routeObjectID = pinAnnotation.parseObjectID
+            routeInfoButton.addTarget(self, action: "pinPressed:", forControlEvents: .TouchUpInside)
+            
+            //TODO change image to something else
+            if let image = UIImage(named: "menu.png") {
+                routeInfoButton.setImage(image, forState: .Normal)
+            }
+            routeInfoButton.frame.size.width = 44
+            routeInfoButton.frame.size.height = 44
+            
+            pinAnnotationView.leftCalloutAccessoryView = routeInfoButton
+            
+            return pinAnnotationView
+        }
+        
+        return nil
+    }
+    
+    
+    //Executes when user touches an annotation's button if the button is of
+    //type CustomPinButton
+    func pinPressed(sender: CustomPinButton!) {
+        self.routeObjectID = sender.routeObjectID
+        performSegueWithIdentifier("routeInfo", sender: self)
+    }
+    
     
     /*
       Input: An address string as follows - # street, city, state, zip
@@ -174,6 +191,9 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         })
     }
     
+    //Not used yet but is able to turn coordinate to an address string.
+    //Will have to mimic execute with Address String later so that a user can
+    //create a route through dropping a ping at a location
     func convertCoordsToAddress(locationInCoords: CLLocation){
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locationInCoords, completionHandler: { (placemarks, error) -> Void in
@@ -212,31 +232,17 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
 
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation:CLLocation = locations[0]
-        centerMapOnLocation(userLocation)
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print("Error while updating location " + error.localizedDescription)
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //Let the RouteInfoView have the objectId of the ParseRoute selected
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // Create a new variable to store the instance of PlayerTableViewController
+        let destinationVC = segue.destinationViewController as! RouteInfoViewController
+        destinationVC.routeObjectID = self.routeObjectID
     }
-    */
 
 }

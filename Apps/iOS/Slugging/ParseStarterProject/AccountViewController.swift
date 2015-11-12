@@ -12,7 +12,7 @@ import Parse
 
 class AccountViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var loadImageButton: UIButton!
-    
+    @IBOutlet weak var editAccountButton: UIBarButtonItem!
     @IBOutlet weak var saveChangesButton: UIButton!
     @IBOutlet weak var changePasswordButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
@@ -24,6 +24,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var myCarType: UITextField!
 
     let imagePicker = UIImagePickerController()
+    var driverObjectID: String?
     
     @IBAction func loadImage(sender: AnyObject) {
         imagePicker.allowsEditing = false
@@ -71,10 +72,19 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         notEditingAccount()
         
         imagePicker.delegate = self
+        var currentId: String
         
-        let currentId = PFUser.currentUser()?.objectId
+        if self.driverObjectID == nil {
+            currentId = (PFUser.currentUser()?.objectId)!
+        } else {
+            currentId = self.driverObjectID!
+            editAccountButton.enabled = false
+            deleteAccountButton.hidden = true
+            changePasswordButton.hidden = true
+        }
+        
         let query = PFUser.query()
-        query!.getObjectInBackgroundWithId(currentId!) {
+        query!.getObjectInBackgroundWithId(currentId) {
             (myself: PFObject?, error: NSError?) -> Void in
             if error == nil && myself != nil {
                 self.myName.text = myself!.objectForKey("name") as? String

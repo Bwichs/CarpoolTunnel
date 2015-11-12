@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BEB00D41BE848F1007ADF82 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00CF1BE848F1007ADF82 /* ParseCrashReporting.framework */; settings = {ASSET_TAGS = (); }; };
-		1BEB00D71BE848F1007ADF82 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00D21BE848F1007ADF82 /* ParseUI.framework */; settings = {ASSET_TAGS = (); }; };
+		1BEB00D41BE848F1007ADF82 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00CF1BE848F1007ADF82 /* ParseCrashReporting.framework */; };
+		1BEB00D71BE848F1007ADF82 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00D21BE848F1007ADF82 /* ParseUI.framework */; };
 		1BEB00DB1BE84A60007ADF82 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00DA1BE84A60007ADF82 /* libstdc++.6.tbd */; };
 		1BEB00DD1BE84A98007ADF82 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00DC1BE84A98007ADF82 /* libsqlite3.tbd */; };
-		270E1C0C1BE9335200391215 /* RouteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E1C0B1BE9335200391215 /* RouteInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		2727223B1BCE13BC000DA48D /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727223A1BCE13BC000DA48D /* PassengerViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		272722401BD08952000DA48D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727223E1BD08952000DA48D /* SWRevealViewController.m */; settings = {ASSET_TAGS = (); }; };
-		272722421BD09A78000DA48D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 272722411BD09A78000DA48D /* menu.png */; settings = {ASSET_TAGS = (); }; };
-		272722441BD0A142000DA48D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722431BD0A142000DA48D /* AccountViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		272722461BD0A858000DA48D /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722451BD0A858000DA48D /* DriverViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722501BD20ABB000DA48D /* MenuTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		270E1C0C1BE9335200391215 /* RouteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E1C0B1BE9335200391215 /* RouteInfoViewController.swift */; };
+		2727223B1BCE13BC000DA48D /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727223A1BCE13BC000DA48D /* PassengerViewController.swift */; };
+		272722401BD08952000DA48D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727223E1BD08952000DA48D /* SWRevealViewController.m */; };
+		272722421BD09A78000DA48D /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 272722411BD09A78000DA48D /* menu.png */; };
+		272722441BD0A142000DA48D /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722431BD0A142000DA48D /* AccountViewController.swift */; };
+		272722461BD0A858000DA48D /* DriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722451BD0A858000DA48D /* DriverViewController.swift */; };
+		272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272722501BD20ABB000DA48D /* MenuTableViewController.swift */; };
 		27917BC01BE2EFDE0024DC6C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27917BBF1BE2EFDE0024DC6C /* CoreLocation.framework */; };
-		27917BC21BE57C480024DC6C /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27917BC11BE57C480024DC6C /* PinAnnotation.swift */; settings = {ASSET_TAGS = (); }; };
-		27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */; settings = {ASSET_TAGS = (); }; };
+		27917BC21BE57C480024DC6C /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27917BC11BE57C480024DC6C /* PinAnnotation.swift */; };
+		27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C0F9221BD8A89C002FB5AD /* Launch Screen.storyboard */; };
 		814C3ACA1B69877600E307BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC61B69877600E307BB /* Main.storyboard */; };
 		814C3ACB1B69877600E307BB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 814C3AC81B69877600E307BB /* Images.xcassets */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
@@ -216,7 +216,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = V652D3ELMP;
+						DevelopmentTeam = WRM3Z9F4EC;
 					};
 				};
 			};
@@ -435,14 +435,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.parse.Slugging;
+				PRODUCT_BUNDLE_IDENTIFIER = SluggingUCSC;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";
@@ -459,13 +464,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.parse.Slugging;
+				PRODUCT_BUNDLE_IDENTIFIER = SluggingUCSC;
 				PRODUCT_NAME = "ParseStarterProject-Swift";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";

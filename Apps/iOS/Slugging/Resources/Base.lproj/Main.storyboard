@@ -344,11 +344,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="f62-mI-c5H" id="hiV-Wv-hHf">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a9Q-vi-WpY">
-                                            <rect key="frame" x="15" y="18" width="32" height="20"/>
+                                            <rect key="frame" x="15" y="19" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -357,7 +357,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="blL-L4-YDV">
-                                            <rect key="frame" x="15" y="38" width="41" height="14"/>
+                                            <rect key="frame" x="15" y="38.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -653,7 +653,6 @@
                                 <state key="normal" title="View Driver Account"/>
                                 <connections>
                                     <action selector="driverAccount:" destination="dGQ-lJ-V0D" eventType="touchUpInside" id="ZeS-6z-fm4"/>
-                                    <segue destination="q5D-ud-LZ3" kind="show" identifier="viewDriverAccount" id="ikb-yY-kEQ"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -695,6 +694,7 @@
                         <outlet property="from" destination="zSa-LF-A6e" id="Dh8-ld-vhy"/>
                         <outlet property="passengers" destination="vjo-rP-LL0" id="rMA-ws-ozk"/>
                         <outlet property="to" destination="11b-Zg-iw1" id="Z2i-SG-hmN"/>
+                        <segue destination="q5D-ud-LZ3" kind="show" identifier="viewDriverAccount" id="gyO-EK-2BA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsp-N4-D5F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1260,6 +1260,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5c3-Yu-jXP"/>
-        <segue reference="ikb-yY-kEQ"/>
+        <segue reference="gyO-EK-2BA"/>
     </inferredMetricsTieBreakers>
 </document>

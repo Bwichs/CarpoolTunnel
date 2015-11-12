@@ -14,9 +14,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -60,6 +63,27 @@ public class DriverPendingAdapter extends BaseAdapter {
 
     public void refresh(){
         notifyDataSetChanged();
+    }
+
+    public void pushByEmail(String email, final String from, final String to, final String date) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", email);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> objects, ParseException e) {
+                pushToPassenger(objects.get(0), from, to, date);
+            }
+        });
+    }
+    public void pushToPassenger(ParseUser passenger, String from, String to, String date) {
+        String driver = ParseUser.getCurrentUser().getUsername();
+        ParsePush push = new ParsePush();
+        ParseQuery pushQuery = ParseInstallation.getQuery();
+        pushQuery.whereEqualTo("user", passenger);
+        push.setQuery(pushQuery);
+        push.setMessage(driver + " has accepted your booked route from "
+                + from + " to " + to + " on " + date + ".");
+        push.sendInBackground();
     }
     View vew = null;
     public View getView(final int position, View view, ViewGroup parent) {
@@ -110,6 +134,10 @@ public class DriverPendingAdapter extends BaseAdapter {
                                             List<String> temp = new ArrayList<String>();
                                             temp.add(PassengerRouteClasslist.get(position).getBooker());
                                             route.removeAll("bookers", temp);
+                                            String origin = (String) route.get("from");
+                                            String dest = (String) route.get("to");
+                                            String date = (String) route.get("depDay");
+                                            pushByEmail(PassengerRouteClasslist.get(position).getBooker(),origin,dest,date);
                                             try{
                                                 route.save();
 

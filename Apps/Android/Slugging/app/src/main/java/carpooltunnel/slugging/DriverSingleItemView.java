@@ -183,6 +183,7 @@ public class DriverSingleItemView extends AppCompatActivity {
     // Sends push notification to each Passenger that booked upon Route Delete.
     public void pushToEachPassenger(ParseObject route){
         List<String> bookers = route.getList("bookers");
+        List<String> passengers = route.getList("passengers");
         final String driver = ParseUser.getCurrentUser().getUsername();
         final String origin = (String) route.get("from");
         final String dest = (String) route.get("to");
@@ -190,6 +191,16 @@ public class DriverSingleItemView extends AppCompatActivity {
         for(String booker:bookers){
             ParseQuery<ParseUser> query = ParseUser.getQuery();
             query.whereEqualTo("username", booker);
+            query.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> objects, ParseException e) {
+                    deletePushToPassenger(objects.get(0),driver,origin,dest,date);
+                }
+            });
+        }
+        for(String passenger:passengers){
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("username", passenger);
             query.findInBackground(new FindCallback<ParseUser>() {
                 @Override
                 public void done(List<ParseUser> objects, ParseException e) {

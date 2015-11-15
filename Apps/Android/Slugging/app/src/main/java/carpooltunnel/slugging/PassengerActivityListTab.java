@@ -67,6 +67,8 @@ public class PassengerActivityListTab extends ListFragment {
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
             // Show progressdialog
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCanceledOnTouchOutside(false);
             mProgressDialog.show();
         }
         public final String TAG = "PA";

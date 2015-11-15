@@ -60,8 +60,8 @@ public class DriverSingleItemView extends AppCompatActivity {
         i = getIntent();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //try {
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(

@@ -69,8 +69,8 @@ public class SingleItemView extends AppCompatActivity {
         // Retrieve data from MainActivity on item click event
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");

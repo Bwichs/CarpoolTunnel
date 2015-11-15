@@ -33,8 +33,7 @@
             android:layout_width="match_parent"
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize"
-
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            />
 
 
         <android.support.design.widget.TabLayout

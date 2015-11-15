@@ -270,15 +270,19 @@ public class AccountActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 startActivity(new Intent(this, DriverActivity.class));
+                finish();
                 break;
             case R.id.nav_second_fragment:
                 startActivity(new Intent(this, PassengerActivity.class));
+                finish();
                 break;
             case R.id.nav_third_fragment:
                 startActivity(new Intent(this, AccountActivity.class));
+                finish();
                 break;
             case R.id.nav_fourth_fragment:
                 startActivity(new Intent(this, TutorialActivity.class));
+                finish();
                 break;
             case R.id.nav_fifth_fragment:
                 new AlertDialog.Builder(AccountActivity.this)

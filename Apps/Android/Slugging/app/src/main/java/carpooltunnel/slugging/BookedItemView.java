@@ -57,8 +57,8 @@ public class BookedItemView extends AppCompatActivity {
         setContentView(R.layout.activity_booked_item_view);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");

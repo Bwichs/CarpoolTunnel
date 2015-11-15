@@ -130,11 +130,13 @@
         </receiver>
 
         <activity android:name=".BookedItemView"
+            android:label="Route Details"
             android:theme="@style/stupidtest">
         </activity>
         <activity android:name=".MyRouteAdapter" >
         </activity>
         <activity android:name=".DriverSingleItemView"
+            android:label="Route Details"
             android:theme="@style/stupidtest">
         </activity>
         <activity android:name=".MapWrapperLayout" >

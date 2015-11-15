@@ -29,8 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/toolbar"
-
-        app:layout_scrollFlags="scroll|enterAlways"/>
+        />
 
         <android.support.design.widget.TabLayout
             android:layout_height="wrap_content"
@@ -49,9 +48,6 @@
             />
 
     </android.support.design.widget.CoordinatorLayout>
-
-    <include layout="@layout/content_passenger" />
-
 
 <android.support.design.widget.NavigationView
 android:id="@+id/nvView"

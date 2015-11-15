@@ -24,7 +24,7 @@
     <string name="prompt_numpass"># of Passengers</string>
     <string name="prompt_time">Departure Time</string>
     <string name="prompt_day">Day</string>
-    <string name="sched_sub">Submit!</string>
+    <string name="sched_sub">Submit</string>
 
     <string name="title_activity_welcome">Welcome Activity</string>
     <string name="title_activity_driver">Driver Activity</string>

@@ -10,7 +10,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -90,7 +89,7 @@ public class AccountActivity extends AppCompatActivity {
             });
         }else{Log.e("TAG", "car pic null");}
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final Button fab = (Button) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

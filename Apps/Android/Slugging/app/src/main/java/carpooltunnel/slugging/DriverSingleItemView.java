@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,6 +50,7 @@ public class DriverSingleItemView extends AppCompatActivity {
     String name = "";
     ParseObject route;
     Intent i;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,10 @@ public class DriverSingleItemView extends AppCompatActivity {
         setContentView(R.layout.activity_driver_single_item_view);
         // Retrieve data from MainActivity on item click event
         i = getIntent();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        setSupportActionBar(toolbar);
 
         //try {
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
@@ -68,19 +75,16 @@ public class DriverSingleItemView extends AppCompatActivity {
                     if (e == null) {
                         // object will be your game score
                         route = object;
-<<<<<<< Updated upstream
-=======
                         //ParseObject n = new ParseObject("User");
                         ParseObject n = route.getParseObject("user");
                         name = n.getString("username");
 
                         Log.e(TAG,"create error"+route);
->>>>>>> Stashed changes
 
                         if(route.getList("passengers")!=null){
                             List<String> ary = route.getList("passengers");
-                            for(String n : ary){
-                                name += n + ", ";
+                            for(String sn : ary){
+                                name += sn + ", ";
                                 txtDriverUser.setText(name);
                             }
                             Log.e(TAG, name);
@@ -140,8 +144,6 @@ public class DriverSingleItemView extends AppCompatActivity {
         mDeleteButton.setOnClickListener(new OnClickListener() {
 
             public void onClick (View view){
-
-
 
                 new AlertDialog.Builder(DriverSingleItemView.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
@@ -217,5 +219,16 @@ public class DriverSingleItemView extends AppCompatActivity {
         push.setMessage(driver + " has deleted your booked route from "
                 + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

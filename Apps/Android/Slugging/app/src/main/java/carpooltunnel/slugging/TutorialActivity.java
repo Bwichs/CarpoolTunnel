@@ -1,22 +1,23 @@
 package carpooltunnel.slugging;
 
-        import android.graphics.Color;
-        import android.os.Bundle;
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.FragmentManager;
-        import android.support.v4.app.FragmentStatePagerAdapter;
-        import android.support.v4.view.PagerAdapter;
-        import android.support.v4.view.ViewPager;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 
-        import android.support.v7.app.AppCompatActivity;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.Window;
-        import android.view.WindowManager;
-        import android.widget.Button;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 public class TutorialActivity extends AppCompatActivity {
@@ -157,7 +158,9 @@ public class TutorialActivity extends AppCompatActivity {
         }
     }
 
-    private void endTutorial(){
+    private void endTutorial() {
+        //need a way to pass in prior activity, passenger activity for now
+        startActivity(new Intent(this, PassengerActivity.class));
         finish();
         //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
@@ -182,7 +185,7 @@ public class TutorialActivity extends AppCompatActivity {
             TutorialPane tp = null;
             switch(position){
                 case 0:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_one);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
                     break;
                 case 1:
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
@@ -191,13 +194,12 @@ public class TutorialActivity extends AppCompatActivity {
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_three);
                     break;
                 case 3:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
                     break;
                 case 4:
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_transparent);
                     break;
             }
-
             return tp;
         }
 

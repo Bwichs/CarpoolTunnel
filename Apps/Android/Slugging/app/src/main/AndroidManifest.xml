@@ -102,15 +102,10 @@
         <activity
             android:name=".SingleItemView"
             android:label="@string/title_activity_single_item_view"
-            android:theme="@style/Theme.App.Base" >
+            android:theme="@style/stupidtest" >
         </activity>
         <activity android:name=".PagerAdapter" >
         </activity>
-        <activity android:name=".PassengerActivityListTab" >
-        </activity>
-        <activity android:name=".PassengerActivityMapTab" >
-        </activity>
-
         <service android:name="com.parse.PushService" />
 
         <receiver
@@ -134,21 +129,21 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".BookedItemView" >
+        <activity android:name=".BookedItemView"
+            android:theme="@style/stupidtest">
         </activity>
         <activity android:name=".MyRouteAdapter" >
         </activity>
-        <activity android:name=".DriverSingleItemView" >
+        <activity android:name=".DriverSingleItemView"
+            android:theme="@style/stupidtest">
         </activity>
-<<<<<<< Updated upstream
         <activity android:name=".MapWrapperLayout" >
-        </activity>
+        </activity>d
         <activity android:name=".DriverPending" >
-=======
+        </activity>
         <activity android:name=".TutorialActivity" >
         </activity>
         <activity android:name=".TutorialPane" >
->>>>>>> Stashed changes
         </activity>
     </application>
 

@@ -14,7 +14,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -24,6 +26,7 @@ public class PassengerActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    public static final String TAG = "PA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,11 @@ public class PassengerActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
         drawerToggle = setupDrawerToggle();
+
+        ParseUser user = ParseUser.getCurrentUser();
+        TextView text = (TextView) findViewById(R.id.nav_header_email);
+        Log.e(TAG,"user"+ user.toString());// text.setText(user.toString());
+
 
 //        ParseUser user = ParseUser.getCurrentUser();
 //        TextView navname = (TextView) findViewById(R.id.nav_header_name);

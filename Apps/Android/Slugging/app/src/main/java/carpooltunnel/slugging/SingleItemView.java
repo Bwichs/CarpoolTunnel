@@ -5,29 +5,23 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
 import com.parse.GetCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.RequestPasswordResetCallback;
 
-import org.json.JSONArray;
-
-import java.io.IOException;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SingleItemView extends AppCompatActivity {
@@ -56,6 +50,7 @@ public class SingleItemView extends AppCompatActivity {
     List<ParseObject> ob;
     final ParseUser me = ParseUser.getCurrentUser();
     final String myUser = me.getUsername().toString();
+    Toolbar toolbar;
 
     public void bookPushToDriver(ParseUser driver, String passenger, String from, String to, String date) {
         ParsePush push = new ParsePush();
@@ -72,12 +67,16 @@ public class SingleItemView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_view);
         // Retrieve data from MainActivity on item click event
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back);
+        setSupportActionBar(toolbar);
+
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");
         query.include("user");
         final List<String> bookers = new ArrayList<String>();
         final Button btn = (Button) findViewById(R.id.book);
-        final Button btn2 = (Button) findViewById(R.id.back);
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
@@ -109,13 +108,6 @@ public class SingleItemView extends AppCompatActivity {
         createdAt = i.getStringExtra("createdAt");
         updatedAt = i.getStringExtra("updatedAt");
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(SingleItemView.this, PassengerActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(SingleItemView.this)
@@ -177,5 +169,16 @@ public class SingleItemView extends AppCompatActivity {
         txtUpdatedAt.setText(updatedAt);
 
         //Log.e(TAG, "user:" + name);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

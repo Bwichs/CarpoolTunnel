@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="7.0sp"
     android:paddingRight="7.0sp"
+    android:background="#eee"
     tools:context="carpooltunnel.slugging.PassengerActivityListTab">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <ListView
-            android:background="@color/white"
+            android:background="#eee"
             android:id="@+id/android:list"
             android:divider="@null"
             android:dividerHeight="5.0sp"

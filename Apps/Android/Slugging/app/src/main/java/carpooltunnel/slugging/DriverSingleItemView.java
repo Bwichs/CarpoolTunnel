@@ -68,19 +68,15 @@ public class DriverSingleItemView extends AppCompatActivity {
                     if (e == null) {
                         // object will be your game score
                         route = object;
-<<<<<<< Updated upstream
-=======
                         //ParseObject n = new ParseObject("User");
                         ParseObject n = route.getParseObject("user");
                         name = n.getString("username");
 
                         Log.e(TAG,"create error"+route);
->>>>>>> Stashed changes
-
                         if(route.getList("passengers")!=null){
                             List<String> ary = route.getList("passengers");
-                            for(String n : ary){
-                                name += n + ", ";
+                            for(String ns : ary){
+                                name += ns + ", ";
                                 txtDriverUser.setText(name);
                             }
                             Log.e(TAG, name);

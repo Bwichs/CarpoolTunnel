@@ -4,12 +4,13 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -19,23 +20,38 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverRoutes extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class DriverRoutes extends Fragment {
     ListView listview;
     List<ParseObject> ob;
     ProgressDialog mProgressDialog;
     DriverListViewAdapter adapter;
     private List<PassengerRouteClass> PassengerRouteClasslist = null;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         new RemoteDataTask().execute();
         return inflater.inflate(R.layout.activity_driver_activity_list_routes, container, false);
     }
-
     @Override
-    public void onRefresh() {
-        new RemoteDataTask().execute();
+    public void onViewCreated(View view, Bundle savedInstanceState){
+        swipeContainer = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_refresh_layout);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchListAsync();
+            }
+        });
+
     }
+
+    public void fetchListAsync() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+        swipeContainer.setRefreshing(false);
+    }
+
     // RemoteDataTask AsyncTask
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
         @Override

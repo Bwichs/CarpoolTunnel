@@ -10,8 +10,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -76,19 +74,6 @@ public class DriverActivitySubmit extends Fragment {
         view = (RelativeLayout) inflater.inflate(R.layout.fragment_driver_activity_submit, container, false);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
-        //this declares the map fragment, and hides them
-        //fragmentManagerDest = new DriverActivityMapFinishFragment().getFragmentManager();
-        //fragmentManagerStarting = new DriverActivityMapStartFragment().getFragmentManager();
-        //Log.e(TAG, "fragstartest:" + fragmentManagerStarting);
-        //FragmentTransaction ft = getFragmentManager().beginTransaction();
-        //ft.hide(fragmentManagerStarting.findFragmentById(R.id.location_map_start));
-        //ft.hide(fragmentManagerDest.findFragmentById(R.id.location_map_dest));
-        //ft.commit();
-        //function call for buttons to show/hide map fragments
-
-        //addShowHideListener(R.id.startlocation, fragmentManagerStarting.findFragmentByTag("hello"));
-        //addShowHideListener(R.id.destlocation, fragmentManagerDest.findFragmentById(R.id.location_map_dest));
 
         mFrom = (EditText) view.findViewById(R.id.start);
         mTo = (EditText) view.findViewById(R.id.finish);
@@ -165,41 +150,16 @@ public class DriverActivitySubmit extends Fragment {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        return view;
-    }
-//    //button function
-//    void addShowHideListener(int buttonId, final android.support.v4.app.Fragment fragment) {
-//        Log.e(TAG,"hello"+fragment);
-//        final Button button = (Button)getView().findViewById(buttonId);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Log.e(TAG,"onClick");
-//                FragmentTransaction ft = getFragmentManager().beginTransaction();
-//                ft.setCustomAnimations(android.R.animator.fade_in,
-//                        android.R.animator.fade_out);
-//                if (fragment.isHidden()) {
-//                    ft.show(fragment);
-//                    Log.e(TAG,"SHOW");
-//
-//                } else {
-//                    ft.hide(fragment);
-//                    Log.e(TAG, "HIDE");
-//                }
-//                ft.commit();
+//        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
 //            }
 //        });
-//    }
-
-
-
+        return view;
+    }
 
     private void submitRoute(){
 
@@ -211,6 +171,7 @@ public class DriverActivitySubmit extends Fragment {
         if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
             boolean locationFrom = false;
             boolean locationTo = false;
+            boolean locationSame = false;
 
             List<Address> foundGeocodeFrom = null;
             List<Address> foundGeocodeTo = null;
@@ -257,11 +218,17 @@ public class DriverActivitySubmit extends Fragment {
                 else{
                     Log.e(TAG,"To location not found");
                 }
+                if(foundGeocodeTo.get(0).getLatitude() == foundGeocodeFrom.get(0).getLatitude() && foundGeocodeTo.get(0).getLongitude() == foundGeocodeFrom.get(0).getLongitude()) {
+                    locationSame = true;
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Start and Finish cannot be the same location!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
             catch (IOException ioexception){
                 Log.e(TAG, "location error",ioexception);
             }
-            if(locationFrom == true && locationTo == true) {
+            if(locationFrom == true && locationTo == true && locationSame == false) {
                 ParseRoute route = new ParseRoute();
 
                 to = to.substring(0,1).toUpperCase() + to.substring(1).toLowerCase();
@@ -299,7 +266,7 @@ public class DriverActivitySubmit extends Fragment {
                         "Please enter a valid destination address",
                         Toast.LENGTH_LONG).show();
             }
-            else{
+            else if(locationFrom == false && locationTo == false){
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Please enter valid start and destination addresses",
                         Toast.LENGTH_LONG).show();

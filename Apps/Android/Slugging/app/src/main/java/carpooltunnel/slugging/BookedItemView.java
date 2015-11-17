@@ -3,10 +3,11 @@ package carpooltunnel.slugging;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -21,10 +22,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class BookedItemView extends AppCompatActivity {
     // Declare Variables
@@ -50,18 +48,24 @@ public class BookedItemView extends AppCompatActivity {
     public final String TAG = "SIV";
     boolean canBook = true;;
     List<ParseObject> ob;
+    Toolbar toolbar;
     final ParseUser me = ParseUser.getCurrentUser();
     final String myUser = me.getUsername().toString();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booked_item_view);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent i = getIntent();
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ParseRoute");
         query.include("user");
         final List<String> bookers = new ArrayList<String>();
         final Button btn = (Button) findViewById(R.id.book);
-        final Button btn2 = (Button) findViewById(R.id.back);
+        //final Button btn2 = (Button) findViewById(R.id.back);
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
@@ -92,11 +96,11 @@ public class BookedItemView extends AppCompatActivity {
         driverUser = i.getStringExtra("driverUser");
         createdAt = i.getStringExtra("createdAt");
         updatedAt = i.getStringExtra("updatedAt");
-        btn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        btn2.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(BookedItemView.this)
@@ -160,5 +164,16 @@ public class BookedItemView extends AppCompatActivity {
         push.setMessage(passenger + " has unbooked your route from "
                 + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

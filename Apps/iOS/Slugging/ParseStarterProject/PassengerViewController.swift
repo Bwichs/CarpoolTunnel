@@ -35,6 +35,7 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
             locationManager.requestAlwaysAuthorization()
             locationManager.startUpdatingLocation()
         }

@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,6 +50,7 @@ public class DriverSingleItemView extends AppCompatActivity {
     String name = "";
     ParseObject route;
     Intent i;
+    Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,10 @@ public class DriverSingleItemView extends AppCompatActivity {
         setContentView(R.layout.activity_driver_single_item_view);
         // Retrieve data from MainActivity on item click event
         i = getIntent();
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //try {
             ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(
@@ -73,10 +80,11 @@ public class DriverSingleItemView extends AppCompatActivity {
                         name = n.getString("username");
 
                         Log.e(TAG,"create error"+route);
+
                         if(route.getList("passengers")!=null){
                             List<String> ary = route.getList("passengers");
-                            for(String ns : ary){
-                                name += ns + ", ";
+                            for(String sn : ary){
+                                name += sn + ", ";
                                 txtDriverUser.setText(name);
                             }
                             Log.e(TAG, name);
@@ -137,8 +145,6 @@ public class DriverSingleItemView extends AppCompatActivity {
 
             public void onClick (View view){
 
-
-
                 new AlertDialog.Builder(DriverSingleItemView.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Delete?")
@@ -179,6 +185,7 @@ public class DriverSingleItemView extends AppCompatActivity {
     // Sends push notification to each Passenger that booked upon Route Delete.
     public void pushToEachPassenger(ParseObject route){
         List<String> bookers = route.getList("bookers");
+        List<String> passengers = route.getList("passengers");
         final String driver = ParseUser.getCurrentUser().getUsername();
         final String origin = (String) route.get("from");
         final String dest = (String) route.get("to");
@@ -186,6 +193,16 @@ public class DriverSingleItemView extends AppCompatActivity {
         for(String booker:bookers){
             ParseQuery<ParseUser> query = ParseUser.getQuery();
             query.whereEqualTo("username", booker);
+            query.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> objects, ParseException e) {
+                    deletePushToPassenger(objects.get(0),driver,origin,dest,date);
+                }
+            });
+        }
+        for(String passenger:passengers){
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("username", passenger);
             query.findInBackground(new FindCallback<ParseUser>() {
                 @Override
                 public void done(List<ParseUser> objects, ParseException e) {
@@ -202,5 +219,16 @@ public class DriverSingleItemView extends AppCompatActivity {
         push.setMessage(driver + " has deleted your booked route from "
                 + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

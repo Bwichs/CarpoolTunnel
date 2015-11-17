@@ -83,6 +83,17 @@
         android:layout_below="@+id/from"
         android:layout_toRightOf="@+id/tolabel" />
 
+    <Button
+        style="?android:attr/borderlessButtonStyle"
+        android:id="@+id/book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/to"
+        android:layout_gravity="bottom|right"
+        android:textColor="#009688"
+        android:fontFamily="sans-serif-light"
+        android:text="Details"/>
+
 
 </RelativeLayout>
 </android.support.v7.widget.CardView>

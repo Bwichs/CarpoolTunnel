@@ -24,12 +24,11 @@
     <string name="prompt_numpass"># of Passengers</string>
     <string name="prompt_time">Departure Time</string>
     <string name="prompt_day">Day</string>
-    <string name="sched_sub">Submit!</string>
+    <string name="sched_sub">Submit</string>
 
-    <string name="title_activity_welcome">Welcome Activity</string>
-    <string name="title_activity_driver">Driver Activity</string>
-    <string name="title_activity_account">Account Activity</string>
-    <string name="title_activity_passenger">Passenger Activity</string>
+    <string name="title_activity_driver">Driver</string>
+    <string name="title_activity_account">Account</string>
+    <string name="title_activity_passenger">Passenger</string>
 
     <color name="white">#FFFFFF</color>
     <color name="bg_login">#009688</color>
@@ -46,7 +45,7 @@
     <color name="btn_logut_bg">#F3875F</color>
 
     <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_single_item_view">SingleItemView</string>
+    <string name="title_activity_single_item_view">Route Details</string>
 
     <string name="title_activity_main">Parse Custom ListView</string>
 

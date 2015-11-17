@@ -14,7 +14,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -24,6 +26,7 @@ public class PassengerActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
+    public static final String TAG = "PA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +40,7 @@ public class PassengerActivity extends AppCompatActivity {
         setupDrawerContent(nvDrawer);
         drawerToggle = setupDrawerToggle();
 
-//        ParseUser user = ParseUser.getCurrentUser();
-//        TextView navname = (TextView) findViewById(R.id.nav_header_name);
-//        navname.setText(user.getString("name"));
-//        TextView navemail = (TextView) findViewById(R.id.nav_header_email);
-//        navemail.setText(user.getUsername());
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Route List"));
@@ -89,15 +88,19 @@ public class PassengerActivity extends AppCompatActivity {
         switch(menuItem.getItemId()) {
             case R.id.nav_first_fragment:
                 startActivity(new Intent(this, DriverActivity.class));
+                finish();
                 break;
             case R.id.nav_second_fragment:
                 startActivity(new Intent(this, PassengerActivity.class));
+                finish();
                 break;
             case R.id.nav_third_fragment:
                 startActivity(new Intent(this, AccountActivity.class));
+                finish();
                 break;
             case R.id.nav_fourth_fragment:
                 startActivity(new Intent(this, TutorialActivity.class));
+                finish();
                 break;
             case R.id.nav_fifth_fragment:
                 new AlertDialog.Builder(PassengerActivity.this)
@@ -147,6 +150,12 @@ public class PassengerActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        TextView etext = (TextView) mDrawer.findViewById(R.id.nav_header_email);
+        TextView ntext = (TextView) mDrawer.findViewById(R.id.nav_header_name);
+        Log.e(TAG, "user:" + ParseUser.getCurrentUser().getUsername() + " name:" + ParseUser.getCurrentUser().get("name"));
+        //etext.setText(ParseUser.getCurrentUser().getUsername());
+        //ntext.setText(ParseUser.getCurrentUser().get("name").toString());
         // Sync the toggle state after onRestoreInstanceState has occurred.
         drawerToggle.syncState();
     }

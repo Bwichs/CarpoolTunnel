@@ -25,22 +25,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
-
+import java.util.List;
 
 
 public class AccountActivity extends AppCompatActivity {
     public static final String TAG = "map";
     public static int RESULT_LOAD_IMAGE = 1;
-    final ParseUser user = ParseUser.getCurrentUser();
+    ParseUser user = ParseUser.getCurrentUser();
     public boolean picSaved;
     private DrawerLayout mDrawer;
     private NavigationView nvDrawer;
@@ -50,46 +54,95 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
         drawerToggle = setupDrawerToggle();
-
         final EditText name = (EditText) findViewById(R.id.nameContent);
-        name.setText(user.getString("name"));
-        TextView un = (TextView) findViewById(R.id.anContent);
-        un.setText(user.getUsername());
         final EditText pn = (EditText) findViewById(R.id.pnContent);
-        pn.setText(user.getString("phoneNumber"));
         final EditText ct = (EditText) findViewById(R.id.ctContent);
-        ct.setText(user.getString("carType"));
+        final Button passwordButton = (Button) findViewById(R.id.pwbutton);
+        final Button fab = (Button) findViewById(R.id.fab);
+        final Button deleteButton = (Button) findViewById(R.id.dButton);
+        final TextView un = (TextView) findViewById(R.id.anContent);
 
         TextView navname = (TextView) findViewById(R.id.nav_header_name);
         //navname.setText(user.getString("name"));
         TextView navemail = (TextView) findViewById(R.id.nav_header_email);
         //navemail.setText(user.getUsername());
 
-        ParseFile carpic = user.getParseFile("carpic");
-        if(carpic != null) {
-            carpic.getDataInBackground(new GetDataCallback() {
-                public void done(byte[] data, ParseException e) {
-                    if (e == null) {
-                        // data has the bytes
-                        Log.e("TAG", "car pic data loaded");
-                        Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
-                        ImageView image = (ImageView) findViewById(R.id.image);
-                        image.setImageBitmap(Bitmap.createScaledBitmap(bm, 640, 512, false));
-                    } else {
-                        // something went wrong
-                        Log.e("TAG", "no car pic data loaded");
-                    }
+        if(getIntent().getStringExtra("email") != null){
+
+            ParseQuery<ParseUser> query = ParseUser.getQuery();
+            query.whereEqualTo("email", getIntent().getStringExtra("email"));
+            query.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> list, ParseException e) {
+                    user = list.get(0);
+                    Log.e(TAG, user.getUsername());
+                    ParseFile carpic = user.getParseFile("carpic");
+                    carpic.getDataInBackground(new GetDataCallback() {
+                        public void done(byte[] data, ParseException e) {
+                            if (e == null) {
+                                // data has the bytes
+                                Log.e("TAG", "car pic data loaded for " + user.getUsername());
+                                Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+                                ImageView image = (ImageView) findViewById(R.id.image);
+                                image.setImageBitmap(Bitmap.createScaledBitmap(bm, 640, 512, false));
+                            } else {
+                                // something went wrong
+                                Log.e("TAG", "no car pic data loaded");
+                            }
+                        }
+                    });
+
+                    un.setText(user.getUsername());
+                    ct.setText(user.getString("carType"));
+                    pn.setText(user.getString("phoneNumber"));
+                    name.setText(user.getString("name"));
+                    name.setEnabled(false);
+                    name.setHint("");
+                    pn.setEnabled(false);
+                    pn.setHint("");
+                    ct.setEnabled(false);
+                    ct.setHint("");
+                    passwordButton.setVisibility(View.INVISIBLE);
+                    passwordButton.setEnabled(false);
+                    fab.setVisibility(View.INVISIBLE);
+                    fab.setEnabled(false);
+                    deleteButton.setVisibility(View.INVISIBLE);
+                    deleteButton.setEnabled(false);
                 }
             });
-        }else{Log.e("TAG", "car pic null");}
+        }else {
+            un.setText(user.getUsername());
+            ct.setText(user.getString("carType"));
+            pn.setText(user.getString("phoneNumber"));
+            name.setText(user.getString("name"));
+            ParseFile carpic = user.getParseFile("carpic");
+            if (carpic != null) {
+                carpic.getDataInBackground(new GetDataCallback() {
+                    public void done(byte[] data, ParseException e) {
+                        if (e == null) {
+                            // data has the bytes
+                            Log.e("TAG", "car pic data loaded for " + user.getUsername());
+                            Bitmap bm = BitmapFactory.decodeByteArray(data, 0, data.length);
+                            ImageView image = (ImageView) findViewById(R.id.image);
+                            image.setImageBitmap(Bitmap.createScaledBitmap(bm, 640, 512, false));
+                        } else {
+                            // something went wrong
+                            Log.e("TAG", "no car pic data loaded");
+                        }
+                    }
+                });
+            } else {
+                Log.e("TAG", "car pic null");
+            }
+        }
 
-        final Button fab = (Button) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +167,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        final Button passwordButton = (Button) findViewById(R.id.pwbutton);
+
         passwordButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ParseUser.requestPasswordResetInBackground(user.getEmail(), new RequestPasswordResetCallback() {
@@ -133,7 +186,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-        final Button deleteButton = (Button) findViewById(R.id.dButton);
+
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 new AlertDialog.Builder(AccountActivity.this)
@@ -164,15 +217,17 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
         final ImageView image = (ImageView) findViewById(R.id.image);
-        image.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View  v) {
-                Intent i = new Intent(
-                        Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        if(getIntent().getStringExtra("email") == null) {
+            image.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(
+                            Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-                startActivityForResult(i, RESULT_LOAD_IMAGE);
+                    startActivityForResult(i, RESULT_LOAD_IMAGE);
 
-            }
-        });
+                }
+            });
+        }
         /*facebookButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
@@ -221,7 +276,8 @@ public class AccountActivity extends AppCompatActivity {
             try{
                bm = BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage));
                Bitmap bmap = Bitmap.createScaledBitmap(bm, 640, 512, false);
-               image.setImageBitmap(bmap);
+                Log.e(TAG, "test");
+                image.setImageBitmap(bmap);
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bmap.compress(Bitmap.CompressFormat.PNG, 30, stream);
                 byte[] byteArray = stream.toByteArray();

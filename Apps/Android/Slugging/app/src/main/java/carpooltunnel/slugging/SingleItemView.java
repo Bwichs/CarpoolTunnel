@@ -77,6 +77,7 @@ public class SingleItemView extends AppCompatActivity {
         query.include("user");
         final List<String> bookers = new ArrayList<String>();
         final Button btn = (Button) findViewById(R.id.book);
+        final Button btn2 = (Button) findViewById(R.id.driverAcc);
         query.getInBackground(i.getStringExtra("routeId"), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
@@ -144,6 +145,18 @@ public class SingleItemView extends AppCompatActivity {
                         })
                         .setNegativeButton("No", null)
                         .show();
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(SingleItemView.this, AccountActivity.class);
+                // Pass all data rank
+                intent.putExtra("email",
+                        driverUser);
+                // Start SingleItemView Class
+                startActivity(intent);
+                finish();
             }
         });
         // Locate the TextViews in singleitemview.xml

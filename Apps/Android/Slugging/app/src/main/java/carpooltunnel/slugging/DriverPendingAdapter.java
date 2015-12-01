@@ -1,6 +1,7 @@
 package carpooltunnel.slugging;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,10 +34,11 @@ public class DriverPendingAdapter extends BaseAdapter {
     private ArrayList<PassengerRouteClass> arraylist;
     private String routeId;
     ParseObject route;
-
+    String verified;
     public DriverPendingAdapter(Context context,
-                                List<PassengerRouteClass> PassengerRouteClasslist) {
+                                List<PassengerRouteClass> PassengerRouteClasslist, String v) {
         mContext = context;
+        verified = v;
         this.PassengerRouteClasslist = PassengerRouteClasslist;
         inflater = LayoutInflater.from(mContext);
         this.arraylist = new ArrayList<PassengerRouteClass>();
@@ -117,11 +119,42 @@ public class DriverPendingAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
+                if(verified.equals("false")){
+                    new AlertDialog.Builder(vew.getRootView().getContext())
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setTitle("Sign up for route?")
+                            .setMessage("Do you want to book this route?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                        Toast.makeText(mContext.getApplicationContext(),
+                                                "Accepted Passenger",
+                                                Toast.LENGTH_LONG).show();
+                                                int x = Integer.parseInt(route.getString("numPass")) - 1;
+                                                route.put("numPass", String.valueOf(x));
+                                                route.add("passengers", PassengerRouteClasslist.get(position).getBooker());
+                                                List<String> temp = new ArrayList<String>();
+                                                temp.add(PassengerRouteClasslist.get(position).getBooker());
+                                                route.removeAll("bookers", temp);
+                                                String origin = (String) route.get("from");
+                                                String dest = (String) route.get("to");
+                                                String date = (String) route.get("depDay");
+                                                pushByEmail(PassengerRouteClasslist.get(position).getBooker(),origin,dest,date);
+                                                try{
+                                                    route.save();
+
+                                                }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }
+                                }
+
+                            })
+                            .setNegativeButton("No", null)
+                            .show();
+                }
 
                 new AlertDialog.Builder(vew.getRootView().getContext())
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Sign up for route?")
-                        .setMessage("Do you want to book this route?")
+                        .setTitle("Sign up passenger?")
+                        .setMessage("Do you want to accept this passenger?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -137,7 +170,10 @@ public class DriverPendingAdapter extends BaseAdapter {
                                             String origin = (String) route.get("from");
                                             String dest = (String) route.get("to");
                                             String date = (String) route.get("depDay");
-                                            pushByEmail(PassengerRouteClasslist.get(position).getBooker(),origin,dest,date);
+                                            pushByEmail(PassengerRouteClasslist.get(position).getBooker(), origin, dest, date);
+                                            Intent intent = new Intent(mContext,DriverPending.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            mContext.startActivity(intent);
+                                            ((Activity)mContext).finish();
                                             try{
                                                 route.save();
 

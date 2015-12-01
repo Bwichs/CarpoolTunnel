@@ -90,8 +90,8 @@ public class PassengerMyRoutes extends ListFragment {
                 query.orderByAscending("createdAt");
                 ob = query.find();
                 for (ParseObject route : ob) {
-                    if(route.getList("bookers")!=null){
-                        List<String> ary = route.getList("bookers");
+                    if(route.getList("passengers")!=null){
+                        List<String> ary = route.getList("passengers");
                         //Log.e(TAG, "bookers" + ary.toString());
                         if(ary.contains(me.getUsername().toString())){
                             ParseObject n = route.getParseObject("user");

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BB00B2B1C0A72A0007A333A /* PushNotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BB00B2A1C0A72A0007A333A /* PushNotificationController.swift */; };
 		1BEB00D41BE848F1007ADF82 /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00CF1BE848F1007ADF82 /* ParseCrashReporting.framework */; };
 		1BEB00D71BE848F1007ADF82 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00D21BE848F1007ADF82 /* ParseUI.framework */; };
 		1BEB00DB1BE84A60007ADF82 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00DA1BE84A60007ADF82 /* libstdc++.6.tbd */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BB00B2A1C0A72A0007A333A /* PushNotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushNotificationController.swift; sourceTree = "<group>"; };
 		1BEB00CF1BE848F1007ADF82 /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
 		1BEB00D21BE848F1007ADF82 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		1BEB00DA1BE84A60007ADF82 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
@@ -143,6 +145,7 @@
 		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
 			isa = PBXGroup;
 			children = (
+				1BB00B2A1C0A72A0007A333A /* PushNotificationController.swift */,
 				272722471BD0A8B4000DA48D /* Non-Views */,
 				2727223C1BD0893F000DA48D /* SWRevealViewController */,
 				2727223A1BCE13BC000DA48D /* PassengerViewController.swift */,
@@ -323,6 +326,7 @@
 				81BA814D1A49DA1800E65899 /* LogginViewController.swift in Sources */,
 				272722511BD20ABB000DA48D /* MenuTableViewController.swift in Sources */,
 				272722441BD0A142000DA48D /* AccountViewController.swift in Sources */,
+				1BB00B2B1C0A72A0007A333A /* PushNotificationController.swift in Sources */,
 				270E1C0C1BE9335200391215 /* RouteInfoViewController.swift in Sources */,
 				272722401BD08952000DA48D /* SWRevealViewController.m in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,

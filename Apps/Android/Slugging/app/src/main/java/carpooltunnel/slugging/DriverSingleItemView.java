@@ -153,6 +153,7 @@ public class DriverSingleItemView extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (route != null) {
+                                    pushToEachPassenger(route);
                                     route.deleteInBackground();
                                     Intent intent = new Intent(DriverSingleItemView.this, DriverActivity.class);
                                     startActivity(intent);
@@ -190,25 +191,37 @@ public class DriverSingleItemView extends AppCompatActivity {
         final String origin = (String) route.get("from");
         final String dest = (String) route.get("to");
         final String date = (String) route.get("depDay");
-        for(String booker:bookers){
-            ParseQuery<ParseUser> query = ParseUser.getQuery();
-            query.whereEqualTo("username", booker);
-            query.findInBackground(new FindCallback<ParseUser>() {
-                @Override
-                public void done(List<ParseUser> objects, ParseException e) {
-                    deletePushToPassenger(objects.get(0),driver,origin,dest,date);
-                }
-            });
+        if(bookers != null) {
+            for (String booker : bookers) {
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereEqualTo("email", booker);
+                query.findInBackground(new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> objects, ParseException e) {
+                        if (e == null) {
+                            deletePushToPassenger(objects.get(0), driver, origin, dest, date);
+                        } else {
+                            Log.e(TAG, "get booker null");
+                        }
+                    }
+                });
+            }
         }
-        for(String passenger:passengers){
-            ParseQuery<ParseUser> query = ParseUser.getQuery();
-            query.whereEqualTo("username", passenger);
-            query.findInBackground(new FindCallback<ParseUser>() {
-                @Override
-                public void done(List<ParseUser> objects, ParseException e) {
-                    deletePushToPassenger(objects.get(0),driver,origin,dest,date);
-                }
-            });
+        if(passengers != null) {
+            for (String passenger : passengers) {
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereEqualTo("email", passenger);
+                query.findInBackground(new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> objects, ParseException e) {
+                        if (e == null) {
+                            deletePushToPassenger(objects.get(0), driver, origin, dest, date);
+                        } else {
+                            Log.e(TAG, "get pass null");
+                        }
+                    }
+                });
+            }
         }
     }
     public void deletePushToPassenger(ParseUser passenger, String driver, String from, String to, String date) {

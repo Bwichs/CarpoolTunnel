@@ -6,6 +6,7 @@
         android:id="@+id/booker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#212121"
         android:layout_below="@+id/from"
         android:layout_toRightOf="@+id/tolabel"
         android:paddingBottom="16dp"/>

@@ -141,7 +141,8 @@
         </activity>
         <activity android:name=".MapWrapperLayout" >
         </activity>d
-        <activity android:name=".DriverPending" >
+        <activity android:name=".DriverPending"
+            android:theme="@style/stupidtest">
         </activity>
         <activity android:name=".TutorialActivity" >
         </activity>

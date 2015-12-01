@@ -81,14 +81,6 @@ public class DriverSingleItemView extends AppCompatActivity {
 
                         Log.e(TAG,"create error"+route);
 
-                        if(route.getList("passengers")!=null){
-                            List<String> ary = route.getList("passengers");
-                            for(String sn : ary){
-                                name += sn + ", ";
-                                txtDriverUser.setText(name);
-                            }
-                            Log.e(TAG, name);
-                        }
                         //ParseObject n = new ParseObject("User");
                         //ParseObject n = route.getParseObject("user");
                     } else {
@@ -126,7 +118,7 @@ public class DriverSingleItemView extends AppCompatActivity {
         txtFrom.setText(from);
         txtNumPass.setText(numPass);
         txtTo.setText(to);
-        driverUserLabel.setText("Passengers: ");
+        driverUserLabel.setText(ParseUser.getCurrentUser().toString());
 
         txtCreatedAt.setText(createdAt);
         txtUpdatedAt.setText(updatedAt);
@@ -176,6 +168,23 @@ public class DriverSingleItemView extends AppCompatActivity {
                 // Pass all data rank
                 intent.putExtra("routeId",
                         (route.getObjectId()));
+                intent.putExtra("verified", false);
+                // Start SingleItemView Class
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        Button verifiedButton = (Button) findViewById(R.id.verifiedbutton);
+        verifiedButton.setOnClickListener(new OnClickListener() {
+
+            public void onClick (View view){
+
+                Intent intent = new Intent(DriverSingleItemView.this, DriverPending.class);
+                // Pass all data rank
+                intent.putExtra("routeId",
+                        (route.getObjectId()));
+                intent.putExtra("verified", true);
                 // Start SingleItemView Class
                 startActivity(intent);
                 finish();

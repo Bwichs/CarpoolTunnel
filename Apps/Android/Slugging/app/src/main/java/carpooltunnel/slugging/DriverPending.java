@@ -29,6 +29,8 @@ public class DriverPending extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_pending);
         routeId = getIntent().getStringExtra("routeId");
+        boolean verified = false;
+        getIntent().getBooleanExtra("verified", verified);
         //Log.e(TAG, "Found id: " + routeId);
         PassengerRouteClasslist = new ArrayList<PassengerRouteClass>();
         try {
@@ -45,7 +47,26 @@ public class DriverPending extends AppCompatActivity {
                 if(route.getObjectId().toString().equals(routeId) && route.getList("bookers")!=null){
                     //Log.e(TAG, "Matched id");
                     List<String> ary = route.getList("bookers");
-                    //Log.e(TAG, "bookers" + ary.toString());
+                    //Log.e(TAG, "bookers" + ary.toString())
+                    if(!ary.isEmpty())
+                        for(String req : ary){
+                            PassengerRouteClass map = new PassengerRouteClass();
+                            map.setBooker(req);
+                            map.setDepDay((String) route.get("depDay"));
+                            map.setDepTime((String) route.get("depTime"));
+                            map.setFrom((String) route.get("from"));
+                            map.setNumPass((String) route.get("numPass"));
+                            map.setTo((String) route.get("to"));
+                            map.setRouteId((String) route.getObjectId());
+                            map.setCreatedAt(route.getCreatedAt().toString());
+                            map.setUpdatedAt(route.getUpdatedAt().toString());
+                            PassengerRouteClasslist.add(map);
+                        }
+
+                }else if(route.getObjectId().toString().equals(routeId) && route.getList("passengers")!=null && verified){
+                    //Log.e(TAG, "Matched id");
+                    List<String> ary = route.getList("passengers");
+                    //Log.e(TAG, "bookers" + ary.toString())
                     if(!ary.isEmpty())
                         for(String req : ary){
                             PassengerRouteClass map = new PassengerRouteClass();
@@ -72,7 +93,7 @@ public class DriverPending extends AppCompatActivity {
 //            adapter = new ListViewAdapter(PassengerActivityListTab.this,
 //                    PassengerRouteClasslist);
         adapter = new DriverPendingAdapter(getApplicationContext(),
-                PassengerRouteClasslist);
+                PassengerRouteClasslist, verified);
         // Binds the Adapter to the ListView
         listview.setAdapter(adapter);
         // Close the progressdialog

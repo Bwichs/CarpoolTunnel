@@ -27,40 +27,38 @@ class RouteInfoViewController: UIViewController {
     @IBAction func joinCarpool(sender: AnyObject) {
         //passenger 
         
-        let currentUserID = PFUser.currentUser()?.objectId
+        let currentUserEmail = PFUser.currentUser()!.username
         let query = PFQuery(className: "ParseRoute")
         query.includeKey("objectId")
         query.whereKey("objectId", equalTo: self.routeObjectID!)
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil {
-                for route in objects! {
-                    let userPointer:PFObject = (route["user"] as? PFObject)!
-                    let userQuery = PFUser.query()
-                    userQuery!.getObjectInBackgroundWithId(userPointer.objectId!){
-                        (driver: PFObject?, error: NSError?) -> Void in
-                        if error == nil && driver != nil {
-                            var reqArray = driver!["reqPassengers"] as? [String]
-                            if reqArray == nil {
-                                reqArray = []
-                            }
-                            reqArray!.append(currentUserID!)
-                            driver!["reqPassengers"] = reqArray
-                            driver!.saveInBackgroundWithBlock {
-                                (success, error) -> Void in
-                            }
-                        }
+            if error == nil && objects != nil {
+                let route = objects![0]
+                
+                let passRoute = route["passengers"] as? [String]
+                if passRoute != nil {
+                    if !passRoute!.contains(currentUserEmail!) {
+                        self.signIn_alert("Already Joined",
+                            alert_message: "You have already joined  this carpool route.")
+                        return
                     }
                 }
-            }
                 
-        /*
-        userPointer["objectId"] as? String
-        let userPointer:PFObject = (route["user"] as? PFObject)!
-        var reqArray = driver!["reqPassengers"] as? [String]
-        reqArray!.append(currentUserID!)
-        route!["user"] = reqArray
-        route!.saveInBackgroundWithBlock {
-        */
+                var reqRoute = route["bookers"] as? [String]
+                if reqRoute != nil {
+                    if !reqRoute!.contains(currentUserEmail!){
+                        reqRoute!.append(currentUserEmail!)
+                        route["bookers"] = reqRoute
+                        route.saveInBackground()
+                        self.signIn_alert("Success",
+                            alert_message: "You have successfully requested to join this carpool, please wait to be accepted by the driver.")
+                    } else {
+                        self.signIn_alert("Already requested",
+                            alert_message: "You have already requested to join this carpool route, please wait to be accepted by the driver.")
+                    }
+                }
+                
+            }
 
         }
     }
@@ -82,6 +80,17 @@ class RouteInfoViewController: UIViewController {
             }
         }
     }
+    
+    func signIn_alert(alert_title: String, alert_message: String) {
+        if #available(iOS 8.0, *) {
+            let alertController = UIAlertController(title: alert_title, message: alert_message,
+                preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,6 +102,7 @@ class RouteInfoViewController: UIViewController {
         // Create a new variable to store the instance of PlayerTableViewController
         let destinationVC = segue.destinationViewController as! AccountViewController
         destinationVC.driverObjectID = self.driverObjectID
+        destinationVC.routeObjectID = self.routeObjectID
     }
 
 }

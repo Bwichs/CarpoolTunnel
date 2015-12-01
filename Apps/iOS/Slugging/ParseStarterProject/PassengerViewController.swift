@@ -77,7 +77,7 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         }
         
         
-        //done with setting route on map*/
+        //done with setting route on map
         
         
         
@@ -148,8 +148,10 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
     }
     
     
-    //Executes when user touches an annotation's button if the button is of
-    //type CustomPinButton
+    /*
+      Executes when user touches an annotation's button if the button is of
+      type CustomPinButton
+    */
     func pinPressed(sender: CustomPinButton!) {
         self.routeObjectID = sender.routeObjectID
         performSegueWithIdentifier("routeInfo", sender: self)
@@ -192,9 +194,11 @@ class PassengerViewController: UIViewController, MKMapViewDelegate, CLLocationMa
         })
     }
     
-    //Not used yet but is able to turn coordinate to an address string.
-    //Will have to mimic execute with Address String later so that a user can
-    //create a route through dropping a ping at a location
+    /*
+      Not used yet but is able to turn coordinate to an address string.
+      Will have to mimic execute with Address String later so that a user can
+      create a route through dropping a ping at a location
+    */
     func convertCoordsToAddress(locationInCoords: CLLocation){
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(locationInCoords, completionHandler: { (placemarks, error) -> Void in

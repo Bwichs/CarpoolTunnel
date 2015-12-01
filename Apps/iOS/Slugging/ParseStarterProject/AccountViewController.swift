@@ -9,8 +9,8 @@
 import UIKit
 import Parse
 
-
 class AccountViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @IBOutlet weak var myAccountNav: UINavigationItem!
     @IBOutlet weak var loadImageButton: UIButton!
     @IBOutlet weak var editAccountButton: UIBarButtonItem!
     @IBOutlet weak var saveChangesButton: UIButton!
@@ -25,6 +25,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     let imagePicker = UIImagePickerController()
     var driverObjectID: String?
+    var routeObjectID: String?
     
     @IBAction func loadImage(sender: AnyObject) {
         imagePicker.allowsEditing = false
@@ -67,6 +68,14 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         myCarType.textColor = UIColor.blackColor()
     }
     
+    /*
+      Go back to route info, we were viewing account of driver.
+      TODO: add prepare for segue to set routeInfo
+    */
+    func backToRoute() {
+        performSegueWithIdentifier("backToRouteInfo", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         notEditingAccount()
@@ -81,6 +90,8 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
             editAccountButton.enabled = false
             deleteAccountButton.hidden = true
             changePasswordButton.hidden = true
+            myAccountNav.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backToRoute")
+            
         }
         
         let query = PFUser.query()
@@ -107,7 +118,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         // Do any additional setup after loading the view.
-        if self.revealViewController() != nil {
+        if self.revealViewController() != nil && self.driverObjectID == nil {
             menuButton.target = self.revealViewController()
             menuButton.action = "revealToggle:"
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -177,15 +188,11 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func changePassword(sender: AnyObject) {
     }
     
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if driverObjectID != nil {
+            let destinationVC = segue.destinationViewController as! RouteInfoViewController
+            destinationVC.routeObjectID = self.routeObjectID
+        }
     }
-    */
 
 }

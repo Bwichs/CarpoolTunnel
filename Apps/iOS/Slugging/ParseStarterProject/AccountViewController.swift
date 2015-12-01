@@ -27,12 +27,14 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
     var driverObjectID: String?
     var routeObjectID: String?
     
+    
     @IBAction func loadImage(sender: AnyObject) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .PhotoLibrary
         
         presentViewController(imagePicker, animated: true, completion: nil)
     }
+    
     
     func notEditingAccount(){
         saveChangesButton.hidden = true
@@ -52,6 +54,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         myCarType.textColor = UIColor.whiteColor()
     }
     
+    
     func editingAccount(){
         saveChangesButton.hidden = false
         loadImageButton.hidden = false
@@ -68,13 +71,6 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         myCarType.textColor = UIColor.blackColor()
     }
     
-    /*
-      Go back to route info, we were viewing account of driver.
-      TODO: add prepare for segue to set routeInfo
-    */
-    func backToRoute() {
-        performSegueWithIdentifier("backToRouteInfo", sender: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +86,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
             editAccountButton.enabled = false
             deleteAccountButton.hidden = true
             changePasswordButton.hidden = true
-            myAccountNav.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "backToRoute")
-            
+            myAccountNav.leftBarButtonItem = myAccountNav.backBarButtonItem
         }
         
         let query = PFUser.query()
@@ -126,6 +121,7 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.revealViewController().rearViewRevealWidth = 160
     }
     
+    
     func imagePickerController(
         picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -136,15 +132,18 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         dismissViewControllerAnimated(true, completion: nil)
     }
-        
+    
+    
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     @IBAction func saveChanges(sender: AnyObject) {
         let currentId = PFUser.currentUser()?.objectId
@@ -178,21 +177,22 @@ class AccountViewController: UIViewController, UIImagePickerControllerDelegate, 
         notEditingAccount()
     }
     
+    
     @IBAction func editAccount(sender: AnyObject) {
         editingAccount()
     }
 
+    
     @IBAction func deleteAccount(sender: AnyObject) {
     }
+    
     
     @IBAction func changePassword(sender: AnyObject) {
     }
     
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if driverObjectID != nil {
-            let destinationVC = segue.destinationViewController as! RouteInfoViewController
-            destinationVC.routeObjectID = self.routeObjectID
-        }
+
     }
 
 }

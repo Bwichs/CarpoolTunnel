@@ -37,9 +37,9 @@ class RouteInfoViewController: UIViewController {
                 
                 let passRoute = route["passengers"] as? [String]
                 if passRoute != nil {
-                    if !passRoute!.contains(currentUserEmail!) {
+                    if passRoute!.contains(currentUserEmail!) {
                         self.signIn_alert("Already Joined",
-                            alert_message: "You have already joined  this carpool route.")
+                            alert_message: "You have already joined this carpool route.")
                         return
                     }
                 }
@@ -56,6 +56,10 @@ class RouteInfoViewController: UIViewController {
                         self.signIn_alert("Already requested",
                             alert_message: "You have already requested to join this carpool route, please wait to be accepted by the driver.")
                     }
+                } else {
+                    let newReqList: [String] = [currentUserEmail!]
+                    route["bookers"] = newReqList
+                    route.saveInBackground()
                 }
                 
             }

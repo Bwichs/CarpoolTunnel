@@ -22,6 +22,7 @@ public class DriverPending extends AppCompatActivity {
     DriverPendingAdapter adapter;
     public final String TAG = "Pending";
     String routeId;
+    String verified;
     final ParseUser me = ParseUser.getCurrentUser();
     private List<PassengerRouteClass> PassengerRouteClasslist = null;
     @Override
@@ -29,8 +30,7 @@ public class DriverPending extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_pending);
         routeId = getIntent().getStringExtra("routeId");
-        boolean verified = false;
-        getIntent().getBooleanExtra("verified", verified);
+        verified = getIntent().getStringExtra("verified");;
         //Log.e(TAG, "Found id: " + routeId);
         PassengerRouteClasslist = new ArrayList<PassengerRouteClass>();
         try {
@@ -44,26 +44,7 @@ public class DriverPending extends AppCompatActivity {
             for (ParseObject route : ob) {
                 //get array of pending
                 //Log.e(TAG, route.getObjectId().toString() );
-                if(route.getObjectId().toString().equals(routeId) && route.getList("bookers")!=null){
-                    //Log.e(TAG, "Matched id");
-                    List<String> ary = route.getList("bookers");
-                    //Log.e(TAG, "bookers" + ary.toString())
-                    if(!ary.isEmpty())
-                        for(String req : ary){
-                            PassengerRouteClass map = new PassengerRouteClass();
-                            map.setBooker(req);
-                            map.setDepDay((String) route.get("depDay"));
-                            map.setDepTime((String) route.get("depTime"));
-                            map.setFrom((String) route.get("from"));
-                            map.setNumPass((String) route.get("numPass"));
-                            map.setTo((String) route.get("to"));
-                            map.setRouteId((String) route.getObjectId());
-                            map.setCreatedAt(route.getCreatedAt().toString());
-                            map.setUpdatedAt(route.getUpdatedAt().toString());
-                            PassengerRouteClasslist.add(map);
-                        }
-
-                }else if(route.getObjectId().toString().equals(routeId) && route.getList("passengers")!=null && verified){
+                if(route.getObjectId().toString().equals(routeId) && route.getList("passengers")!=null && verified.equals("true")){
                     //Log.e(TAG, "Matched id");
                     List<String> ary = route.getList("passengers");
                     //Log.e(TAG, "bookers" + ary.toString())
@@ -82,6 +63,24 @@ public class DriverPending extends AppCompatActivity {
                             PassengerRouteClasslist.add(map);
                         }
 
+                }else if(route.getObjectId().toString().equals(routeId) && route.getList("bookers")!=null) {
+                    //Log.e(TAG, "Matched id");
+                    List<String> ary = route.getList("bookers");
+                    //Log.e(TAG, "bookers" + ary.toString())
+                    if (!ary.isEmpty())
+                        for (String req : ary) {
+                            PassengerRouteClass map = new PassengerRouteClass();
+                            map.setBooker(req);
+                            map.setDepDay((String) route.get("depDay"));
+                            map.setDepTime((String) route.get("depTime"));
+                            map.setFrom((String) route.get("from"));
+                            map.setNumPass((String) route.get("numPass"));
+                            map.setTo((String) route.get("to"));
+                            map.setRouteId((String) route.getObjectId());
+                            map.setCreatedAt(route.getCreatedAt().toString());
+                            map.setUpdatedAt(route.getUpdatedAt().toString());
+                            PassengerRouteClasslist.add(map);
+                        }
                 }
             }
         } catch (ParseException e) {

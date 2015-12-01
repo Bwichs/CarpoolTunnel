@@ -168,7 +168,7 @@ public class DriverSingleItemView extends AppCompatActivity {
                 // Pass all data rank
                 intent.putExtra("routeId",
                         (route.getObjectId()));
-                intent.putExtra("verified", false);
+                intent.putExtra("verified", "false");
                 // Start SingleItemView Class
                 startActivity(intent);
                 finish();
@@ -184,7 +184,7 @@ public class DriverSingleItemView extends AppCompatActivity {
                 // Pass all data rank
                 intent.putExtra("routeId",
                         (route.getObjectId()));
-                intent.putExtra("verified", true);
+                intent.putExtra("verified", "true");
                 // Start SingleItemView Class
                 startActivity(intent);
                 finish();

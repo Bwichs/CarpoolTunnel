@@ -33,10 +33,9 @@ public class DriverPendingAdapter extends BaseAdapter {
     private ArrayList<PassengerRouteClass> arraylist;
     private String routeId;
     ParseObject route;
-    Boolean verified;
-
+    String verified;
     public DriverPendingAdapter(Context context,
-                                List<PassengerRouteClass> PassengerRouteClasslist, boolean v) {
+                                List<PassengerRouteClass> PassengerRouteClasslist, String v) {
         mContext = context;
         verified = v;
         this.PassengerRouteClasslist = PassengerRouteClasslist;
@@ -119,7 +118,7 @@ public class DriverPendingAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View arg0) {
-                if(!verified){
+                if(verified.equals("true")){
                     new AlertDialog.Builder(vew.getRootView().getContext())
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setTitle("Sign up for route?")

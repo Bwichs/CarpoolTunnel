@@ -118,7 +118,7 @@ public class DriverSingleItemView extends AppCompatActivity {
         txtFrom.setText(from);
         txtNumPass.setText(numPass);
         txtTo.setText(to);
-        driverUserLabel.setText(ParseUser.getCurrentUser().toString());
+        driverUserLabel.setText("Driver: " + ParseUser.getCurrentUser().getUsername());
 
         txtCreatedAt.setText(createdAt);
         txtUpdatedAt.setText(updatedAt);

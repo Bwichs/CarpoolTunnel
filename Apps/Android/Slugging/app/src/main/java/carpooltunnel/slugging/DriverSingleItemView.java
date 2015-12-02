@@ -125,12 +125,12 @@ public class DriverSingleItemView extends AppCompatActivity {
 
         //Log.e(TAG, "user:" + name);
 
-        Button mEditButton = (Button) findViewById(R.id.editbutton);
-        mEditButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View view) {
-
-            }
-        });
+//        Button mEditButton = (Button) findViewById(R.id.editbutton);
+//        mEditButton.setOnClickListener(new OnClickListener() {
+//            public void onClick(View view) {
+//
+//            }
+//        });
 
         Button mDeleteButton = (Button) findViewById(R.id.deletebutton);
         mDeleteButton.setOnClickListener(new OnClickListener() {

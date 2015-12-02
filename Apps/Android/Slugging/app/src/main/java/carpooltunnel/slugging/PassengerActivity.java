@@ -36,7 +36,10 @@ public class PassengerActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+       // View header = LayoutInflater.from(this).inflate(R.layout.nav_header,null);
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
+       // nvDrawer.addHeaderView(header);
+
         setupDrawerContent(nvDrawer);
         drawerToggle = setupDrawerToggle();
 
@@ -74,6 +77,19 @@ public class PassengerActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
+
+        //View header = LayoutInflater.from(this).inflate(R.layout.nav_header, null);
+      //  navigationView.removeHeaderView(navigationView);
+      //  navigationView.addHeaderView(navigationView);
+        TextView etext = (TextView) navigationView.findViewById(R.id.nav_header_email);
+        TextView ntext = (TextView) navigationView.findViewById(R.id.nav_header_name);
+
+        if(etext != null && ntext != null){
+            Log.e(TAG, "user:" + ParseUser.getCurrentUser().getUsername() + " name:" + ParseUser.getCurrentUser().get("name"));
+            etext.setText(ParseUser.getCurrentUser().getUsername());
+            ntext.setText(ParseUser.getCurrentUser().get("name").toString());
+            // Sync the toggle state after onRestoreInstanceState has occurred.
+        }
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -150,13 +166,16 @@ public class PassengerActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
-        TextView etext = (TextView) mDrawer.findViewById(R.id.nav_header_email);
-        TextView ntext = (TextView) mDrawer.findViewById(R.id.nav_header_name);
-        Log.e(TAG, "user:" + ParseUser.getCurrentUser().getUsername() + " name:" + ParseUser.getCurrentUser().get("name"));
-        //etext.setText(ParseUser.getCurrentUser().getUsername());
-        //ntext.setText(ParseUser.getCurrentUser().get("name").toString());
-        // Sync the toggle state after onRestoreInstanceState has occurred.
+//        View header = LayoutInflater.from(this).inflate(R.layout.nav_header,null);
+//        nvDrawer.addHeaderView(header);
+//        TextView etext = (TextView) header.findViewById(R.id.nav_header_email);
+//        TextView ntext = (TextView) header.findViewById(R.id.nav_header_name);
+//        Log.e(TAG, "user:" + ParseUser.getCurrentUser().getUsername() + " name:" + ParseUser.getCurrentUser().get("name"));
+//        if(etext != null && ntext != null){
+//        etext.setText(ParseUser.getCurrentUser().getUsername());
+//        ntext.setText(ParseUser.getCurrentUser().get("name").toString());
+//        // Sync the toggle state after onRestoreInstanceState has occurred.
+//        }
         drawerToggle.syncState();
     }
 

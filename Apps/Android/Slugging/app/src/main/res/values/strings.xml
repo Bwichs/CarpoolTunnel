@@ -49,14 +49,14 @@
 
     <string name="title_activity_main">Parse Custom ListView</string>
 
-    <string name="depDaylabel">"Departure Day : "</string>
-    <string name="depTimelabel">"Departure Time : "</string>
-    <string name="fromlabel">"Starting Location : "</string>
-    <string name="numPasslabel">"Number of Passengers : "</string>
-    <string name="tolabel">"Destination : "</string>
-    <string name="driverUserlabel">"Driver : "</string>
-    <string name="createdAtlabel">"First created : "</string>
-    <string name="updatedAtlabel">"Last updated : "</string>
+    <string name="depDaylabel">"Date: "</string>
+    <string name="depTimelabel">"Time: "</string>
+    <string name="fromlabel">"From: "</string>
+    <string name="numPasslabel">"Seats:    "</string>
+    <string name="tolabel">"To: "</string>
+    <string name="driverUserlabel">"Driver: "</string>
+    <string name="createdAtlabel">"First created: "</string>
+    <string name="updatedAtlabel">"Last updated: "</string>
 
     <string name="dummy_section_text">Section %1d is just a dummy section.</string>
     <string name="demo_external_activity">Demo External Activity</string>

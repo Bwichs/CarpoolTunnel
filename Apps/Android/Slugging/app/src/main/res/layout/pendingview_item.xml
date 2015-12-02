@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7.0sp"
+        android:layout_marginRight="7.0sp"
+        android:paddingTop="5.0sp"
+        card_view:contentPadding="6dp"
+        card_view:cardElevation="2dp"
+        card_view:cardCornerRadius="3dp"
+        card_view:cardUseCompatPadding="true"
+        card_view:cardBackgroundColor="#fff"
+        >
     <TextView
         android:id="@+id/booker"
         android:layout_width="wrap_content"
@@ -10,5 +23,6 @@
         android:layout_below="@+id/from"
         android:layout_toRightOf="@+id/tolabel"
         android:paddingBottom="16dp"/>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

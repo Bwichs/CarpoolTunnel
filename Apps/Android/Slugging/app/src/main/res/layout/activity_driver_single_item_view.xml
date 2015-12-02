@@ -44,6 +44,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:paddingTop="5.0sp"
             android:layout_marginLeft="7.0sp"
             android:layout_marginRight="7.0sp"
             card_view:contentPadding="6dp"
@@ -176,22 +177,11 @@
         android:minHeight="0dp" android:minWidth="0dp"
         style="?android:attr/borderlessButtonStyle"
         android:textColor="#009688"
-        android:id="@+id/editbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:layout_below="@id/updatedAt"
-        android:text="Edit"/>
-
-    <Button
-        android:minHeight="0dp" android:minWidth="0dp"
-        style="?android:attr/borderlessButtonStyle"
-        android:textColor="#009688"
         android:id="@+id/deletebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/updatedAt"
-        android:layout_toRightOf="@id/editbutton"
+        android:layout_gravity="bottom|left"
         android:text="Delete"/>
 
     <Button

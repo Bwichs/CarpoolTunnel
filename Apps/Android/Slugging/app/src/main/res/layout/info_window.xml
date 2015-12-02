@@ -27,7 +27,9 @@
 
     <Button
         android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
+        android:textColor="#009688"
         android:layout_height="wrap_content"
         android:text="Book Route" />
 </LinearLayout>

@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         } else {
-            Intent intent = new Intent(this, PassengerActivity.class); //go to welcome
+            Intent intent = new Intent(this, AccountActivity.class); //go to welcome
             startActivity(intent);
             finish();
         }

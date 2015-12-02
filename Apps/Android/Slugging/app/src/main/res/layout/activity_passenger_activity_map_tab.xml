@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eee"
+    android:gravity="center"
+    android:id="@+id/coordinatorLayout"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:fitsSystemWindows="true"
+    tools:context="carpooltunnel.slugging.DriverActivity">
 <carpooltunnel.slugging.MapWrapperLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,6 +18,7 @@
 
     >
 
+
     <fragment
         android:id="@+id/location_maps_routes"
         android:layout_width="match_parent"
@@ -14,4 +26,7 @@
         class="com.google.android.gms.maps.SupportMapFragment"
         tools:layout="@layout/activity_passenger_activity_map_tab" />
 
+
+
 </carpooltunnel.slugging.MapWrapperLayout>
+</android.support.design.widget.CoordinatorLayout>

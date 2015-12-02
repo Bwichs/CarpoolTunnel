@@ -14,46 +14,58 @@
     >
 
     <TextView
-        android:id="@+id/depDaylabel"
+        android:id="@+id/depTime"
+        android:textSize="22sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/depDaylabel" />
+        android:gravity="top|left" />
 
     <TextView
+        android:textSize="22sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:id="@+id/spacer"
+        android:layout_toRightOf="@+id/depTime"/>
+
+    <TextView
+        android:textSize="22sp"
         android:id="@+id/depDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/depDaylabel" />
+        android:layout_toRightOf="@+id/spacer" />
 
     <TextView
-        android:id="@+id/depTimelabel"
-        android:layout_width="wrap_content"
+        android:textSize="22sp"
+        android:id="@+id/numPass"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/depDaylabel"
-        android:text="@string/depTimelabel" />
+        android:layout_toEndOf="@id/depDay"
+        android:layout_gravity="end"
+        android:gravity="end"
+        />
 
     <TextView
-        android:id="@+id/depTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/depDay"
-        android:layout_toRightOf="@+id/depTimelabel" />
-
-    <TextView
+        android:textSize="22sp"
         android:id="@+id/numPasslabel"
-        android:layout_width="wrap_content"
+        android:layout_width = "match_parent"
+        android:gravity="end"
+        android:layout_gravity="end"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/depTimelabel"
+        android:paddingBottom="10.0sp"
         android:text="@string/numPasslabel" />
 
-    <TextView
-        android:id="@+id/numPass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/depTime"
-        android:layout_toRightOf="@+id/numPasslabel" />
+
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+
+        android:layout_above="@+id/fromlabel"
+        android:background="#c0c0c0"/>
 
     <TextView
+        android:paddingTop="10.0sp"
         android:id="@+id/fromlabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,10 +74,11 @@
 
 
     <TextView
+        android:paddingTop="10.0sp"
         android:id="@+id/from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numPass"
+        android:layout_below="@+id/numPasslabel"
         android:layout_toRightOf="@+id/fromlabel" />
 
 
@@ -73,7 +86,7 @@
         android:id="@+id/tolabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/from"
+        android:layout_below="@+id/fromlabel"
         android:text="@string/tolabel" />
 
     <TextView
@@ -81,14 +94,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/from"
-        android:layout_toRightOf="@+id/tolabel" />
+        android:layout_toRightOf="@+id/tolabel"
+        android:paddingBottom="10.0sp"
+        />
+
+    <View
+        android:id="@+id/botline"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/to"
+        android:background="#c0c0c0"/>
+
 
     <Button
         style="?android:attr/borderlessButtonStyle"
         android:id="@+id/book"
+        android:paddingTop="10sp"
+        android:minHeight="0dp"
+        android:minWidth="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/to"
+        android:layout_below="@+id/botline"
         android:layout_gravity="bottom|right"
         android:textColor="#009688"
         android:fontFamily="sans-serif-light"

@@ -185,19 +185,19 @@ public class TutorialActivity extends AppCompatActivity {
             TutorialPane tp = null;
             switch(position){
                 case 0:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_one);
                     break;
                 case 1:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_transparent);
                     break;
                 case 2:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_three);
-                    break;
-                case 3:
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
                     break;
+                case 3:
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_three);
+                    break;
                 case 4:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_transparent);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
                     break;
             }
             return tp;

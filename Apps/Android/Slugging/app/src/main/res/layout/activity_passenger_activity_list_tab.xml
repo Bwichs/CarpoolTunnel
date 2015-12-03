@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     android:paddingLeft="7.0sp"
     android:paddingRight="7.0sp"
+    android:layout_marginTop="5.0sp"
+    android:layout_marginBottom="5.0sp"
     android:background="#eee"
     tools:context="carpooltunnel.slugging.PassengerActivityListTab">
 
@@ -11,9 +13,10 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="?attr/actionBarSize">
+        >
 
         <ListView
+
             android:background="#eee"
             android:id="@+id/android:list"
             android:divider="@null"

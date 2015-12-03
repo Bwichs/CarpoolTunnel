@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -82,7 +83,8 @@ public class DriverListViewAdapter extends BaseAdapter {
         holder.to.setText(PassengerRouteClasslist.get(position).getTo());
 
         // Listen for ListView Item Click
-        view.setOnClickListener(new OnClickListener() {
+        Button bookbtn = (Button) view.findViewById(R.id.book);
+        bookbtn.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

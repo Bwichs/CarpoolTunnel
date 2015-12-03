@@ -9,6 +9,8 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
      * available.
      */
     boolean canBook = true;;
+    private CoordinatorLayout coordinatorLayout;
     private static GoogleMap mMap;
     private static Double latitude, longitude;
 
@@ -73,6 +76,8 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
         }
 
         view = inflater.inflate(R.layout.activity_passenger_activity_map_tab, container, false);
+        coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id
+                .coordinatorLayout);
         // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
         latitude = 36.9719;
         longitude = -122.0264;
@@ -151,28 +156,44 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                         }catch (IOException ioexception){
                             Log.e(TAG, "address error",ioexception);
                         }
+                        try {
+                            Location point = new Location("point");
 
-                        Location point = new Location("point");
+                            point.setLatitude(coord.latitude);
+                            point.setLongitude(coord.longitude);
 
-                        point.setLatitude(coord.latitude);
-                        point.setLongitude(coord.longitude);
+                            Location coordTo = new Location("coordTo");
 
-                        Location coordTo = new Location("coordTo");
+                            coordTo.setLatitude(foundGeocodeTo.get(0).getLatitude());
+                            coordTo.setLongitude(foundGeocodeTo.get(0).getLongitude());
 
-                        coordTo.setLatitude(foundGeocodeTo.get(0).getLatitude());
-                        coordTo.setLongitude(foundGeocodeTo.get(0).getLongitude());
+                            Location coordFrom = new Location("coordFrom");
 
-                        Location coordFrom = new Location("coordFrom");
+                            coordFrom.setLatitude(foundGeocodeFrom.get(0).getLatitude());
+                            coordFrom.setLongitude(foundGeocodeFrom.get(0).getLongitude());
 
-                        coordFrom.setLatitude(foundGeocodeFrom.get(0).getLatitude());
-                        coordFrom.setLongitude(foundGeocodeFrom.get(0).getLongitude());
+                            LatLng frm = new LatLng(foundGeocodeTo.get(0).getLatitude(), foundGeocodeTo.get(0).getLongitude());
+                            LatLng tto = new LatLng(foundGeocodeFrom.get(0).getLatitude(), foundGeocodeFrom.get(0).getLongitude());
+                            String url = getDirectionsUrl(frm, tto);
+                            //Log.e(TAG, url.toString());
+                            SelectedDownloadTask x = new SelectedDownloadTask();
+                            //x.execute(url);
+                        }
+                        catch (IndexOutOfBoundsException hello){
+                            Snackbar snackbar = Snackbar
+                                    .make(coordinatorLayout, "Internet error.", Snackbar.LENGTH_LONG)
+                                    .setAction("RETRY", new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Snackbar snackbar1 = Snackbar.make(coordinatorLayout, "Trying again...", Snackbar.LENGTH_SHORT);
+                                            snackbar1.show();
+                                            startActivity(new Intent(getView().getContext(), PassengerActivity.class));
+                                            getActivity().finish();
+                                        }
+                                    });
 
-                        LatLng frm = new LatLng(foundGeocodeTo.get(0).getLatitude(), foundGeocodeTo.get(0).getLongitude());
-                        LatLng tto = new LatLng(foundGeocodeFrom.get(0).getLatitude(), foundGeocodeFrom.get(0).getLongitude());
-                        String url = getDirectionsUrl(frm, tto);
-                        //Log.e(TAG, url.toString());
-                        SelectedDownloadTask x = new SelectedDownloadTask();
-                        //x.execute(url);
+                            snackbar.show();
+                        }
                     }
                 } catch (ParseException e) {
                     Log.e("Error", e.getMessage());
@@ -293,7 +314,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                     intent.putExtra("routeId",
                             ((String) route.getObjectId()));
                     startActivity(intent);
-                    getActivity().finish();
+                    //getActivity().finish();
                     /*
                     new AlertDialog.Builder(getActivity())
                             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -682,7 +703,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                 lineOptions.color(color);
             }
             // Drawing polyline in the Google Map for the i-th route
-            mMap.addPolyline(lineOptions);
+            if(lineOptions != null && mMap != null) mMap.addPolyline(lineOptions);
             mProgressDialog.dismiss();
         }
     }

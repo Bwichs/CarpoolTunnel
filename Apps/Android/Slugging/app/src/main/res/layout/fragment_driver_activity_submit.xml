@@ -4,6 +4,7 @@
     tools:context="carpooltunnel.slugging.DriverActivitySubmit"
     android:layout_gravity="center"
     android:background="#eee"
+    android:paddingTop="5.0sp"
     android:paddingLeft="7.0sp"
     android:paddingRight="7.0sp">
 
@@ -16,6 +17,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+
         card_view:contentPadding="16dp"
         card_view:cardElevation="2dp"
         card_view:cardCornerRadius="3dp"

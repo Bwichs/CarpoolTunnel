@@ -314,7 +314,7 @@ public class PassengerActivityMapTab extends Fragment implements OnMapReadyCallb
                     intent.putExtra("routeId",
                             ((String) route.getObjectId()));
                     startActivity(intent);
-                    getActivity().finish();
+                    //getActivity().finish();
                     /*
                     new AlertDialog.Builder(getActivity())
                             .setIcon(android.R.drawable.ic_dialog_alert)

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
@@ -52,12 +53,23 @@ public class SingleItemView extends AppCompatActivity {
     final String myUser = me.getUsername().toString();
     Toolbar toolbar;
 
-    public void bookPushToDriver(ParseUser driver, String passenger, String from, String to, String date) {
+    public void pushByEmail(String email, final String from, final String to, final String date) {
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", email);
+        query.findInBackground(new FindCallback<ParseUser>() {
+            @Override
+            public void done(List<ParseUser> objects, ParseException e) {
+                pushToPassenger(objects.get(0), from, to, date);
+            }
+        });
+    }
+    public void pushToPassenger(ParseUser passenger, String from, String to, String date) {
+        String driver = ParseUser.getCurrentUser().getUsername();
         ParsePush push = new ParsePush();
         ParseQuery pushQuery = ParseInstallation.getQuery();
-        pushQuery.whereEqualTo("user", driver);
+        pushQuery.whereEqualTo("user", passenger);
         push.setQuery(pushQuery);
-        push.setMessage(passenger + " has booked your route from "
+        push.setMessage(driver + " has requested to join your route from "
                 + from + " to " + to + " on " + date + ".");
         push.sendInBackground();
     }
@@ -130,7 +142,7 @@ public class SingleItemView extends AppCompatActivity {
                                     String origin = (String) route.get("from");
                                     String dest = (String) route.get("to");
                                     String date = (String) route.get("depDay");
-                                    bookPushToDriver(driver, myUser, origin, dest, date);
+                                    pushByEmail(driver.getEmail(), origin, dest, date);
                                     try{
                                         route.save();
                                     }catch(ParseException e){ Log.e(TAG, "error saving " + e.toString()); }

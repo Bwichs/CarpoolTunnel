@@ -4,15 +4,19 @@
     android:layout_height="match_parent"
     android:background="#E91E63">
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30sp"
+        android:text="Passengers:\n\nYou can view the routes in either the list view, or the map view. In list view, you can view each route individually by pressing the details button. Then you can book the route, or see the driver's information. \n\nIn map view, you can click on the pins to book the route.\n\n\Your passenger routes show up in Your routes once the driver has verified your place.\n\nYou can't book your own routes, book a route more than once, or book a full route."
+        android:id="@+id/content"/>
+
     <ImageView
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
         android:id="@+id/rain"/>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/content"/>
+
 
     <ImageView
         android:layout_width="match_parent"

@@ -188,16 +188,16 @@ public class TutorialActivity extends AppCompatActivity {
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_one);
                     break;
                 case 1:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_transparent);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
                     break;
                 case 2:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_two);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
                     break;
                 case 3:
                     tp = TutorialPane.newInstance(R.layout.fragment_tutorial_three);
                     break;
                 case 4:
-                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_four);
+                    tp = TutorialPane.newInstance(R.layout.fragment_tutorial_transparent);
                     break;
             }
             return tp;
@@ -215,15 +215,15 @@ public class TutorialActivity extends AppCompatActivity {
         public void transformPage(View page, float position) {
             int pageWidth = page.getWidth();
 
-            View backgroundView = page.findViewById(R.id.background);
-            View text = page.findViewById(R.id.content);
-
-            View phone = page.findViewById(R.id.phone);
-            View map = page.findViewById(R.id.map);
-            View mountain = page.findViewById(R.id.mountain);
-            View mountainNight = page.findViewById(R.id.mountain_night);
-            View rain = page.findViewById(R.id.rain);
-            View hands = page.findViewById(R.id.screenshot);
+//            View backgroundView = page.findViewById(R.id.background);
+//            View text = page.findViewById(R.id.content);
+//
+//            View phone = page.findViewById(R.id.phone);
+//            View map = page.findViewById(R.id.map);
+//            View mountain = page.findViewById(R.id.mountain);
+//            View mountainNight = page.findViewById(R.id.mountain_night);
+//            View rain = page.findViewById(R.id.rain);
+//            View hands = page.findViewById(R.id.screenshot);
 
             if (position <= 1) {
                 page.setTranslationX(pageWidth * -position);
@@ -232,54 +232,54 @@ public class TutorialActivity extends AppCompatActivity {
             if(position <= -1.0f || position >= 1.0f) {
             } else if( position == 0.0f ) {
             } else {
-                if(backgroundView != null) {
-                    backgroundView.setAlpha(1.0f - Math.abs(position));
-                }
-
-                //Text both translates in/out and fades in/out
-                if (text != null) {
-                    text.setTranslationX(pageWidth * position);
-                    text.setAlpha(1.0f - Math.abs(position));
-                }
-
-                //Map + phone - map simple translate, phone parallax effect
-                if(map != null){
-                    map.setTranslationX(pageWidth * position);
-                }
-
-                if(phone != null){
-                    phone.setTranslationX((float)(pageWidth/1.2 * position));
-                }
-
-                //Mountain day - fade in/out
-                if(mountain != null){
-                    mountain.setAlpha(1.0f - Math.abs(position));
-                }
-
-                //Mountain night - fade in, but translate out, rain fades in but parallax translate out
-                if(mountainNight != null){
-                    if(position < 0){
-                        mountainNight.setTranslationX(pageWidth * position);
-                    }else{
-                        mountainNight.setAlpha(1.0f - Math.abs(position));
-                    }
-                }
-
-                if(rain != null){
-                    if(position < 0){
-                        rain.setTranslationX((float)(pageWidth/1.2 * position));
-                    }else{
-                        rain.setAlpha(1.0f - Math.abs(position));
-                    }
-                }
-
-                //Long click device + hands - translate both way but only fade out
-                if(hands != null){
-                    hands.setTranslationX(pageWidth * position);
-                    if(position < 0) {
-                        hands.setAlpha(1.0f - Math.abs(position));
-                    }
-                }
+//                if(backgroundView != null) {
+//                    backgroundView.setAlpha(1.0f - Math.abs(position));
+//                }
+//
+//                //Text both translates in/out and fades in/out
+//                if (text != null) {
+//                    text.setTranslationX(pageWidth * position);
+//                    text.setAlpha(1.0f - Math.abs(position));
+//                }
+//
+//                //Map + phone - map simple translate, phone parallax effect
+//                if(map != null){
+//                    map.setTranslationX(pageWidth * position);
+//                }
+//
+//                if(phone != null){
+//                    phone.setTranslationX((float)(pageWidth/1.2 * position));
+//                }
+//
+//                //Mountain day - fade in/out
+//                if(mountain != null){
+//                    mountain.setAlpha(1.0f - Math.abs(position));
+//                }
+//
+//                //Mountain night - fade in, but translate out, rain fades in but parallax translate out
+//                if(mountainNight != null){
+//                    if(position < 0){
+//                        mountainNight.setTranslationX(pageWidth * position);
+//                    }else{
+//                        mountainNight.setAlpha(1.0f - Math.abs(position));
+//                    }
+//                }
+//
+//                if(rain != null){
+//                    if(position < 0){
+//                        rain.setTranslationX((float)(pageWidth/1.2 * position));
+//                    }else{
+//                        rain.setAlpha(1.0f - Math.abs(position));
+//                    }
+//                }
+//
+//                //Long click device + hands - translate both way but only fade out
+//                if(hands != null){
+//                    hands.setTranslationX(pageWidth * position);
+//                    if(position < 0) {
+//                        hands.setAlpha(1.0f - Math.abs(position));
+//                    }
+//                }
             }
         }
     }

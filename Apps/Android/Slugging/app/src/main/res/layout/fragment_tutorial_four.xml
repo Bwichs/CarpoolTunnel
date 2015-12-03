@@ -3,6 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#4CAF50">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30sp"
+        android:textColor="#212121"
+        android:text="Drivers:\n\n Submit your route using the submit card. Atleast one location must be with 50 miles of Santa Cruz. Valid locations only. Fill in all fields before attempting to submit. \n\nOnce submitted, check that your route appears in the My routes tab. You can pull down to refresh! When a passenger requests to join your carpool, they will appear in the pending list. Click on their name to verify them. Then they will be moved from the pending list to the verified list. "
+        android:id="@+id/content"/>
+
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -10,15 +19,10 @@
     <ImageView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:src="@drawable/car"
         android:id="@+id/screenshot"
          />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Happy Slugging!"
-        android:id="@+id/content"/>
+
 
     <ImageView
         android:layout_width="wrap_content"

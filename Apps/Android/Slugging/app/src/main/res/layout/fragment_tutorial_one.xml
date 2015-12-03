@@ -4,13 +4,16 @@
     android:layout_height="match_parent"
     android:background="#03A9F4">
     <ImageView
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
         android:id="@+id/mountain"/>
 
     <TextView
+        android:layout_margin="30sp"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
+        android:textColor="#212121"
+        android:text="Welcome to the slugging tutorial.\n\nRules:\n\n1. UCSC email verification is required. PLease verify within 1 minute.\n\n2. Valid UCSC student and faculty only.\n\n3. No profanity, vulgarity please!\n\n4. All services are free! If you are being asked for a fee, please report the user to the slugging admins! \n\nTips:\n\nFill in the account page for better hits!\n\nContact your passenger/driver to arrange things!\n\nBe ready 30 minutes before your ride.\n\nHave fun and be safe. Happy Slugging!"
         android:id="@+id/content"/>
 
     <ImageView

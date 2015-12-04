@@ -168,116 +168,115 @@ public class DriverActivitySubmit extends Fragment {
         numPass = mNumPass.getText().toString();
         depTime = mTime.getText().toString();
         depDay = mDay.getText().toString();
-        if(!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
-            boolean locationFrom = false;
-            boolean locationTo = false;
-            boolean locationSame = false;
+        int toTest = Integer.parseInt(numPass);
+        if(toTest > 0 && toTest < 10) {
+            if (!from.matches("") && !to.matches("") && !numPass.matches("") && !depTime.matches("") && !depDay.matches("")) {
+                boolean locationFrom = false;
+                boolean locationTo = false;
+                boolean locationSame = false;
 
-            List<Address> foundGeocodeFrom = null;
-            List<Address> foundGeocodeTo = null;
-            Geocoder geocoder;
-            try{
-                geocoder = new Geocoder(getActivity(), Locale.getDefault());
-                foundGeocodeFrom = geocoder.getFromLocationName(from, 1);
-                //radius of 50 miles ~ 80467.2 metres from SC
-                if(foundGeocodeFrom != null && !foundGeocodeFrom.isEmpty()){
-                    foundGeocodeFrom.get(0).getLatitude();
-                    foundGeocodeFrom.get(0).getLongitude();
-                    Log.e(TAG,"location from, latlong:"+foundGeocodeFrom.get(0).getLatitude()+" "+foundGeocodeFrom.get(0).getLongitude());
-                    float[] distance = new float[3];
-                    Location.distanceBetween(36.9719,-122.0264,foundGeocodeFrom.get(0).getLatitude(),foundGeocodeFrom.get(0).getLongitude(),distance );
-                    if(distance[0] <= 80500)
-                        locationFrom = true;
-                    else{
+                List<Address> foundGeocodeFrom = null;
+                List<Address> foundGeocodeTo = null;
+                Geocoder geocoder;
+                try {
+                    geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                    foundGeocodeFrom = geocoder.getFromLocationName(from, 1);
+                    //radius of 50 miles ~ 80467.2 metres from SC
+                    if (foundGeocodeFrom != null && !foundGeocodeFrom.isEmpty()) {
+                        foundGeocodeFrom.get(0).getLatitude();
+                        foundGeocodeFrom.get(0).getLongitude();
+                        Log.e(TAG, "location from, latlong:" + foundGeocodeFrom.get(0).getLatitude() + " " + foundGeocodeFrom.get(0).getLongitude());
+                        float[] distance = new float[3];
+                        Location.distanceBetween(36.9719, -122.0264, foundGeocodeFrom.get(0).getLatitude(), foundGeocodeFrom.get(0).getLongitude(), distance);
+                        if (distance[0] <= 80500)
+                            locationFrom = true;
+                        else {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    "Please enter an address within 50 miles of Santa Cruz",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.e(TAG, "From location not found");
+                    }
+
+                    geocoder = new Geocoder(getActivity(), Locale.getDefault());
+                    foundGeocodeTo = geocoder.getFromLocationName(to, 1);
+                    //radius of 50 miles ~ 80467.2 metres from SC
+                    if (foundGeocodeTo != null && !foundGeocodeTo.isEmpty()) {
+                        foundGeocodeTo.get(0).getLatitude();
+                        foundGeocodeTo.get(0).getLongitude();
+                        float[] distance = new float[3];
+                        Location.distanceBetween(36.9719, -122.0264, foundGeocodeTo.get(0).getLatitude(), foundGeocodeTo.get(0).getLongitude(), distance);
+                        Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + " " + foundGeocodeTo.get(0).getLongitude() + " distbwtTo:" + distance[0] + " " + distance[1] + " " + distance[2]);
+                        if (distance[0] <= 80500)
+                            locationTo = true;
+                        else {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    "Please enter an address within a 50 mile radius of Santa Cruz",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Log.e(TAG, "To location not found");
+                    }
+                    if (locationTo == true && locationFrom == true && foundGeocodeTo.get(0).getLatitude() == foundGeocodeFrom.get(0).getLatitude() && foundGeocodeTo.get(0).getLongitude() == foundGeocodeFrom.get(0).getLongitude()) {
+                        locationSame = true;
                         Toast.makeText(getActivity().getApplicationContext(),
-                                "Please enter an address within 50 miles of Santa Cruz",
+                                "Start and Finish cannot be the same location!",
                                 Toast.LENGTH_LONG).show();
                     }
+                } catch (IOException ioexception) {
+                    Log.e(TAG, "location error", ioexception);
                 }
-                else{
-                    Log.e(TAG,"From location not found");
-                }
+                if (locationFrom == true && locationTo == true && locationSame == false) {
+                    ParseRoute route = new ParseRoute();
 
-                geocoder = new Geocoder(getActivity(), Locale.getDefault());
-                foundGeocodeTo = geocoder.getFromLocationName(to, 1);
-                //radius of 50 miles ~ 80467.2 metres from SC
-                if(foundGeocodeTo != null && !foundGeocodeTo.isEmpty()){
-                    foundGeocodeTo.get(0).getLatitude();
-                    foundGeocodeTo.get(0).getLongitude();
-                    float[] distance = new float[3];
-                    Location.distanceBetween(36.9719,-122.0264,foundGeocodeTo.get(0).getLatitude(),foundGeocodeTo.get(0).getLongitude(),distance );
-                    Log.e(TAG, "location to, latlong:" + foundGeocodeTo.get(0).getLatitude() + " " + foundGeocodeTo.get(0).getLongitude()+" distbwtTo:"+distance[0]+" "+distance[1]+" "+distance[2]);
-                    if(distance[0] <= 80500)
-                    locationTo = true;
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                "Please enter an address within a 50 mile radius of Santa Cruz",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
-                else{
-                    Log.e(TAG,"To location not found");
-                }
-                if(foundGeocodeTo.get(0).getLatitude() == foundGeocodeFrom.get(0).getLatitude() && foundGeocodeTo.get(0).getLongitude() == foundGeocodeFrom.get(0).getLongitude()) {
-                    locationSame = true;
+                    to = to.substring(0, 1).toUpperCase() + to.substring(1).toLowerCase();
+                    from = from.substring(0, 1).toUpperCase() + from.substring(1).toLowerCase();
+
+                    Random rnd = new Random();
+                    int colour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+
+                    user = ParseUser.getCurrentUser();
+                    route.setFrom(from);
+                    route.setTo(to);
+                    route.setNumPass(numPass);
+                    route.setDepTime(depTime);
+                    route.setDepDay(depDay);
+                    route.setUser(user);
+                    route.setColour(colour);
+                    route.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
+                                    Toast.LENGTH_LONG).show();
+                            //finish();
+                        }
+                    });
+                    pushRouteSuccess(user, from, to, depDay);
+                } else if (locationFrom == false && locationTo == true) {
                     Toast.makeText(getActivity().getApplicationContext(),
-                            "Start and Finish cannot be the same location!",
+                            "Please enter a valid start address",
+                            Toast.LENGTH_LONG).show();
+                } else if (locationFrom == true && locationTo == false) {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Please enter a valid destination address",
+                            Toast.LENGTH_LONG).show();
+                } else if (locationFrom == false && locationTo == false) {
+                    Toast.makeText(getActivity().getApplicationContext(),
+                            "Please enter valid start and destination addresses",
                             Toast.LENGTH_LONG).show();
                 }
-            }
-            catch (IOException ioexception){
-                Log.e(TAG, "location error",ioexception);
-            }
-            if(locationFrom == true && locationTo == true && locationSame == false) {
-                ParseRoute route = new ParseRoute();
-
-                to = to.substring(0,1).toUpperCase() + to.substring(1).toLowerCase();
-                from = from.substring(0,1).toUpperCase() + from.substring(1).toLowerCase();
-
-                Random rnd = new Random();
-                int colour = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
-                user = ParseUser.getCurrentUser();
-                route.setFrom(from);
-                route.setTo(to);
-                route.setNumPass(numPass);
-                route.setDepTime(depTime);
-                route.setDepDay(depDay);
-                route.setUser(user);
-                route.setColour(colour);
-                route.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                "Route added from " + from + " to " + to + " at " + depTime + " on " + depDay,
-                                Toast.LENGTH_LONG).show();
-                        //finish();
-                    }
-                });
-                pushRouteSuccess(user, from, to, depDay);
-            }
-            else if(locationFrom == false && locationTo == true){
+            } else {
                 Toast.makeText(getActivity().getApplicationContext(),
-                        "Please enter a valid start address",
+                        "Please fill in the entire form",
                         Toast.LENGTH_LONG).show();
             }
-            else if(locationFrom == true && locationTo == false){
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "Please enter a valid destination address",
-                        Toast.LENGTH_LONG).show();
-            }
-            else if(locationFrom == false && locationTo == false){
-                Toast.makeText(getActivity().getApplicationContext(),
-                        "Please enter valid start and destination addresses",
-                        Toast.LENGTH_LONG).show();
-            }
-        }
-        else{
+        } else {
             Toast.makeText(getActivity().getApplicationContext(),
-                    "Please fill in the entire form",
+                    "Please input a valid number of passengers, between 1 and 9.",
                     Toast.LENGTH_LONG).show();
+
         }
     }
-
-
 }

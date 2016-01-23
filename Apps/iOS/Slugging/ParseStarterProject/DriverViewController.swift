@@ -131,7 +131,7 @@ class DriverViewTableDetail: UIViewController, UITextFieldDelegate {
     @IBAction func saveRoute(sender: AnyObject) {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        //dateFormatter.dateFormat = "MM/dd/yyyy"
         let strDate = dateFormatter.stringFromDate(date.date)
         dateFormatter.dateFormat = "HH:mm"
         let strTime = dateFormatter.stringFromDate(date.date)

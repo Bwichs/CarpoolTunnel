@@ -12,7 +12,6 @@
 		1BEB00D71BE848F1007ADF82 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00D21BE848F1007ADF82 /* ParseUI.framework */; };
 		1BEB00DB1BE84A60007ADF82 /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00DA1BE84A60007ADF82 /* libstdc++.6.tbd */; };
 		1BEB00DD1BE84A98007ADF82 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BEB00DC1BE84A98007ADF82 /* libsqlite3.tbd */; };
-		270CB3B31C536CB20016F83C /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 270CB3B21C536CB20016F83C /* icon.png */; };
 		270E1C0C1BE9335200391215 /* RouteInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270E1C0B1BE9335200391215 /* RouteInfoViewController.swift */; };
 		2727223B1BCE13BC000DA48D /* PassengerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2727223A1BCE13BC000DA48D /* PassengerViewController.swift */; };
 		272722401BD08952000DA48D /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2727223E1BD08952000DA48D /* SWRevealViewController.m */; };
@@ -40,7 +39,6 @@
 		1BEB00D21BE848F1007ADF82 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		1BEB00DA1BE84A60007ADF82 /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		1BEB00DC1BE84A98007ADF82 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		270CB3B21C536CB20016F83C /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../../../Desktop/icon.png; sourceTree = "<group>"; };
 		270E1C0B1BE9335200391215 /* RouteInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInfoViewController.swift; sourceTree = "<group>"; };
 		2727223A1BCE13BC000DA48D /* PassengerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassengerViewController.swift; sourceTree = "<group>"; };
 		2727223D1BD08952000DA48D /* ParseStarterProject-Swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ParseStarterProject-Swift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -58,7 +56,7 @@
 		814C3AC71B69877600E307BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		814C3AC81B69877600E307BB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		814C3AC91B69877600E307BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		81BA81451A49DA1800E65899 /* ParseStarterProject-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ParseStarterProject-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BA81451A49DA1800E65899 /* CarpoolTunnel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarpoolTunnel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81BA814C1A49DA1800E65899 /* LogginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogginViewController.swift; sourceTree = "<group>"; };
 		81BA816B1A49DB6800E65899 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 			isa = PBXGroup;
 			children = (
 				814C3AC81B69877600E307BB /* Images.xcassets */,
-				270CB3B21C536CB20016F83C /* icon.png */,
 				272722411BD09A78000DA48D /* menu.png */,
 				814C3AC91B69877600E307BB /* Info.plist */,
 			);
@@ -131,7 +128,7 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
-				81BA81471A49DA1800E65899 /* ParseStarterProject */,
+				81BA81471A49DA1800E65899 /* CarpoolTunnel */,
 				814C3AC51B69877600E307BB /* Resources */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
@@ -142,12 +139,12 @@
 		81BA81461A49DA1800E65899 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				81BA81451A49DA1800E65899 /* ParseStarterProject-Swift.app */,
+				81BA81451A49DA1800E65899 /* CarpoolTunnel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		81BA81471A49DA1800E65899 /* ParseStarterProject */ = {
+		81BA81471A49DA1800E65899 /* CarpoolTunnel */ = {
 			isa = PBXGroup;
 			children = (
 				1BB00B2A1C0A72A0007A333A /* PushNotificationController.swift */,
@@ -162,6 +159,7 @@
 				272722501BD20ABB000DA48D /* MenuTableViewController.swift */,
 				27917BC11BE57C480024DC6C /* PinAnnotation.swift */,
 			);
+			name = CarpoolTunnel;
 			path = ParseStarterProject;
 			sourceTree = "<group>";
 		};
@@ -192,9 +190,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		81BA81441A49DA1800E65899 /* ParseStarterProject-Swift */ = {
+		81BA81441A49DA1800E65899 /* CarpoolTunnel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "ParseStarterProject-Swift" */;
+			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "CarpoolTunnel" */;
 			buildPhases = (
 				240A409BCA75F96226D6B0AE /* Check Pods Manifest.lock */,
 				81BA81411A49DA1800E65899 /* Sources */,
@@ -208,9 +206,9 @@
 			);
 			dependencies = (
 			);
-			name = "ParseStarterProject-Swift";
+			name = CarpoolTunnel;
 			productName = ParseStarterProject;
-			productReference = 81BA81451A49DA1800E65899 /* ParseStarterProject-Swift.app */;
+			productReference = 81BA81451A49DA1800E65899 /* CarpoolTunnel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -229,7 +227,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "ParseStarterProject-Swift" */;
+			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "CarpoolTunnel" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -242,7 +240,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				81BA81441A49DA1800E65899 /* ParseStarterProject-Swift */,
+				81BA81441A49DA1800E65899 /* CarpoolTunnel */,
 			);
 		};
 /* End PBXProject section */
@@ -253,7 +251,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				27C0F9231BD8A89C002FB5AD /* Launch Screen.storyboard in Resources */,
-				270CB3B31C536CB20016F83C /* icon.png in Resources */,
 				814C3ACA1B69877600E307BB /* Main.storyboard in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				272722421BD09A78000DA48D /* menu.png in Resources */,
@@ -375,6 +372,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: brianwichers@gmail.com (C8PG8CT9XB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -460,7 +458,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = CarpoolTunnel;
-				PRODUCT_NAME = "ParseStarterProject-Swift";
+				PRODUCT_NAME = CarpoolTunnel;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -488,7 +486,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CarpoolTunnel;
-				PRODUCT_NAME = "ParseStarterProject-Swift";
+				PRODUCT_NAME = CarpoolTunnel;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ParseStarterProject/ParseStarterProject-Swift-Bridging-Header.h";
 			};
@@ -497,7 +495,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "ParseStarterProject-Swift" */ = {
+		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "CarpoolTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81621A49DA1800E65899 /* Debug */,
@@ -506,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "ParseStarterProject-Swift" */ = {
+		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "CarpoolTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81651A49DA1800E65899 /* Debug */,

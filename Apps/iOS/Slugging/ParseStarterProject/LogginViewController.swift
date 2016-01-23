@@ -10,12 +10,61 @@
 import UIKit
 import Parse
 
-class LogginViewController: UIViewController {
+class LogginViewController: UIViewController, UITextFieldDelegate {
     
+    // MARK: Properties
     
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    override func viewDidAppear(animated: Bool) {
+        let currentUser = PFUser.currentUser()
+        if currentUser != nil {
+            // Do stuff with the user
+            
+            self.performSegueWithIdentifier("go_to_main_menu", sender: self)
+            
+        } else {
+            // Show the signup or login screen
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
+        // Handle the text field's user input through delegate callbacks
+        emailAddress.delegate = self
+        password.delegate = self
+        emailAddress.returnKeyType = UIReturnKeyType.Next
+        password.returnKeyType = UIReturnKeyType.Done
+        emailAddress.autocorrectionType = .No
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Hide the keyboard.
+        textField.resignFirstResponder()
+        if textField == emailAddress {
+            password.becomeFirstResponder()
+        }
+        if textField == password {
+            register_or_signIn(self)
+        }
+
+        return false
+    }
+    
+    // MARK: Actions
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
     
     @IBAction func register_or_signIn(sender: AnyObject) {
         var userEmailAddress = emailAddress.text
@@ -106,27 +155,5 @@ class LogginViewController: UIViewController {
             // Fallback on earlier versions
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        let currentUser = PFUser.currentUser()
-        if currentUser != nil {
-            // Do stuff with the user
-        
-        self.performSegueWithIdentifier("go_to_main_menu", sender: self)
-            
-        } else {
-            // Show the signup or login screen
-        }
 
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

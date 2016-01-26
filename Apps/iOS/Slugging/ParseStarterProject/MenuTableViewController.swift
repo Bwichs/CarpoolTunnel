@@ -11,6 +11,7 @@ import UIKit
 import Parse
 
 class MenuTableViewController: UITableViewController {
+    @IBOutlet weak var account_name: UILabel!
 
     @IBAction func logOut(sender: UIButton) {
         processSignOut()
@@ -31,6 +32,8 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //account_name.text = (my_account["name"] as! String)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

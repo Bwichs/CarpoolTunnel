@@ -10,6 +10,8 @@
 import UIKit
 import Parse
 
+var my_account : PFUser = PFUser()
+
 class LogginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Properties
@@ -99,6 +101,7 @@ class LogginViewController: UIViewController, UITextFieldDelegate {
                 if return_user != nil {
                     //Verify email
                     if return_user?["emailVerified"] as! Bool == true {
+                        my_account = return_user!
                         self.activityIndicator.stopAnimating()
                         dispatch_async(dispatch_get_main_queue()) {
                             self.performSegueWithIdentifier(
